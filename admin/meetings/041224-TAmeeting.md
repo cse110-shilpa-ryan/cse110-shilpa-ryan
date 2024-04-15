@@ -14,6 +14,6 @@
 
 
 ### Tasks
-- [ ] add jash (TA) to github organization
+- [x] add jash (TA) to github organization
 - [ ] schedule weekly meeting with TA
 - [x] change our slack group name once we come up with one
