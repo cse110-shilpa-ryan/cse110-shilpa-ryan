@@ -1,5 +1,6 @@
 # Kickoff Meeting
 #### 04/14/2024 at 12:00 pm in DIB
+note-taker: Shilpa
 ### Attendance
 - no one missing
 
