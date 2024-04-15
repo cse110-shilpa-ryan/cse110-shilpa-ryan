@@ -1,8 +1,6 @@
 # 11:eleven (Team 11)
 
-![Team Logo](./admin/branding/teamlogo.png)
-<img src="./admin/branding/teamlogo.png" alt="Team Logo" width="300" >
-
+<img src="./admin/branding/teamlogo.png" alt="Team Logo" width="400" >
 
 ## [Meet the Team!](./admin/team.md)
 
