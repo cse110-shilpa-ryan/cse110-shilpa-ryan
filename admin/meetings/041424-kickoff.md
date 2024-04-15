@@ -32,6 +32,6 @@
 - [x] Create team branding page - Ryan
 - [x] Create team logo - Aryan
 - [x] Setup Slack (change names, add team logo) 
-- [ ] Submit contract - Everyone
-- [ ] Submit team bonding activity - Everyone
-- [ ] Edit & upload video - Nirvek
+- [x] Submit contract - Everyone
+- [x] Submit team bonding activity - Everyone
+- [x] Edit & upload video - Nirvek
