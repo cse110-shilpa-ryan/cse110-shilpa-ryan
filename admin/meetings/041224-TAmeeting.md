@@ -1,5 +1,6 @@
 # First Meeting with TA
 #### 04/12/2024 at 12:30 pm over Zoom
+note-taker: Shilpa
 ### Attendance
 - missing Hugir, Abijith
 
