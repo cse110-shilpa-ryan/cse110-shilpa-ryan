@@ -1,5 +1,6 @@
 # Meeting Name
 #### 01/01/2020 at 12:00 pm 
+note-taker: 
 ### Attendance
 - missing: ?
 
