@@ -4,3 +4,4 @@
 
 ## [Meet the Team!](./admin/team.md)
 
+## [Watch our Intro Video!](./admin/videos/teamintro.mp4)
