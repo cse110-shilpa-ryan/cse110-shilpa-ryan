@@ -45,3 +45,7 @@ Hugir is a third-year Computer Science Major. He is a local San Diegan intereste
 **[Evan Wu](https://github.com/ehw014)**
 
 Evan Wu is a fourth year computer science major in Sixth College. He is interested in database design and game design. He is interested in cooking.
+
+## Team Intro Video 
+
+https://github.com/cse110-sp24-group11/cse110-sp24-group11/blob/main/admin/videos/teamintro.mp4
