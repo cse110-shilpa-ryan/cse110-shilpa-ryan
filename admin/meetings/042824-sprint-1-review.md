@@ -22,7 +22,7 @@ note-taker: Ryan
 - Cielo: Completed Opportunities section in SWOT, Inspected accessibility and performance of website via Devtools
 - Aryan: Completed Weaknesses section in SWOT, collaborated with Jacob on addition/deletion feature in Implementation, made animation/graphics suggestions.
 - Evan: Worked on fetching JSON file in JS, troubleshooted code in beginning stages of Derisk.
-- Hugir: absent
+- Hugir: Tried to troubleshoot why the JSON file didn't work in the beginning. Worked on adding some HTML in the beginning as well.
 
 ### Finalized Page Preview
 <img width="497" alt="image" src="https://github.com/cse110-sp24-group11/cse110-sp24-group11/assets/110417507/a7e64990-e600-4f71-98db-49652976d4cf">
