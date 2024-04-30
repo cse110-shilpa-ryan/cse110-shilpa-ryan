@@ -3,3 +3,5 @@
 - [Week 2 Meeting with TA](041224-TAmeeting.md)
 - [Warmup Exercise Meeting](042124-warmup.md)
 - [Week 4 Meeting with TA](042424-TAmeeting.md)
+- [Sprint Review #1](042824-sprint-1-review.md)
+- [Sprint #1 Retrospective](042824-retrospective.md)
