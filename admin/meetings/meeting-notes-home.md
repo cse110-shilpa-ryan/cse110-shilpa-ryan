@@ -5,3 +5,5 @@
 - [Week 4 Meeting with TA](042424-TAmeeting.md)
 - [Sprint Review #1](042824-sprint-1-review.md)
 - [Sprint #1 Retrospective](042824-retrospective.md)
+- [Brainstorming](050324-brainstorm.md)
+- [Starting Pitch](050324-pitch.md)
