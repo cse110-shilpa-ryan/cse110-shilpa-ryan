@@ -7,3 +7,4 @@
 - [Sprint #1 Retrospective](042824-retrospective.md)
 - [Brainstorming](050324-brainstorm.md)
 - [Starting Pitch](050324-pitch.md)
+- [Week 6 Meeting with TA](050824-TAmeeting.md)
