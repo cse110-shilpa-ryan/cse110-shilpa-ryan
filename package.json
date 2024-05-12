@@ -4,7 +4,8 @@
   },
   "scripts": {
     "test": "jest",
-    "lint": "standard"
+    "lint": "standard",
+    "docs": "jsdoc assets/src/*.js"
   },
   "type": "module",
   "jest": {
