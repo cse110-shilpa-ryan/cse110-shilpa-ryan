@@ -9,13 +9,12 @@ With user accounts, only users with account credentials would be allowed to crea
 ## Considered Options
 
 * Develop without framework 
-  * User data would be hosted on a remote server (SQL), not locally (JSON)
+  * User data would be hosted on a remote server (SQL or NoSQL), not locally (JSON)
   * Website interactions with server would be facilitated with PHP 
-  * Information would be encrypted
-* Third Party Authenticator
-* Develop with framework
-* 
+  * Information between server and client should be encrypted
+* Third Party Authenticator or Develop with framework
+  * Use a third party authenticator (Auth0) to handle all user interactions
 
 ## Decision Outcome
 
-?????
+We decided that implementing user accounts would be too much to learn for a feature that is not core to our application. 
