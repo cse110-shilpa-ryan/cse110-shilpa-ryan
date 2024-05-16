@@ -9,3 +9,4 @@
 - [Starting Pitch](050324-pitch.md)
 - [Week 6 Meeting with TA](050824-TAmeeting.md)
 - [CI/CD Pipeline Meeting](050924-adrs.md)
+- [Week 7 Meeting with TA](051524-TAmeeting.md)
