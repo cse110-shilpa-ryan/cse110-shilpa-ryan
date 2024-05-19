@@ -1,0 +1,2 @@
+- Reusable navigation bar + other elements maybe [here](https://stackoverflow.com/questions/31954089/how-can-i-reuse-a-navigation-bar-on-multiple-pages).
+- Style sheet for each webpage, and one shared style sheet. Research how to give higher precedence if multiple style sheets are used.
