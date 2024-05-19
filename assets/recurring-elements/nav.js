@@ -11,7 +11,8 @@ function loadNavbar() {
                 </div>
                     <div class="nav-buttons">
                         <a href="../front-page/index.html" class="nav-button">Front Page</a>
-                        <a href="../events-tasks/index.html" class="nav-button">Events & Tasks</a>
+                        <a href="../calendar/index.html" class="nav-button">Calendar</a>
+                        <a href="../projects/index.html" class="nav-button">Projects</a>
                         <a href="../journal/index.html" class="nav-button">Journal</a>
                 </div>
             </div>

@@ -2,7 +2,7 @@ async function loadProjects() {
     try {
         const response = await fetch('projects.json');
         const projects = await response.json();
-        const journalContainer = document.querySelector('.journal-container');
+        const journalContainer = document.querySelector('.project-container');
 
         projects.forEach(project => {
             const projectColumn = document.createElement('div');
