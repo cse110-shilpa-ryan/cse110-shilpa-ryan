@@ -21,5 +21,5 @@ note-taker: Shilpa
 - make sure it is not just a CRUD application
 
 ### Tasks
-- [ ] inform the TA of our timeline by Week 9
-- [ ] research more features
+- [X] inform the TA of our timeline by Week 9
+- [X] research more features
