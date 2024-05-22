@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Calendar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Calendar</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../front-page/index.html">Home</a></li>
-                <li><a href="../events-tasks/index.html">Calendar</a></li>
-                <li><a href="../journal/index.html">Journal</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Your content goes here -->
-    </main>
-
-    <footer>
-        <!-- Your footer content goes here -->
-    </footer>
+    <div id="calendar-container">
+        <div id="calendar-header">
+            <button id="prevMonth">Previous</button>
+            <span id="currentMonthYear"></span>
+            <button id="nextMonth">Next</button>
+        </div>
+        <div id="calendar-days">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div id="calendar"></div>
+    </div>
+    <div id="task-form">
+        <h2>Add Task</h2>
+        <form id="addTaskForm">
+            <label for="taskTitle">Title:</label>
+            <input type="text" id="taskTitle" required>
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" required>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" required>
+            <button type="submit">Add Task</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
