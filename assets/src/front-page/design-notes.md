@@ -5,6 +5,7 @@
 
 ## Approach 2 
 ### Methodology : Show a page preview within the home page using iframe. This will allow interaction with projects from the home page (through the project pages) 
+### Note : Can exclude header + footer to prevent navigation to other pages.
 ### Problem : People might not go to projects page, home page might end up being too noisy.
 
 ## Approach 3
