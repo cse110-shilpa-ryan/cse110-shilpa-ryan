@@ -10,3 +10,5 @@
 - [Week 6 Meeting with TA](050824-TAmeeting.md)
 - [CI/CD Pipeline Meeting](050924-adrs.md)
 - [Week 7 Meeting with TA](051524-TAmeeting.md)
+- [Assigning Tasks](051924-taskteams.md)
+- [Week 8 Meeting with TA](052224-TAmeeting.md)
