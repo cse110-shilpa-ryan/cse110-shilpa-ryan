@@ -28,3 +28,16 @@
     grid-area: 2 / 3 / 6 / 4; 
     border: 1px solid red; 
 }
+
+/*#frame {
+    border: 10px solid blue;
+    width: 500px;
+    height: 500px;
+    pointer-events: none;
+    -webkit-transform: translate(-200px,-200px) scale(.2, .2);
+    -moz-transform: translate(-200px,-200px) scale(.2, .2);
+    -o-transform: translate(-200px,-200px) scale(.2, .2);
+    -ms-transform: translate(-200px,-200px) scale(.2, .2);
+    transform: translate(-200px,-200px) scale(.2, .2);
+    overflow: hidden;
+  }*/
