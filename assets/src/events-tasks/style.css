@@ -5,7 +5,9 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100vh;
+    /*height: 100vh;
+    this fucks with the header, causes it to get cut off at
+    certain resolutions, leaving it off for now*/
     margin: 0;
     background-color: #f4f4f4;
 }
@@ -26,9 +28,16 @@ body {
 #calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    
     gap: 5px;
     text-align: center;
     font-weight: bold;
+    /**/    
+    min-width: 742px;
+    /*This is kind of a hard coded solution but it stops the week days
+    from getting offset from the boxes at lower resolutions*/
+    min-height: 20px;
+    
 }
 
 #calendar {
@@ -43,6 +52,8 @@ body {
     /* width: 100px;
     height: 100px; */
     width: calc(100% - 10px);
+    min-width: 100px;
+    min-height: 120px;
     height: calc(100% - 10px); 
     background-color: white;
     border: 1px solid #ccc;
@@ -80,11 +91,19 @@ body {
 
 #task-form {
     margin-top: 10px;
+    top: 680px;
+    /*this seems to fix the issue with the add task form getting
+    covered when resizing smaller vertically, but it DOES cause problems if
+    you resize the the window bigger vertically because the grid size is
+    calculated based on % - px, so it stretches and at higher vertical resolutions
+    will cut off the add task*/
+    position: absolute;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    
 }
 
 form label, form input, form button {
