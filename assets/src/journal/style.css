@@ -1,0 +1,22 @@
+body{
+    font-family: 'Josefin Sans';
+    background-color: #6e8894;
+    color: black;
+    padding: 3% 5%;
+}
+journal-entry{
+    display: block;
+    padding: 3%;
+    background-color: white;
+    color: black;
+}
+journal-entry h2{
+    margin: 0%;
+}
+tag{
+    display: inline-block;
+    padding: 1%;
+    border-radius: 10%;
+    background-color: #45051f;
+    color: white;
+}
