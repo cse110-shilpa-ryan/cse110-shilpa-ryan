@@ -24,23 +24,21 @@
         </div>
         <div id="calendar"></div>
     </div>
-    <div id="task-form">
-        <h2>Add Task</h2>
-        <form id="addTaskForm">
-            <label for="taskTitle">Title:</label>
-            <input type="text" id="taskTitle" required>
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" required>
-            <label for="endDate">End Date:</label>
-            <input type="date" id="endDate" required>
-            <button type="submit">Add Task</button>
-        </form>
-    </div>
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
-            <h2>Tasks</h2>
+            <h2>Tasks for <span id="modal-date"></span></h2>
             <ul id="task-list"></ul>
+            <!-- Add Task Button -->
+            <button id="add-task-button">Add Task</button>
+            <!-- Hidden Add Task Form -->
+            <form id="addTaskFormModal" style="display: none;">
+                <label for="taskTitleModal">Title:</label>
+                <input type="text" id="taskTitleModal" required maxlength="50">
+                <label for="endDateModal">End Date:</label>
+                <input type="date" id="endDateModal" required>
+                <button type="submit">Add Task</button>
+            </form>
         </div>
     </div>
     <script src="script.js"></script>

@@ -1,15 +1,17 @@
-// script.js
 document.addEventListener('DOMContentLoaded', function() {
     const calendarElement = document.getElementById('calendar');
-    const taskForm = document.getElementById('addTaskForm');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
     const currentMonthYear = document.getElementById('currentMonthYear');
     const taskModal = document.getElementById('task-modal');
     const closeButton = document.querySelector('.close-button');
     const taskList = document.getElementById('task-list');
-    
+    const addTaskButton = document.getElementById('add-task-button');
+    const addTaskFormModal = document.getElementById('addTaskFormModal');
+    const modalDate = document.getElementById('modal-date');
+
     let currentDate = new Date();
+    let selectedDay = null;
 
     function getTasks() {
         return JSON.parse(localStorage.getItem('tasks')) || [];
@@ -57,11 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
-    taskForm.addEventListener('submit', function(event) {
+    addTaskFormModal.addEventListener('submit', function(event) {
         event.preventDefault();
-        const taskTitle = document.getElementById('taskTitle').value;
-        const startDate = new Date(document.getElementById('startDate').value);
-        const endDate = new Date(document.getElementById('endDate').value);
+        const taskTitle = document.getElementById('taskTitleModal').value;
+        const endDate = new Date(document.getElementById('endDateModal').value);
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
 
         const tasks = getTasks();
         tasks.push({
@@ -73,7 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
         saveTasks(tasks);
 
         renderCalendar(currentDate);  // Re-render calendar to include new tasks
-        taskForm.reset();
+        addTaskFormModal.reset();
+        addTaskFormModal.style.display = 'none';
+        showTasksForDay(selectedDay);
     });
 
     function addTaskToCalendar(task) {
@@ -133,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showTasksForDay(day) {
+        selectedDay = day;
         taskList.innerHTML = '';
         const tasks = getTasks();
         const year = currentDate.getFullYear();
@@ -141,8 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
-            const taskStartDay = startDate.getDate();
-            const taskEndDay = endDate.getDate();
     
             if (startDate <= new Date(year, month, day) && endDate >= new Date(year, month, day)) {
                 const taskItem = document.createElement('li');
@@ -159,16 +162,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     
+        modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
     }
-    
+
+    addTaskButton.addEventListener('click', () => {
+        addTaskFormModal.style.display = addTaskFormModal.style.display === 'none' ? 'block' : 'none';
+    });
 
     function deleteTask(taskId) {
         let tasks = getTasks();
         tasks = tasks.filter(task => task.id !== taskId); // Only delete the specified task
         saveTasks(tasks);
         renderCalendar(currentDate);
-        taskModal.style.display = 'none';
+        showTasksForDay(selectedDay);
     }
 
     closeButton.addEventListener('click', () => {

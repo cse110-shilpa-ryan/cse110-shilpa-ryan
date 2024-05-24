@@ -132,6 +132,33 @@ form label, form input, form button {
     width: 80%;
 }
 
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.modal-content form label,
+.modal-content form input,
+.modal-content form button {
+    margin: 5px 0;
+}
+
+#add-task-button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#add-task-button:hover {
+    background-color: #45a049;
+}
+
+
 .close-button {
     color: #aaa;
     float: right;
