@@ -24,10 +24,20 @@ async function loadProjects() {
             const projectDescription = document.createElement('p');
             projectDescription.textContent = project.description;
 
+            const projectDelete = document.createElement('div');
+            projectDelete.className = 'project-delete';
+            projectDelete.innerHTML = '<i class="fa fa-trash"></i>';
+
+            projectDelete.addEventListener('click', () => {
+                projectColumn.remove();
+                // UPDATE DATA SOURCE HERE
+            });
+
             projectDetails.appendChild(projectTitle);
             projectDetails.appendChild(projectDescription);
             projectCard.appendChild(projectImage);
             projectCard.appendChild(projectDetails);
+            projectCard.appendChild(projectDelete); 
             projectColumn.appendChild(projectCard);
 
             project.tasks.forEach(task => {
@@ -46,7 +56,7 @@ async function loadProjects() {
 
                 taskDelete.addEventListener('click', () => {
                     taskCard.remove();
-                    // THIS IS WHERE WE CAN ADD DELETING FUNCTIONALITY
+                    // UPDATE DATA SOURCE HERE
                 });
 
                 taskCard.appendChild(taskName);
