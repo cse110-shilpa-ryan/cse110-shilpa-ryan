@@ -40,8 +40,18 @@ async function loadProjects() {
                 const taskDue = document.createElement('p');
                 taskDue.textContent = `Due: ${task.due}`;
 
+                const taskDelete = document.createElement('div');
+                taskDelete.className = 'task-delete';
+                taskDelete.innerHTML = '<i class="fa fa-trash"></i>';
+
+                taskDelete.addEventListener('click', () => {
+                    taskCard.remove();
+                    // THIS IS WHERE WE CAN ADD DELETING FUNCTIONALITY
+                });
+
                 taskCard.appendChild(taskName);
                 taskCard.appendChild(taskDue);
+                taskCard.appendChild(taskDelete);
                 projectColumn.appendChild(taskCard);
             });
 
