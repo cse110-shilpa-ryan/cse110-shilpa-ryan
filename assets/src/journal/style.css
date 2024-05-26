@@ -1,7 +1,10 @@
+header {
+    padding: 1% 5%;
+}
 nav {
-    background-color: #45051f;
+    /* background-color: #45051f; */
     color: white;
-    padding: 1%
+    /* padding: 1%; */
 }
 ul {
     margin: 0;
@@ -11,6 +14,7 @@ li {
     display: inline;
     padding: 1% 5%;
     border-right: 1px solid #bbb;
+    color: white;
 }
 a:link{
     text-decoration: none;
@@ -28,7 +32,7 @@ body{
 }
 journal-entry{
     display: block;
-    padding: 3%;
+    padding: 2%;
     background-color: white;
     color: black;
 }
@@ -41,6 +45,15 @@ tag{
     border-radius: 10%;
     background-color: #45051f;
     color: white;
+}
+.container{
+    display: flex;
+    justify-content: space-between; /* Align items on opposite sides */
+    padding: 0%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 0%;
+    margin-left: 0%;
 }
 .my-nav{
     font-weight: bold;
