@@ -26,15 +26,6 @@ body{
     color: black;
     padding: 3% 5%;
 }
-journal-entry{
-    display: block;
-    padding: 3%;
-    background-color: white;
-    color: black;
-}
-journal-entry h2{
-    margin: 0%;
-}
 tag{
     display: inline-block;
     padding: 1%;
@@ -47,4 +38,25 @@ tag{
     font-size: 1.5rem;
     padding: 0%;
     margin: 0%;
+}
+.list-group-item {
+    display: inline-block;
+    padding: 3%;
+    border-style: solid;
+    border-color: #849324;
+    border-width: 2px;
+    margin-top: 5%;
+}
+button {
+    background-color: #45051f;
+    color: white;
+    padding: 1%;
+    border-style: none;
+    border-radius: 5px;
+}
+.delete {
+    float: right;
+}
+footer {
+    margin-top: 5%;
 }
