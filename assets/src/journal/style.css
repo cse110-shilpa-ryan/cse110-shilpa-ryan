@@ -20,3 +20,9 @@ tag{
     background-color: #45051f;
     color: white;
 }
+.my-nav{
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0%;
+    margin: 0%;
+}
