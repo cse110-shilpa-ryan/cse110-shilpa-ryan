@@ -1,3 +1,25 @@
+nav {
+    background-color: #45051f;
+    color: white;
+    padding: 1%
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: inline;
+    padding: 1% 5%;
+    border-right: 1px solid #bbb;
+}
+a:link{
+    text-decoration: none;
+    color: white;
+    
+}
+a:hover{
+    color: #849324;
+}
 body{
     font-family: 'Josefin Sans';
     background-color: #6e8894;
