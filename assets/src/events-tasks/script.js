@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const addTaskButton = document.getElementById('add-task-button');
     const addTaskFormModal = document.getElementById('addTaskFormModal');
     const modalDate = document.getElementById('modal-date');
+    const monthYearDropdown = document.getElementById('monthYearDropdown');
+    const monthDropdown = document.getElementById('monthDropdown');
+    const yearDropdown = document.getElementById('yearDropdown');
 
     let currentDate = new Date();
     let selectedDay = null;
@@ -185,7 +188,53 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('click', (event) => {
         if (event.target === taskModal) {
             taskModal.style.display = 'none';
+        } else if (!monthYearDropdown.contains(event.target) && !currentMonthYear.contains(event.target)) {
+            monthYearDropdown.style.display = 'none';
         }
+    });
+
+    // Month/Year Dropdown functionality
+    function populateDropdowns() {
+        monthDropdown.innerHTML = '';
+        yearDropdown.innerHTML = '';
+        const months = Array.from({length: 12}, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        months.forEach((month, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = month;
+            if (index === currentDate.getMonth()) {
+                option.selected = true;
+            }
+            monthDropdown.appendChild(option);
+        });
+
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            if (year === currentDate.getFullYear()) {
+                option.selected = true;
+            }
+            yearDropdown.appendChild(option);
+        }
+    }
+
+    currentMonthYear.addEventListener('click', () => {
+        populateDropdowns();
+        monthYearDropdown.style.display = 'block';
+    });
+
+    monthDropdown.addEventListener('change', () => {
+        currentDate.setMonth(monthDropdown.value);
+        renderCalendar(currentDate);
+        monthYearDropdown.style.display = 'none';
+    });
+
+    yearDropdown.addEventListener('change', () => {
+        currentDate.setFullYear(yearDropdown.value);
+        renderCalendar(currentDate);
+        monthYearDropdown.style.display = 'none';
     });
 
     // Initial render

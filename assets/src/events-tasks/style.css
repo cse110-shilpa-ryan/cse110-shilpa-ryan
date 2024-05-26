@@ -5,17 +5,14 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /*height: 100vh;
-    this fucks with the header, causes it to get cut off at
-    certain resolutions, leaving it off for now*/
     margin: 0;
     background-color: #f4f4f4;
 }
 
 #calendar-container {
     margin: 20px;
-    width: 90%; /* Expand the calendar to fit the entire screen */
-    height: 90%; /* Expand the calendar to fit the entire screen */
+    width: 90%;
+    height: 90%;
 }
 
 #calendar-header {
@@ -25,36 +22,33 @@ body {
     margin-bottom: 10px;
 }
 
+#currentMonthYear {
+    cursor: pointer;
+}
+
 #calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    
     gap: 5px;
     text-align: center;
     font-weight: bold;
-    /**/    
     min-width: 742px;
-    /*This is kind of a hard coded solution but it stops the week days
-    from getting offset from the boxes at lower resolutions*/
     min-height: 20px;
-    
 }
 
 #calendar {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
-    width: 90vw; /* Expand the calendar to fit the entire width of the screen */
+    width: 90vw;
     height: 65vh;
 }
 
 .day {
-    /* width: 100px;
-    height: 100px; */
     width: calc(100% - 10px);
     min-width: 100px;
     min-height: 120px;
-    height: calc(100% - 10px); 
+    height: calc(100% - 10px);
     background-color: white;
     border: 1px solid #ccc;
     position: relative;
@@ -84,26 +78,20 @@ body {
 }
 
 .more-tasks {
-    z-index: 1; /* Ensure the "More..." button appears above the calendar grid */
-    position: relative; /* Set the position to relative */
-    top: -10px; /* Adjust the vertical position as needed */
+    z-index: 1;
+    position: relative;
+    top: -10px;
 }
 
 #task-form {
     margin-top: 10px;
     top: 680px;
-    /*this seems to fix the issue with the add task form getting
-    covered when resizing smaller vertically, but it DOES cause problems if
-    you resize the the window bigger vertically because the grid size is
-    calculated based on % - px, so it stretches and at higher vertical resolutions
-    will cut off the add task*/
     position: absolute;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    
 }
 
 form label, form input, form button {
@@ -158,7 +146,6 @@ form label, form input, form button {
     background-color: #45a049;
 }
 
-
 .close-button {
     color: #aaa;
     float: right;
@@ -181,4 +168,20 @@ form label, form input, form button {
     cursor: pointer;
     float: right;
     font-size: 12px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 2;
+}
+
+.dropdown select {
+    margin: 5px;
+    padding: 5px;
 }
