@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Cache DOM elements
     const calendarElement = document.getElementById('calendar');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
@@ -13,24 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const monthDropdown = document.getElementById('monthDropdown');
     const yearDropdown = document.getElementById('yearDropdown');
 
+    // Initialize current date and selected day
     let currentDate = new Date();
     let selectedDay = null;
 
+    // Retrieve tasks from local storage
     function getTasks() {
         return JSON.parse(localStorage.getItem('tasks')) || [];
     }
 
+    // Save tasks to local storage
     function saveTasks(tasks) {
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
 
+    // Render the calendar for a given date
     function renderCalendar(date) {
         calendarElement.innerHTML = '';
         currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
         
         const year = date.getFullYear();
         const month = date.getMonth();
-
         const firstDay = new Date(year, month, 1).getDay();
         const lastDate = new Date(year, month + 1, 0).getDate();
 
@@ -50,18 +54,20 @@ document.addEventListener('DOMContentLoaded', function() {
             dayElement.addEventListener('click', () => showTasksForDay(day));
         }
 
-        // Render tasks for the current month
         renderTasks();
     }
 
+    // Change the month in the calendar
     function changeMonth(direction) {
         currentDate.setMonth(currentDate.getMonth() + direction);
         renderCalendar(currentDate);
     }
 
+    // Event listeners for previous and next month buttons
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
+    // Add a task to the calendar
     addTaskFormModal.addEventListener('submit', function(event) {
         event.preventDefault();
         const taskTitle = document.getElementById('taskTitleModal').value;
@@ -83,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         showTasksForDay(selectedDay);
     });
 
+    // Add a task to a specific day in the calendar
     function addTaskToCalendar(task) {
         const { title, startDate, endDate } = task;
         const year = currentDate.getFullYear();
@@ -123,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Render tasks for the current month
     function renderTasks() {
         const tasks = getTasks();
         const year = currentDate.getFullYear();
@@ -139,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Display tasks for a specific day
     function showTasksForDay(day) {
         selectedDay = day;
         taskList.innerHTML = '';
@@ -154,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
                 
-                // Add delete button
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.className = 'delete-task';
@@ -169,10 +177,12 @@ document.addEventListener('DOMContentLoaded', function() {
         taskModal.style.display = 'block';
     }
 
+    // Toggle visibility of the add task form modal
     addTaskButton.addEventListener('click', () => {
         addTaskFormModal.style.display = addTaskFormModal.style.display === 'none' ? 'block' : 'none';
     });
 
+    // Delete a task from the task list and calendar
     function deleteTask(taskId) {
         let tasks = getTasks();
         tasks = tasks.filter(task => task.id !== taskId); // Only delete the specified task
@@ -181,10 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
         showTasksForDay(selectedDay);
     }
 
+    // Close the task modal
     closeButton.addEventListener('click', () => {
         taskModal.style.display = 'none';
     });
 
+    // Handle outside clicks to close the modals
     window.addEventListener('click', (event) => {
         if (event.target === taskModal) {
             taskModal.style.display = 'none';
@@ -193,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Month/Year Dropdown functionality
+    // Populate the month and year dropdowns with options
     function populateDropdowns() {
         monthDropdown.innerHTML = '';
         yearDropdown.innerHTML = '';
@@ -220,23 +232,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Show the month and year dropdowns when the current month/year is clicked
     currentMonthYear.addEventListener('click', () => {
         populateDropdowns();
         monthYearDropdown.style.display = 'block';
     });
 
+    // Change the month based on dropdown selection
     monthDropdown.addEventListener('change', () => {
         currentDate.setMonth(monthDropdown.value);
         renderCalendar(currentDate);
         monthYearDropdown.style.display = 'none';
     });
 
+    // Change the year based on dropdown selection
     yearDropdown.addEventListener('change', () => {
         currentDate.setFullYear(yearDropdown.value);
         renderCalendar(currentDate);
         monthYearDropdown.style.display = 'none';
     });
 
-    // Initial render
+    // Initial render of the calendar
     renderCalendar(currentDate);
 });
