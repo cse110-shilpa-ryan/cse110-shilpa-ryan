@@ -7,13 +7,12 @@ function loadNavbar() {
         <nav>
             <div class="nav-container">
                 <div class="nav-title">
-                    <h2>Title</h2>
                 </div>
                     <div class="nav-buttons">
-                        <a href="../front-page/index.html" class="nav-button">Front Page</a>
-                        <a href="../calendar/index.html" class="nav-button">Calendar</a>
-                        <a href="../projects/index.html" class="nav-button">Projects</a>
-                        <a href="../journal/index.html" class="nav-button">Journal</a>
+                        <a href="../front-page/index.html" class="nav-button" id="home-nav">Home</a>
+                        <a href="../calendar/index.html" class="nav-button" id="calendar-nav">Calendar</a>
+                        <a href="../projects/index.html" class="nav-button" id="projects-nav">Projects</a>
+                        <a href="../journal/index.html" class="nav-button" id="journal-nav">Journal</a>
                 </div>
             </div>
         </nav>

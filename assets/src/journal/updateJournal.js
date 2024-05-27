@@ -62,11 +62,11 @@ function loadEntries() {
         entryElement.classList.add("list-group-item");
         entryElement.innerHTML = `
             <div>
-                <h5 class="mb-1" contenteditable="true" onblur="updateTitle(${entry.id}, this.textContent)">${entry.title}</h5> <br>
+                <h3 class="mb-1" contenteditable="true" onblur="updateTitle(${entry.id}, this.textContent)">${entry.title}</h3>
                 <p class="mb-1" contenteditable="true" onblur="updateContent(${entry.id}, this.textContent)">${entry.content}</p>
             </div>
             <div>
-                <button class="delete" onclick="removeEntry(${entry.id})">Delete</button>
+                <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
         journalList.appendChild(entryElement);
@@ -74,6 +74,9 @@ function loadEntries() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    let navLink = document.getElementById('journal-nav');
+    navLink.classList.add('active');
+
     loadEntries();
 
     document.getElementById('addEntry').addEventListener('click', () => {

@@ -3,7 +3,6 @@
 
 <head>
     <title>Journal</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../recurring-elements/nav.css">
@@ -13,27 +12,19 @@
 <body>
     
     <header>
-        <nav>
-            <ul>
-                <li><a href="../front-page/index.html">Home</a></li>
-                <li><a href="../events-tasks/index.html">Calendar</a></li>
-                <li><a href="../journal/index.html">Journal</a></li>
-            </ul>
-        </nav>
+      <div id="insert-nav" title="Journal"></div>
     </header>
 
     <main id="journalForm">
         <h1>My Journal</h1>
         <div id="journalEntries" class="list-group"></div>
         <br>
-        <button id="addEntry">Add</button>
+        <button id="addEntry">Add Entry</button>
     </main>
 
-    <footer>
-        <!-- Your footer content goes here -->
-    </footer>
+    <div id="footer"></div>
 </body>
 <script src="../../recurring-elements/nav.js"></script>
 <script src="../../recurring-elements/footer.js"></script>
-
+<script src="updateJournal.js"></script>
 </html>
