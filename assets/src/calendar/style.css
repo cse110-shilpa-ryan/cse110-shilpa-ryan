@@ -1,8 +1,10 @@
+*{
+    font-family: 'Josefin Sans';
+}
 body {
     margin: 0%;
 }
 main {
-    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;

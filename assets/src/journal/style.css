@@ -1,0 +1,32 @@
+*{
+    font-family: 'Josefin Sans';
+}
+body{
+    margin: 0%;
+}
+main{
+    padding: 3% 5%;
+}
+button {
+    background-color: #45051f;
+    color: white;
+    padding: 1%;
+    border-style: none;
+    border-radius: 5px;
+    margin-bottom: 2%;
+}
+.active{
+    font-weight: bold;
+}
+.list-group-item {
+    display: block;
+    padding: 2%;
+    background-color: #b4c6cf;
+    margin-top: 2%;
+}
+.delete {
+    float: right;
+}
+footer {
+    margin-top: 5%;
+}
