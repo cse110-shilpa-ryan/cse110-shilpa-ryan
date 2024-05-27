@@ -1,0 +1,81 @@
+/* assets/recurring-elements/nav.css */
+nav {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 1em 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.nav-title {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.nav-title h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-button {
+    display: inline-block;
+    text-decoration: none;
+    color: #a9a9a9;
+    /* Light gray */
+    font-size: 1em;
+    padding: 0.5em 0.5em;
+    background-color: #ffffff;
+    border: 1px solid #a9a9a9;
+    border-radius: 10px;
+    /* Rounded corners */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    color: #ffffff;
+    transition: 0.8s;
+    /* White text on hover */
+    background-color: #696969;
+    /* Dark gray background on hover */
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #696969;
+    /* Dark gray */
+    padding: 1em 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+}
+
+.footer-container p {
+    margin: 0;
+    color: #d3d3d3;
+    /* Light gray */
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.footer-container p:hover {
+    color: #000000;
+    /* Black */
+}
