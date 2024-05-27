@@ -62,7 +62,7 @@ function loadEntries() {
         entryElement.classList.add("list-group-item");
         entryElement.innerHTML = `
             <div>
-                <h5 class="mb-1" contenteditable="true" onblur="updateTitle(${entry.id}, this.textContent)">${entry.title}</h5>
+                <h5 class="mb-1" contenteditable="true" onblur="updateTitle(${entry.id}, this.textContent)">${entry.title}</h5> <br>
                 <p class="mb-1" contenteditable="true" onblur="updateContent(${entry.id}, this.textContent)">${entry.content}</p>
             </div>
             <div>
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadEntries();
 
     document.getElementById('addEntry').addEventListener('click', () => {
-        const newEntry = createEntry('New Journal Entry', 'Today I...');
+        const newEntry = createEntry('New Entry Title', 'Click to edit entry content...');
         loadEntries();
     });
 });
