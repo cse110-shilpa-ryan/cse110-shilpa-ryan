@@ -17,8 +17,6 @@ button {
 }
 .active{
     font-weight: bold;
-    color: black;
-    background-color: black;
 }
 .list-group-item {
     display: block;
