@@ -1,0 +1,246 @@
+body {
+    margin: 0%;
+}
+main {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+#calendar-container {
+    margin: 20px;
+    width: 90%;
+    height: 90%;
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#currentMonthYear {
+    cursor: pointer;
+    border-radius: 5px;
+    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); 
+    padding: 3px;
+    border: 1px solid #000;
+    color: black;
+    text-decoration: none;
+    margin-right: 0.5%; /*Middle month/year button was slightly offset, didnt like it and this is a "solution." 
+    If you can even call it that... */
+    
+}
+
+#currentMonthYear:hover {
+    background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%);
+}
+
+
+#calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+    font-weight: bold;
+    min-width: 742px;
+    min-height: 20px;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 90vw;
+    height: 65vh;
+}
+
+#nextMonth {
+    border-radius: 5px;
+    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); 
+    padding: 3px;
+    border: 1px solid #000;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 0.5% /*Next month button was slightly offset, didnt like it and this is a "solution." 
+    If you can even call it that... */
+}
+
+#nextMonth:hover {
+    background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%);
+}
+
+#prevMonth {
+    border-radius: 5px;
+    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); 
+    padding: 3px;
+    border: 1px solid #000;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#prevMonth:hover {
+    background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%);
+}
+
+.day {
+    width: calc(100% - 10px);
+    min-width: 100px;
+    min-height: 120px;
+    height: calc(100% - 10px);
+    background-color: white;
+    border: 1px solid #ccc;
+    position: relative;
+    cursor: pointer;
+}
+
+.day:hover {
+    border: 1px solid black;
+}
+
+.day-number {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 14px;
+    color: #888;
+}
+
+.task {
+    background-color: #ffeb3b;
+    border-radius: 3px;
+    padding: 2px;
+    margin-top: 20px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.task.more-tasks {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.more-tasks {
+    z-index: 1;
+    position: relative;
+    top: -10px;
+}
+
+#task-form {
+    margin-top: 10px;
+    top: 680px;
+    position: absolute;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label, form input, form button {
+    margin: 5px 0;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.modal-content form label,
+.modal-content form input,
+.modal-content form button {
+    margin: 5px 0;
+}
+
+#add-task-button {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#add-task-button:hover {
+    background-color: #45a049;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete-task {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
+.delete-task:hover {
+    background-color: rgb(220, 0, 0);
+}
+
+.dropdown {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 2;
+}
+
+.dropdown select {
+    margin: 5px;
+    padding: 5px;
+}
