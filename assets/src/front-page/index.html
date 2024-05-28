@@ -17,12 +17,17 @@
     <main>
         <div class="dashboard">
             <div class="title-container">
-                <h1>Home Page / Dashboard - date</h1>
+                <h1 class = "title-date">Home Page / Dashboard - date</h1>
+                <script>
+                    let now = new Date();
+                    document.querySelector(".title-date").innerHTML =  "Home - " + now.toLocaleDateString();
+                </script>
+
             </div>
             <div class="project-container">
                 <h2> Recent Project </h2>
-                <iframe id="frame" src="../events-tasks/index.html"></iframe>
-                <script src="script.js" defer></script>
+                <!--<iframe id="frame" src="../events-tasks/index.html"></iframe>
+                <script src="script.js" defer></script>-->
                 
 
             </div>
@@ -35,6 +40,7 @@
 
             <div class="journal-container">
                 <h2> Daily Log</h2>
+                <div id="journalEntries" class="list-group"></div>
             </div>
         </div>
     </main>
@@ -44,5 +50,5 @@
 </body>
 <script src="../../recurring-elements/nav.js"></script>
 <script src="../../recurring-elements/footer.js"></script>
-
+<script src="../../src/journal/updateJournal.js"></script>
 </html>
