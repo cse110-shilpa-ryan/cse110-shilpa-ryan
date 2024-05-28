@@ -1,4 +1,6 @@
-
+*{
+    font-family: 'Josefin Sans';
+}
 
 .dashboard {
     display: grid;

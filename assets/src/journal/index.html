@@ -2,28 +2,29 @@
 <html>
 
 <head>
-    <title>Development Journal</title>
+    <title>Journal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="../../recurring-elements/nav.css">
 
+</head>
+    
 <body>
+    
     <header>
-        <nav>
-            <ul>
-                <li><a href="../front-page/index.html">Home</a></li>
-                <li><a href="../events-tasks/index.html">Calendar</a></li>
-                <li><a href="../journal/index.html">Journal</a></li>
-            </ul>
-        </nav>
+      <div id="insert-nav" title="Journal"></div>
     </header>
 
-    <main>
-        <!-- Your content goes here -->
+    <main id="journalForm">
+        <h1>My Journal</h1>
+        <div id="journalEntries" class="list-group"></div>
+        <br>
+        <button id="addEntry">Add Entry</button>
     </main>
 
-    <footer>
-        <!-- Your footer content goes here -->
-    </footer>
+    <div id="footer"></div>
 </body>
-
+<script src="../../recurring-elements/nav.js"></script>
+<script src="../../recurring-elements/footer.js"></script>
+<script src="updateJournal.js"></script>
 </html>
