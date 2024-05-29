@@ -69,7 +69,7 @@ function loadEntries() {
                 <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
-        journalList.appendChild(entryElement);
+        journalList.prepend(entryElement);
     });
 }
 
