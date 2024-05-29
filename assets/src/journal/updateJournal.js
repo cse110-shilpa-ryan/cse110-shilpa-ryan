@@ -9,9 +9,10 @@ function saveEntries(entries) {
 
 function createEntry(title, content) {
     const entries = getEntries();
+    const currDate = new Date();
     const newEntry = {
         id: Date.now(),
-        title: title,
+        title: currDate.toLocaleString(),
         content: content
     };
     entries.push(newEntry);
