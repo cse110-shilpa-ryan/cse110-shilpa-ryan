@@ -71,10 +71,7 @@ function createProjectCard(project, projectIndex) {
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
     projectTitle.value = project.title;
-    projectTitle.addEventListener('change', () => {
-        project.title = projectTitle.value;
-        saveProjectsToLocalStorage();
-    });
+    projectTitle.disabled = true; // Disable editing directly
 
     const projectDescription = document.createElement('p');
     projectDescription.textContent = project.description;
@@ -87,6 +84,12 @@ function createProjectCard(project, projectIndex) {
         projects.splice(projectIndex, 1);
         projectColumn.remove();
         saveProjectsToLocalStorage();
+    });
+
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.addEventListener('click', () => {
+        createEditModal(project, projectIndex);
     });
 
     const addTaskButton = document.createElement('button');
@@ -103,6 +106,7 @@ function createProjectCard(project, projectIndex) {
     projectDetails.appendChild(projectDescription);
     projectCard.appendChild(projectImage);
     projectCard.appendChild(projectDetails);
+    projectCard.appendChild(editButton);
     projectCard.appendChild(projectDelete);
     projectCard.appendChild(addTaskButton);
     projectColumn.appendChild(projectCard);
@@ -133,18 +137,101 @@ async function loadProjects() {
     displayProjects();
 }
 
+function createEditModal(project = null, projectIndex = null) {
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    const projectTitle = document.createElement('input');
+    projectTitle.type = 'text';
+    projectTitle.placeholder = 'Project Title';
+    projectTitle.value = project ? project.title : '';
+
+    const projectDescription = document.createElement('textarea');
+    projectDescription.placeholder = 'Project Description';
+    projectDescription.value = project ? project.description : '';
+
+    const projectImage = document.createElement('input');
+    projectImage.type = 'file';
+
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save';
+    saveButton.addEventListener('click', () => {
+        if (!project) {
+            // Adding a new project
+            project = {
+                title: projectTitle.value,
+                description: projectDescription.value,
+                image: '',
+                tasks: []
+            };
+            projects.push(project);
+            saveProjectImage(projectImage, project).then(() => {
+                saveProjectsToLocalStorage();
+                displayProjects();
+                closeModal(modalOverlay);
+            });
+        } else {
+            // Editing an existing project
+            project.title = projectTitle.value;
+            project.description = projectDescription.value;
+            if (projectImage.files[0]) {
+                saveProjectImage(projectImage, project).then(() => {
+                    saveProjectsToLocalStorage();
+                    displayProjects();
+                    closeModal(modalOverlay);
+                });
+            } else {
+                saveProjectsToLocalStorage();
+                displayProjects();
+                closeModal(modalOverlay);
+            }
+        }
+    });
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.addEventListener('click', () => {
+        closeModal(modalOverlay);
+    });
+
+    modalContent.appendChild(projectTitle);
+    modalContent.appendChild(projectDescription);
+    modalContent.appendChild(projectImage);
+    modalContent.appendChild(saveButton);
+    modalContent.appendChild(cancelButton);
+    modalOverlay.appendChild(modalContent);
+
+    document.body.appendChild(modalOverlay);
+    document.querySelector('.project-container').classList.add('blur-background');
+}
+
+function saveProjectImage(inputElement, project) {
+    return new Promise((resolve) => {
+        if (inputElement.files[0]) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                project.image = reader.result;
+                resolve();
+            };
+            reader.readAsDataURL(inputElement.files[0]);
+        } else {
+            resolve();
+        }
+    });
+}
+
+function closeModal(modal) {
+    document.body.removeChild(modal);
+    document.querySelector('.project-container').classList.remove('blur-background');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadProjects();
 
     document.getElementById('add-project-button').addEventListener('click', () => {
-        const project = {
-            title: 'New Project',
-            description: 'Description of new project',
-            image: '../../images/default.png',
-            tasks: []
-        };
-        projects.push(project);
-        displayProjects();
-        saveProjectsToLocalStorage();
+        createEditModal();
     });
 });
