@@ -3,17 +3,24 @@
 }
 body{
     margin: 0%;
+    /* background-color: #b4c6cf;; */
 }
 main{
     padding: 3% 5%;
 }
 button {
-    background-color: #45051f;
+    background-color: #6b3249;
     color: white;
     padding: 1%;
-    border-style: none;
     border-radius: 5px;
     margin-bottom: 2%;
+}
+button:hover{
+    cursor: pointer;
+    color: #6b3249;
+    background-color: white;
+    font-weight:bold;
+    border: 2px solid #6b3249;
 }
 .active{
     font-weight: bold;
@@ -21,8 +28,12 @@ button {
 .list-group-item {
     display: block;
     padding: 2%;
-    background-color: #b4c6cf;
-    margin-top: 2%;
+    background-color: #cdd5dd;
+    /* border-color: #b4c6cf;
+    border-width: 2px;
+    border-style: solid; */
+    margin-top: 2%; 
+    border-radius: 10px;
 }
 .delete {
     float: right;
