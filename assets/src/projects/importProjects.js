@@ -95,12 +95,17 @@ function createProjectCard(project, projectIndex) {
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
     addTaskButton.addEventListener('click', () => {
-        const task = { task: 'New Task', due: '2024-12-31' };
+        const today = new Date();
+        const nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Set to the next day using local time
+        const nextDayFormatted = nextDay.toISOString().split('T')[0];
+        const task = { task: 'New Task', due: nextDayFormatted };
         projects[projectIndex].tasks.push(task);
         const taskCard = createTaskCard(task, projectIndex, projects[projectIndex].tasks.length - 1);
         projectColumn.appendChild(taskCard);
         saveProjectsToLocalStorage();
     });
+    
+    
 
     projectDetails.appendChild(projectTitle);
     projectDetails.appendChild(projectDescription);
