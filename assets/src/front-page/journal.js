@@ -10,35 +10,35 @@ document.addEventListener('DOMContentLoaded', function() {
         const journals = getJournalEntries();
         const today = new Date();
         const nextFiveDays = new Date();
-        nextFiveDays.setDate(today.getDate() + 5);
+        nextFiveDays.setDate(today.getDate() - 5);
 
-        return journals.filter(task => {
-            //const journalDate = Date.parse(journals.id);
-            console.log(journals.id);
-            return true;
+        return journals.filter(journal => {
+            let journalDate = new Date(journal.id);
+            return journalDate >= nextFiveDays;
             //return endDate >= today && endDate <= nextThreeDays;
         });
     }
 
     // Render upcoming tasks to the task container
-    function renderUpcomingTasks() {
+    function renderRecentJournals() {
         const upcomingTasks = getRecentJournals();
-        const taskContainer = document.getElementById('upcoming-tasks');
-        taskContainer.innerHTML = '';
+        const journalContainer = document.getElementById('home-journals');
+        journalContainer.innerHTML = '';
 
         if (upcomingTasks.length === 0) {
-            taskContainer.innerHTML = '<li>No upcoming tasks</li>';
+            journalContainer.innerHTML = '<li>No recent journals</li>';
         } else {
-            upcomingTasks.forEach(task => {
-                const taskItem = document.createElement('li');
-                taskItem.textContent = `${task.title} (Due: ${new Date(task.endDate).toDateString()})`;
-                taskContainer.appendChild(taskItem);
+            upcomingTasks.forEach(journal => {
+                let journalItem = document.createElement('li');
+                let journalDate = new Date(journal.id);
+                journalItem.textContent = `${journal.title} (${journalDate.toDateString()})`;
+                journalContainer.appendChild(journalItem);
             });
         }
     }
 
     // Initial rendering of upcoming tasks
-    renderUpcomingTasks();
+    renderRecentJournals();
 });
 
 

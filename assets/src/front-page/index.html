@@ -17,15 +17,15 @@
     <main>
         <div class="dashboard">
             <div class="title-container">
-                <h1 class = "title-date">Home Page / Dashboard - date</h1>
+                <h1 class = "title-date">Home</h1>
                 <script>
                     let now = new Date();
-                    document.querySelector(".title-date").innerHTML =  "Home - " + now.toLocaleDateString();
+                    document.querySelector(".title-date").innerHTML =  "Home - " + now.toDateString();
                 </script>
 
             </div>
             <div class="project-container">
-                <h2> Recent Project </h2>
+                <h2>Recent Project</h2>
                 <!--<iframe id="frame" src="../events-tasks/index.html"></iframe>
                 <script src="script.js" defer></script>-->
                 
@@ -33,13 +33,13 @@
             </div>
 
             <div class="task-container">
-                <h2> Upcoming Deadlines </h2>
+                <h2>Upcoming Deadlines</h2>
                 <ul id="upcoming-tasks"></ul> <!-- Task list container -->
             </div>
 
             <div class="journal-container">
-                <h2> Daily Log</h2>
-                <div id="journalEntries" class="list-group"></div>
+                <h2>Recent Journals</h2>
+                <ul id="home-journals"></ol>
             </div>
         </div>
     </main>
