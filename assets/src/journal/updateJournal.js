@@ -9,9 +9,10 @@ function saveEntries(entries) {
 
 function createEntry(title, content) {
     const entries = getEntries();
+    const currDate = new Date();
     const newEntry = {
         id: Date.now(),
-        title: title,
+        title: currDate.toLocaleString(),
         content: content
     };
     entries.push(newEntry);
@@ -69,7 +70,7 @@ function loadEntries() {
                 <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
-        journalList.appendChild(entryElement);
+        journalList.prepend(entryElement);
     });
 }
 
