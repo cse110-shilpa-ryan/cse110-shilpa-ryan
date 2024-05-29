@@ -1,8 +1,13 @@
 /* Add Font Awesome for trash icon */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
+/* Font for website
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap'); */
+
+*{
+    font-family: 'Josefin Sans';
+}
 body {
-    font-family: 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
     background-color: #ffffff;
