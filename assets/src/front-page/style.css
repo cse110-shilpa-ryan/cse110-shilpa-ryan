@@ -1,6 +1,12 @@
 *{
     font-family: 'Josefin Sans';
 }
+body{
+    margin: 0%;
+}
+main {
+    padding: 3% 5%;
+}
 
 .dashboard {
     display: grid;
@@ -8,21 +14,33 @@
     grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    gap: 5% 3%;
     
     }
 
-  
 .title-container { 
     grid-area: 1 / 1 / 1 / 4; 
+    background-color: #f1f1f1;
+    padding: 2%;
+    border-radius: 25px;
 }
 .project-container { 
     grid-area: 2 / 1 / 4 / 3; 
+    background-color: #f1f1f1;
+    padding: 2%;
+    border-radius: 25px;
 }
 
 .task-container { 
     grid-area: 4 / 1 / 6 / 3; 
+    background-color: #f1f1f1;
+    padding: 2%;
+    border-radius: 25px;
 }
 
 .journal-container { 
     grid-area: 2 / 3 / 6 / 4; 
+    background-color: #f1f1f1;
+    padding: 4%;
+    border-radius: 25px;
 }
