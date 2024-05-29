@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Helper function to get tasks from local storage
+    // Helper function to get journals from local storage
     function getJournalEntries() {
         return JSON.parse(localStorage.getItem('journalEntries')) || [];
     }
 
-    // Helper function to filter tasks due in the next 3 days
+    // Helper function to filter journals within the last 5 days
     function getRecentJournals() {
         const journals = getJournalEntries();
         const today = new Date();
@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return journals.filter(journal => {
             let journalDate = new Date(journal.id);
+            console.log(journalDate.toDateString());
             return journalDate >= nextFiveDays;
-            //return endDate >= today && endDate <= nextThreeDays;
-        });
+        }).sort((a,b) => b.id - a.id);
     }
 
-    // Render upcoming tasks to the task container
+    // Render recent journals
     function renderRecentJournals() {
         const upcomingTasks = getRecentJournals();
         const journalContainer = document.getElementById('home-journals');
@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initial rendering of upcoming tasks
     renderRecentJournals();
 });
 
