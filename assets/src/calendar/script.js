@@ -141,7 +141,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
-            if (newStart <= new Date(year, month) && newEnd >= new Date(year, month)) {
+            const curDate = new Date(year, month);
+            if (newStart <= curDate && newEnd >= curDate) {
                 addTaskToCalendar(task);
             }
         });
@@ -158,8 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
+            const curDate = new Date(year, month, day);
     
-            if (startDate <= new Date(year, month, day) && endDate >= new Date(year, month, day)) {
+            if (startDate <= curDate && endDate >= curDate) {
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
                 
