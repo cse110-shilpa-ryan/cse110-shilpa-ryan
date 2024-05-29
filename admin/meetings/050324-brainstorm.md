@@ -39,6 +39,6 @@ thinking about users and their expectations (write user stories)
 
 
 ### Tasks
-- [ ] export miro contents to pdf and upload to /specs/brainstorm/ - shilpa
-- [ ] Split up and research about the feasibility of each feature - team
-- [ ] Conquer by interest / schedule availability
+- [X] export miro contents to pdf and upload to /specs/brainstorm/ - shilpa
+- [X] Split up and research about the feasibility of each feature - team
+- [X] Conquer by interest / schedule availability

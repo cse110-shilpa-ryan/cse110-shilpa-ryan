@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../recurring-elements/nav.css">
-
+    <link rel="icon" type="image/png" href="../../images/icon.png">
 </head>
 
 <body>
@@ -14,7 +17,45 @@
     </header>
 
     <main>
-        <!-- Your content goes here -->
+        <div id="calendar-container">
+            <div id="calendar-header">
+                <button id="prevMonth">Previous</button>
+                <span id="currentMonthYear"></span>
+                <button id="nextMonth">Next</button>
+            </div>
+            <div id="calendar-days">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div id="calendar"></div>
+        </div>
+        <div id="task-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Tasks for <span id="modal-date"></span></h2>
+                <ul id="task-list"></ul>
+                <button id="add-task-button">Add Task</button>
+                <!-- Hidden Add Task Form -->
+                <form id="addTaskFormModal" style="display: none;">
+                    <label for="taskTitleModal">Title:</label>
+                    <input type="text" id="taskTitleModal" required maxlength="50">
+                    <label for="endDateModal">End Date:</label>
+                    <input type="date" id="endDateModal" required>
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+        </div>
+        
+        <div id="monthYearDropdown" class="dropdown" style="display: none;">
+            <select id="monthDropdown"></select>
+            <select id="yearDropdown"></select>
+        </div>
+        <script src="script.js"></script>
     </main>
 
     <div id="footer">

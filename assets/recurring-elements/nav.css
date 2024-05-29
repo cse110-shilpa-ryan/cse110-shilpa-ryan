@@ -35,7 +35,8 @@ nav {
 .nav-button {
     display: inline-block;
     text-decoration: none;
-    color: #a9a9a9;
+    /* color: #a9a9a9; (sorry nirvek, i changed this bc this color wouldn't pass accessibility standards) */
+    color: black;
     /* Light gray */
     font-size: 1em;
     padding: 0.5em 0.5em;
