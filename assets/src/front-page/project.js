@@ -1,35 +1,20 @@
-
+// Display the top 3 projects and their descriptions
 document.addEventListener('DOMContentLoaded', function() {
     // Helper function to get projects from local storage
     function getProjects() {
         return JSON.parse(localStorage.getItem('projectsData')) || [];
     }
 
-    // Helper function to filter tasks due in the next week
-    function getUpcomingProjects() {
-        const projects = getProjects();
-        const today = new Date();
-        const nextWeek = new Date();
-        nextWeek.setDate(today.getDate() + 7);
-
-        return projects.filter(project => {
-            return project.tasks.some(task => {
-                const taskDueDate = new Date(task.due);
-                return taskDueDate >= today && taskDueDate <= nextWeek;
-            });
-        });
-    }
-
-    // Render upcoming projects with tasks due in the next week
-    function renderUpcomingProjects() {
-        const upcomingProjects = getUpcomingProjects();
+    // Render top 3 projects
+    function renderTopProjects() {
+        const projects = getProjects().slice(0, 3); // Get the top 3 projects
         const projectContainer = document.getElementById('recent-projects');
         projectContainer.innerHTML = '';
 
-        if (upcomingProjects.length === 0) {
-            projectContainer.innerHTML = '<li>No upcoming projects</li>';
+        if (projects.length === 0) {
+            projectContainer.innerHTML = '<li>No projects available</li>';
         } else {
-            upcomingProjects.forEach(project => {
+            projects.forEach(project => {
                 const projectItem = document.createElement('li');
                 projectItem.innerHTML = `
                     <div class="project-card">
@@ -37,13 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="project-details">
                             <h3>${project.title}</h3>
                             <p>${project.description}</p>
-                            <p><em>Tasks due soon:</em></p>
-                            <ul>
-                                ${project.tasks.filter(task => {
-                                    const taskDueDate = new Date(task.due);
-                                    return taskDueDate >= new Date() && taskDueDate <= nextWeek;
-                                }).map(task => `<li>${task.task} - ${task.due}</li>`).join('')}
-                            </ul>
                         </div>
                     </div>
                 `;
@@ -52,6 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Initial rendering of upcoming projects
-    renderUpcomingProjects();
+    // Initial rendering of top 3 projects
+    renderTopProjects();
 });
