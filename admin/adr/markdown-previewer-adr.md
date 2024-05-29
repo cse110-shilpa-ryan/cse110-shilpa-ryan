@@ -6,11 +6,10 @@ The complexity of parsing markdown within our project is too great of a scope fo
 
 ## Considered Options
 
-* Markjs
+* Markedjs
 * Markdownit
 * Commonmark
 
 ## Decision Outcome
 
-Chosen option: "Plain JUnit5", 
-Reason, Reason, etc. 
+Of the three option we chose Markedjs because it is used more and has a lot of documentation. It is also still being updated which is a bonus.
