@@ -29,11 +29,13 @@ button:hover{
     display: block;
     padding: 2%;
     background-color: #ede7e3;
-    /* border-color: #b4c6cf;
-    border-width: 2px;
-    border-style: solid; */
     margin-top: 2%; 
     border-radius: 10px;
+}
+.tag {
+    float: left;
+    font-size: 0.75em;
+    padding: 0.5%;
 }
 .delete {
     float: right;

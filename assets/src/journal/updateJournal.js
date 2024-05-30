@@ -67,6 +67,7 @@ function loadEntries() {
                 <p class="mb-1" contenteditable="true" onblur="updateContent(${entry.id}, this.textContent)">${entry.content}</p>
             </div>
             <div>
+                <button class="tag" onclick="addTag()">Add Tags</button>
                 <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
