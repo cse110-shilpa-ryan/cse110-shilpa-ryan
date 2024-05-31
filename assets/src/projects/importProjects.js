@@ -15,7 +15,6 @@ function loadProjectsFromLocalStorage() {
 function saveProjectsToLocalStorage() {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects));
 }
-
 function createTaskCard(task, projectIndex, taskIndex = null) {
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
@@ -86,14 +85,19 @@ function createProjectCard(project, projectIndex) {
         saveProjectsToLocalStorage();
     });
 
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'button-container';
+
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
+    editButton.className = 'card-button';
     editButton.addEventListener('click', () => {
         createEditModal(project, projectIndex);
     });
 
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
+    addTaskButton.className = 'card-button';
     addTaskButton.addEventListener('click', () => {
         const today = new Date();
         const nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Set to the next day using local time
@@ -104,16 +108,18 @@ function createProjectCard(project, projectIndex) {
         projectColumn.appendChild(taskCard);
         saveProjectsToLocalStorage();
     });
-    
-    
+
 
     projectDetails.appendChild(projectTitle);
     projectDetails.appendChild(projectDescription);
     projectCard.appendChild(projectImage);
     projectCard.appendChild(projectDetails);
-    projectCard.appendChild(editButton);
     projectCard.appendChild(projectDelete);
-    projectCard.appendChild(addTaskButton);
+
+    buttonRow.appendChild(editButton);
+    buttonRow.appendChild(addTaskButton);
+    projectCard.appendChild(buttonRow);
+
     projectColumn.appendChild(projectCard);
 
     project.tasks.forEach((task, taskIndex) => {

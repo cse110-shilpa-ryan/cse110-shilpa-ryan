@@ -40,8 +40,9 @@ body {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
-    position: relative; /* Ensure relative positioning */
-    
+    position: relative;
+    /* Ensure relative positioning */
+
 }
 
 .project-image {
@@ -78,16 +79,19 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    display: none; /* Initially hidden */
+    display: none;
+    /* Initially hidden */
     cursor: pointer;
 }
 
 .project-card:hover .project-delete {
-    display: block; /* Show on hover */
+    display: block;
+    /* Show on hover */
 }
 
 .project-delete i {
-    color: var(--button-color); /* Style the trash icon */
+    color: var(--button-color);
+    /* Style the trash icon */
 }
 
 .task-card {
@@ -97,7 +101,8 @@ body {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    position: relative; /* Ensure relative positioning */
+    position: relative;
+    /* Ensure relative positioning */
 }
 
 .task-card input[type="text"],
@@ -125,27 +130,43 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    display: none; /* Initially hidden */
+    display: none;
+    /* Initially hidden */
     cursor: pointer;
 }
 
 .task-card:hover .task-delete {
-    display: block; /* Show on hover */
+    display: block;
+    /* Show on hover */
 }
 
 .task-delete i {
-    color: var(--button-color); /* Style the trash icon */
+    color: var(--button-color);
+    /* Style the trash icon */
 }
 
-.add-task {
-    margin: 20px;
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -10px;
+
 }
 
-.add-task button {
-    padding: 10px 20px;
-    font-size: 16px;
+.card-button {
+    background-color: -;
+    padding: 8px 18px;
+    font-size: 12px;
     cursor: pointer;
+    margin: 10px;
+    border-radius: 0.8em;
 }
+
+.card-button:hover {
+    background-color: var(--button-color);
+    transition: 0.3s;
+    color: #fff;
+}
+
 
 /* Add styles for the edit modal and overlay */
 .modal-overlay {
