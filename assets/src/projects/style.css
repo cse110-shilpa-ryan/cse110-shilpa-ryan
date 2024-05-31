@@ -1,12 +1,3 @@
-/* Variables */
-:root {
-    --background-color: #6E8894;
-    --button-color: #45051f;
-    --box-color: #ede7e3;
-    --pressed-button-color: #bbb;
-    --olive: #849324;
-}
-
 /* Add Font Awesome for trash icon */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
 
