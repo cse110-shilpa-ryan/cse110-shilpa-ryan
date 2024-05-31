@@ -53,7 +53,7 @@ function removeEntry(id) {
     deleteEntry(id);
     loadEntries();
 }
-
+                                                      
 function loadEntries() {
     const entries = getEntries();
     const journalList = document.getElementById("journalEntries");
@@ -67,10 +67,17 @@ function loadEntries() {
                 <p class="mb-1" contenteditable="true" onblur="updateContent(${entry.id}, this.textContent)">${entry.content}</p>
             </div>
             <div>
-                <button class="tag" onclick="addTag()">Add Tags</button>
                 <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
+        let p = entryElement.querySelector('p.mb-1');
+        p.addEventListener('click', () => {
+            if(p.innerHTML === 'Enter your text here...'){
+                p.innerHTML = '';
+                p.style = 'color: black';
+                console.log('clicked');
+            }
+        });
         journalList.prepend(entryElement);
     });
 }
@@ -82,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadEntries();
 
     document.getElementById('addEntry').addEventListener('click', () => {
-        const newEntry = createEntry('New Entry Title', 'Click to edit entry content...');
+        const newEntry = createEntry('New Entry Title', 'Enter your text here...');
         loadEntries();
     });
 });
