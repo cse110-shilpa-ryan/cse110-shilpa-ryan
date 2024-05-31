@@ -4,13 +4,14 @@
 /* Font for website */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-*{
+* {
     font-family: 'Josefin Sans';
 }
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: var(--background-color);
 }
 
 .project-container {
@@ -34,12 +35,13 @@ body {
 
 .project-card {
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: var(--box-color);
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
     position: relative; /* Ensure relative positioning */
+    
 }
 
 .project-image {
@@ -85,7 +87,7 @@ body {
 }
 
 .project-delete i {
-    color: red; /* Style the trash icon */
+    color: var(--button-color); /* Style the trash icon */
 }
 
 .task-card {
@@ -132,7 +134,7 @@ body {
 }
 
 .task-delete i {
-    color: red; /* Style the trash icon */
+    color: var(--button-color); /* Style the trash icon */
 }
 
 .add-task {
