@@ -21,6 +21,9 @@ export function createEditModal(project = null, projectIndex = null) {
     const projectImage = document.createElement('input');
     projectImage.type = 'file';
 
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+
     const saveButton = document.createElement('button');
     saveButton.textContent = 'Save';
     saveButton.addEventListener('click', () => {
@@ -65,10 +68,12 @@ export function createEditModal(project = null, projectIndex = null) {
     modalContent.appendChild(projectTitle);
     modalContent.appendChild(projectDescription);
     modalContent.appendChild(projectImage);
-    modalContent.appendChild(saveButton);
-    modalContent.appendChild(cancelButton);
-    modalOverlay.appendChild(modalContent);
 
+    buttonContainer.appendChild(saveButton);
+    buttonContainer.appendChild(cancelButton);
+    modalContent.appendChild(buttonContainer);
+
+    modalOverlay.appendChild(modalContent);
     document.body.appendChild(modalOverlay);
     document.querySelector('.project-container').classList.add('blur-background');
 }

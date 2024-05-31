@@ -2,6 +2,16 @@
     font-family: 'Josefin Sans';
 }
 
+body {
+    margin: 0%;
+    /* background-color: #b4c6cf;; */
+}
+
+main {
+    padding: 3% 5%;
+}
+
+
 #home-nav {
     font-weight: bold;
     text-decoration: underline;

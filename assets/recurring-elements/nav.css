@@ -58,10 +58,10 @@ nav {
 
 .nav-button:hover {
     color: #ffffff;
-    transition: 0.8s;
+    transition: 0.5s;
     /* White text on hover */
     background-color: #696969;
-    transition: 0.5s;
+    transition: 0.8s;
     text-decoration: underline;
     /* Dark gray background on hover */
 }

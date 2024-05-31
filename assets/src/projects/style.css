@@ -172,9 +172,7 @@ body {
 
 .button-container {
     display: flex;
-    justify-content: center;
-    margin-top: -10px;
-
+    justify-content: space-evenly;
 }
 
 .card-button {
@@ -208,6 +206,7 @@ body {
 }
 
 .modal-content {
+    display: inline-block;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -228,10 +227,17 @@ body {
 }
 
 .modal-content button {
-    padding: 10px 20px;
-    font-size: 16px;
+    background-color: var(--box-color);
+    padding: 8px 18px;
+    font-size: 12px;
     cursor: pointer;
-    margin-top: 10px;
+    border-radius: 0.8em;
+}
+
+.modal-content button:hover {
+    background-color: var(--button-color);
+    transition: 0.3s;
+    color: #fff;
 }
 
 /* Blur the background when modal is active */

@@ -105,8 +105,8 @@ export function createProjectCard(project, projectIndex) {
     projectCard.appendChild(projectDetails);
     projectCard.appendChild(projectDelete);
 
-    buttonRow.appendChild(editButton);
     buttonRow.appendChild(addTaskButton);
+    buttonRow.appendChild(editButton);
     projectCard.appendChild(buttonRow);
 
     projectColumn.appendChild(projectCard);
