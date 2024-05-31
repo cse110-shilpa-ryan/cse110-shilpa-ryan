@@ -1,3 +1,8 @@
-*{
+* {
     font-family: 'Josefin Sans';
+}
+
+#home-nav {
+    font-weight: bold;
+    text-decoration: underline;
 }
