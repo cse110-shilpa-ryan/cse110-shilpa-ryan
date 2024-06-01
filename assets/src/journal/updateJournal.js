@@ -32,9 +32,15 @@ function updateTitle(id, newTitle) {
 function updateContent(id, newContent) {
     const entries = getEntries();
     const entry = entries.find(entry => entry.id === id);
+    console.log(entry);
     if (entry) {
+        if (newContent == '') {
+            newContent = 'Enter your text here...';
+            document.getElementById(`# ${entry.id} p`)
+        }
         entry.content = newContent;
         saveEntries(entries);
+        loadEntries();
     }
 }
 
@@ -53,7 +59,7 @@ function removeEntry(id) {
     deleteEntry(id);
     loadEntries();
 }
-                                                      
+
 function loadEntries() {
     const entries = getEntries();
     const journalList = document.getElementById("journalEntries");
@@ -72,10 +78,8 @@ function loadEntries() {
         `;
         let p = entryElement.querySelector('p.mb-1');
         p.addEventListener('click', () => {
-            if(p.innerHTML === 'Enter your text here...'){
+            if(p.innerHTML == 'Enter your text here...'){
                 p.innerHTML = '';
-                p.style = 'color: black';
-                console.log('clicked');
             }
         });
         journalList.prepend(entryElement);
