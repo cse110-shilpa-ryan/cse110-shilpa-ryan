@@ -95,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         const dayElements = calendarElement.getElementsByClassName('day');
-
         for (let i = 0; i < dayElements.length; i++) {
             const dayElement = dayElements[i];
             const dayNumber = parseInt(dayElement.querySelector('.day-number')?.textContent, 10);
@@ -140,8 +139,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
 
-            if (startDate.getFullYear() === year && startDate.getMonth() === month ||
-                endDate.getFullYear() === year && endDate.getMonth() === month) {
+            const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
+            const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
+            const curDate = new Date(year, month);
+            if (newStart <= curDate && newEnd >= curDate) {
                 addTaskToCalendar(task);
             }
         });
@@ -158,8 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
+            const curDate = new Date(year, month, day);
     
-            if (startDate <= new Date(year, month, day) && endDate >= new Date(year, month, day)) {
+            if (startDate <= curDate && endDate >= curDate) {
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
                 
