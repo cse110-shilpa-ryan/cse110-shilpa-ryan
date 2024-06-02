@@ -15,8 +15,7 @@ main {
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     gap: 5% 3%;
-    
-    }
+}
 
 .title-container { 
     grid-area: 1 / 1 / 1 / 4; 
