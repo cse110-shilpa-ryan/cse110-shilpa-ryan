@@ -14,7 +14,7 @@ main {
 button {
     background-color: #6b3249;
     color: white;
-    padding: 1%;
+    padding: 0.5%;
     border-radius: 5px;
     margin-bottom: 2%;
 }
@@ -36,11 +36,9 @@ button:hover {
 .list-group-item {
     display: block;
     padding: 2%;
-    background-color: #cdd5dd;
-    /* border-color: #b4c6cf;
-    border-width: 2px;
-    border-style: solid; */
-    margin-top: 2%;
+    background-color: #ede7e3;
+    margin-top: 2%; 
+
     border-radius: 10px;
 }
 
