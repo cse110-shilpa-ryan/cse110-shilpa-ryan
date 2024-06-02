@@ -1,5 +1,3 @@
-
-
 function loadFooter() {
   const footerPlaceholder = document.getElementById('footer');
   const footerHTML = `

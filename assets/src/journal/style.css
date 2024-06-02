@@ -1,43 +1,51 @@
-*{
+* {
     font-family: 'Josefin Sans';
 }
-body{
+
+body {
     margin: 0%;
     /* background-color: #b4c6cf;; */
 }
-main{
+
+main {
     padding: 3% 5%;
 }
+
 button {
     background-color: #6b3249;
     color: white;
-    padding: 1%;
+    padding: 0.5%;
     border-radius: 5px;
     margin-bottom: 2%;
 }
-button:hover{
+
+button:hover {
     cursor: pointer;
     color: #6b3249;
     background-color: white;
-    font-weight:bold;
+    font-weight: bold;
     border: 2px solid #6b3249;
 }
-.active{
+
+#journal-nav {
     font-weight: bold;
+    text-decoration: underline;
+
 }
+
 .list-group-item {
     display: block;
     padding: 2%;
-    background-color: #cdd5dd;
-    /* border-color: #b4c6cf;
-    border-width: 2px;
-    border-style: solid; */
+    background-color: #ede7e3;
     margin-top: 2%; 
+
     border-radius: 10px;
 }
+
 .delete {
     float: right;
 }
+
 footer {
     margin-top: 5%;
 }

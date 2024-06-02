@@ -32,9 +32,15 @@ function updateTitle(id, newTitle) {
 function updateContent(id, newContent) {
     const entries = getEntries();
     const entry = entries.find(entry => entry.id === id);
+    console.log(entry);
     if (entry) {
+        if (newContent == '') {
+            newContent = 'Enter your text here...';
+            document.getElementById(`# ${entry.id} p`)
+        }
         entry.content = newContent;
         saveEntries(entries);
+        loadEntries();
     }
 }
 
@@ -70,6 +76,12 @@ function loadEntries() {
                 <button class="delete" onclick="removeEntry(${entry.id})">Delete</button> <br><br>
             </div>
         `;
+        let p = entryElement.querySelector('p.mb-1');
+        p.addEventListener('click', () => {
+            if(p.innerHTML == 'Enter your text here...'){
+                p.innerHTML = '';
+            }
+        });
         journalList.prepend(entryElement);
     });
 }
@@ -81,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadEntries();
 
     document.getElementById('addEntry').addEventListener('click', () => {
-        const newEntry = createEntry('New Entry Title', 'Click to edit entry content...');
+        const newEntry = createEntry('New Entry Title', 'Enter your text here...');
         loadEntries();
     });
 });

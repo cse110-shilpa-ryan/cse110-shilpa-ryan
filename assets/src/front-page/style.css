@@ -1,9 +1,11 @@
-*{
+* {
     font-family: 'Josefin Sans';
 }
-body{
+
+body {
     margin: 0%;
 }
+
 main {
     padding: 3% 5%;
 }
@@ -43,3 +45,9 @@ main {
     padding: 4%;
     border-radius: 25px;
 }
+
+#home-nav {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
