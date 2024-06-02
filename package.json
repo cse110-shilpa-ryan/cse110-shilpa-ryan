@@ -14,5 +14,12 @@
   },
   "dependencies": {
     "marked": "^12.0.2"
-  }
+  },
+  "name": "cse110-sp24-group11",
+  "description": "<img src=\"./admin/branding/teamlogo.png\" alt=\"Team Logo\" width=\"400\" >",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
