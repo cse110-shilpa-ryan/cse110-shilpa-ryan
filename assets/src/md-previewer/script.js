@@ -1,4 +1,4 @@
-import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
+import { marked } from './marked.esm.js';
 
 const contents = document.getElementById('text-content');
 const parsedContent = document.getElementById('md-parser');
@@ -10,15 +10,14 @@ marked.use({
 
 document.addEventListener('DOMContentLoaded', () => {
     const text = localStorage.getItem('content');
-    if(text){
+    if (text) {
         parsedContent.innerHTML = marked.parse(text);
         contents.value = text;
     }
 })
 
 contents.addEventListener('input', () => {
-    const text = contents.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/,'');
-    console.log(text);
+    const text = contents.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '');
     parsedContent.innerHTML = marked.parse(text);
     localStorage.setItem('content', text);
 });
