@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Cache DOM elements
     const calendarElement = document.getElementById('calendar');
     const prevMonthBtn = document.getElementById('prevMonth');
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCalendar(date) {
         calendarElement.innerHTML = '';
         currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-        
+
         const year = date.getFullYear();
         const month = date.getMonth();
         const firstDay = new Date(year, month, 1).getDay();
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
     // Add a task to the calendar
-    addTaskFormModal.addEventListener('submit', function(event) {
+    addTaskFormModal.addEventListener('submit', function (event) {
         event.preventDefault();
         const taskTitle = document.getElementById('taskTitleModal').value;
         const endDate = new Date(document.getElementById('endDateModal').value);
@@ -154,25 +154,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const tasks = getTasks();
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
-    
+
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
-    
+
             if (startDate <= new Date(year, month, day) && endDate >= new Date(year, month, day)) {
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
-                
+
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.className = 'delete-task';
                 deleteButton.addEventListener('click', () => deleteTask(task.id));
                 taskItem.appendChild(deleteButton);
-    
+
                 taskList.appendChild(taskItem);
             }
         });
-    
+
         modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
     }
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDropdowns() {
         monthDropdown.innerHTML = '';
         yearDropdown.innerHTML = '';
-        const months = Array.from({length: 12}, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        const months = Array.from({ length: 12 }, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
         months.forEach((month, index) => {
             const option = document.createElement('option');
             option.value = index;

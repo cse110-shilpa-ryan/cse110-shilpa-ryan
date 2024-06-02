@@ -1,12 +1,15 @@
-*{
+* {
     font-family: 'Josefin Sans';
 }
-body{
+
+body {
     margin: 0%;
 }
-main{
+
+main {
     padding: 3% 5%;
 }
+
 button {
     background-color: #45051f;
     color: white;
@@ -15,18 +18,22 @@ button {
     border-radius: 5px;
     margin-bottom: 2%;
 }
-.active{
+
+.active {
     font-weight: bold;
 }
+
 .list-group-item {
     display: block;
     padding: 2%;
     background-color: #b4c6cf;
     margin-top: 2%;
 }
+
 .delete {
     float: right;
 }
+
 footer {
     margin-top: 5%;
 }
