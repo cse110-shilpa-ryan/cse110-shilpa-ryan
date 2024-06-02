@@ -1,3 +1,13 @@
+/* Variables */
+:root {
+    --background-color: #6E8894;
+    --button-color: #45051f;
+    --box-color: #ede7e3;
+    --pressed-button-color: #bbb;
+    --olive: #849324;
+}
+
+
 /* assets/recurring-elements/nav.css */
 nav {
     position: sticky;
@@ -35,7 +45,6 @@ nav {
 .nav-button {
     display: inline-block;
     text-decoration: none;
-    /* color: #a9a9a9; (sorry nirvek, i changed this bc this color wouldn't pass accessibility standards) */
     color: black;
     /* Light gray */
     font-size: 1em;
@@ -49,22 +58,22 @@ nav {
 
 .nav-button:hover {
     color: #ffffff;
-    transition: 0.8s;
+    transition: 0.5s;
     /* White text on hover */
     background-color: #696969;
+    transition: 0.8s;
+    text-decoration: underline;
     /* Dark gray background on hover */
 }
 
-
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     background-color: #696969;
     /* Dark gray */
-    padding: 1em 0;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+    padding: 0.8em 0;
+    z-index: 0.1;
     text-align: center;
 }
 

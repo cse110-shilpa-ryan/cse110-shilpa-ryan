@@ -4,14 +4,42 @@
 /* Font for website */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
-*{
+* {
     font-family: 'Josefin Sans';
 }
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: var(--background-color);
 }
+
+#projects-nav {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#add-project-button {
+    position: fixed;
+    top: 1.5%;
+    left: 1.5%;
+    background-color: var(--button-color);
+    color: #fff;
+    padding: 1% 2%;
+    min-height: 30px;
+    min-width: 100px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0.5em;
+    z-index: 9001;
+}
+
+#add-project-button:hover {
+    background-color: var(--button-hover-color);
+    transition: 0.5s;
+    color: #000;
+}
+
 
 .project-container {
     display: flex;
@@ -34,12 +62,14 @@ body {
 
 .project-card {
     width: 100%;
-    background-color: #f1f1f1;
+    background-color: var(--box-color);
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
-    position: relative; /* Ensure relative positioning */
+    position: relative;
+    /* Ensure relative positioning */
+
 }
 
 .project-image {
@@ -76,16 +106,19 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    display: none; /* Initially hidden */
+    display: none;
+    /* Initially hidden */
     cursor: pointer;
 }
 
 .project-card:hover .project-delete {
-    display: block; /* Show on hover */
+    display: block;
+    /* Show on hover */
 }
 
 .project-delete i {
-    color: red; /* Style the trash icon */
+    color: var(--button-color);
+    /* Style the trash icon */
 }
 
 .task-card {
@@ -95,7 +128,8 @@ body {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    position: relative; /* Ensure relative positioning */
+    position: relative;
+    /* Ensure relative positioning */
 }
 
 .task-card input[type="text"],
@@ -123,27 +157,41 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    display: none; /* Initially hidden */
+    display: none;
+    /* Initially hidden */
     cursor: pointer;
 }
 
 .task-card:hover .task-delete {
-    display: block; /* Show on hover */
+    display: block;
+    /* Show on hover */
 }
 
 .task-delete i {
-    color: red; /* Style the trash icon */
+    color: var(--button-color);
+    /* Style the trash icon */
 }
 
-.add-task {
-    margin: 20px;
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.add-task button {
-    padding: 10px 20px;
-    font-size: 16px;
+.card-button {
+    background-color: var(--box-color);
+    padding: 8px 18px;
+    font-size: 12px;
     cursor: pointer;
+    margin: 10px;
+    border-radius: 0.8em;
 }
+
+.card-button:hover {
+    background-color: var(--button-color);
+    transition: 0.3s;
+    color: #fff;
+}
+
 
 /* Add styles for the edit modal and overlay */
 .modal-overlay {
@@ -160,6 +208,7 @@ body {
 }
 
 .modal-content {
+    display: inline-block;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -180,10 +229,17 @@ body {
 }
 
 .modal-content button {
-    padding: 10px 20px;
-    font-size: 16px;
+    background-color: var(--box-color);
+    padding: 8px 18px;
+    font-size: 12px;
     cursor: pointer;
-    margin-top: 10px;
+    border-radius: 0.8em;
+}
+
+.modal-content button:hover {
+    background-color: var(--button-color);
+    transition: 0.3s;
+    color: #fff;
 }
 
 /* Blur the background when modal is active */
