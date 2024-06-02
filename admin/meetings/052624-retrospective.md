@@ -6,17 +6,20 @@ note-taker: Jacob
 
 ### Agenda
 1. Do retrospective.
-2. Make new goals for coming week
+   <img width="652" alt="image" src="https://github.com/cse110-sp24-group11/cse110-sp24-group11/assets/103155665/e8229654-ee2a-4d50-a47f-e8da093e37ba">
+   <img width="158" alt="image" src="https://github.com/cse110-sp24-group11/cse110-sp24-group11/assets/103155665/39e11e2d-1145-441b-bcdc-95992636d3df">
+
+3. Make new goals for coming week
    - Home page: consistent styling; basic functionality; show only projects not tasks
    - Projects page: local storage, clicking on task to pop up with additional information, 
    - Calendar page: fix bugs with task implementation, add consistent styling
    - Journal: CRUD + filtering
    - Developer tools: ??
-3. Plan demo for TA (Aryan, Evan, Jacob, Shilpa)
-4. Plan additional meeting
+4. Plan demo for TA (Aryan, Evan, Jacob, Shilpa)
+5. Plan additional meeting
     - Tuesday after lecture
     - Notify who weren’t hear and ask about availability
-5. Record video of working components for assignment 
+6. Record video of working components for assignment 
 
 ### Tasks
 - [x] upload review video to YouTube and GitHub
