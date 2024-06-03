@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const taskModal = document.getElementById('task-modal');
     const closeButton = document.querySelector('.close-button');
     const taskList = document.getElementById('task-list');
+    const projectList = document.getElementById('mainTaskList');
     const addTaskButton = document.getElementById('add-task-button');
     const addTaskFormModal = document.getElementById('addTaskFormModal');
     const modalDate = document.getElementById('modal-date');
@@ -90,14 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add a task to a specific day in the calendar
-    function addTaskToCalendar(task, taskType, color) {
+    function addTaskToCalendar(task, taskType, color, projName="") {
         const { title, startDate, endDate, due } = task;
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         const dayElements = calendarElement.getElementsByClassName('day');
         const dueDate = new Date(due);
         dueDate.setDate(dueDate.getDate() + 1);
-        const dueStr = taskType == 'proj' ? "DUE: " : "";
+        const dueStr = taskType == 'proj' ? "DUE: " + projName + " - ": "";
         
         for (let i = 0; i < dayElements.length; i++) {
             const dayElement = dayElements[i];
@@ -167,13 +168,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         projTasksData.forEach(projData => {
-            color = intToRGB(hashCode(projData.title));
-            console.log(color)
+            const title = projData.title;
+            color = intToRGB(hashCode(title));
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due)
                 dueDate.setDate(dueDate.getDate() + 1);
                 if (dueDate.getFullYear() == curDate.getFullYear() && dueDate.getMonth() == curDate.getMonth()) {
-                    addTaskToCalendar(task, 'proj', color)
+                    addTaskToCalendar(task, 'proj', color, title)
                 }
             })
         });
@@ -183,6 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showTasksForDay(day) {
         selectedDay = day;
         taskList.innerHTML = '';
+        projectList.innerHTML = '';
         const tasks = getTasks('tasks');
         const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
@@ -208,19 +210,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         projTasksData.forEach(projData => {
-            const projTitle = projData.title;
+            // Create a new list element for the project
+            const projectItem = document.createElement('li');
+            let confirm = false;
+            // Create a heading for the project
+            const projectTitle = document.createElement('strong');
+            projectTitle.textContent = projData.title;
+            projectItem.appendChild(projectTitle);
+            
+            // Create a nested list for the tasks
+            const subList = document.createElement('ul');
+            
+            // Iterate over tasks within the project
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due);
                 dueDate.setDate(dueDate.getDate() + 1);
                 
+                // Check if the task is due today
                 if (dueDate.getDate() == curDate.getDate() && dueDate.getMonth() == curDate.getMonth() && dueDate.getFullYear() == curDate.getFullYear()) {
+                    confirm = true;
+                    // Create a list item for each task
                     const taskItem = document.createElement('li');
-                    taskItem.textContent = `${task.title} (for ${projTitle})`;
-        
-                    taskList.appendChild(taskItem);
+                    taskItem.textContent = task.title;
+                    
+                    // Append the task item to the task list
+                    subList.appendChild(taskItem);
                 }
-            })
+            });
+            if (confirm) {
+                // Append the task list to the project item
+                projectItem.appendChild(subList);
+
+                // Append the project item to the main task list container
+                projectList.appendChild(projectItem);
+            }
         });
+        
     
         modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
