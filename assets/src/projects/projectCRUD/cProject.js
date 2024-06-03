@@ -9,9 +9,9 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
 
     const taskName = document.createElement('input');
     taskName.type = 'text';
-    taskName.value = task.task;
+    taskName.value = task.title;
     taskName.addEventListener('change', () => {
-        task.task = taskName.value;
+        task.title = taskName.value;
         saveProjectsToLocalStorage();
     });
 
@@ -40,7 +40,6 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     taskCard.appendChild(taskDelete);
     return taskCard;
 }
-
 
 export function createProjectCard(project, projectIndex) {
     const projectColumn = document.createElement('div');
@@ -91,13 +90,12 @@ export function createProjectCard(project, projectIndex) {
         const today = new Date();
         const nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Set to the next day using local time
         const nextDayFormatted = nextDay.toISOString().split('T')[0];
-        const task = { task: 'New Task', due: nextDayFormatted };
+        const task = { title: 'New Task', due: nextDayFormatted };
         projects[projectIndex].tasks.push(task);
         const taskCard = createTaskCard(task, projectIndex, projects[projectIndex].tasks.length - 1);
         projectColumn.appendChild(taskCard);
         saveProjectsToLocalStorage();
     });
-
 
     projectDetails.appendChild(projectTitle);
     projectDetails.appendChild(projectDescription);
