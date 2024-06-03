@@ -5,15 +5,15 @@
         "image": "../../images/image1.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-01"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-15"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-01"
             }
         ]
@@ -24,15 +24,15 @@
         "image": "../../images/image2.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-05"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-20"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-05"
             }
         ]
@@ -43,15 +43,15 @@
         "image": "../../images/image3.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-10"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-25"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-10"
             }
         ]
@@ -62,15 +62,15 @@
         "image": "../../images/image4.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-15"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-30"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-15"
             }
         ]
@@ -81,15 +81,15 @@
         "image": "../../images/image5.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-15"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-30"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-15"
             }
         ]
@@ -100,15 +100,15 @@
         "image": "../../images/image6.png",
         "tasks": [
             {
-                "task": "Task 1",
+                "taskTitle": "Task 1",
                 "due": "2024-06-15"
             },
             {
-                "task": "Task 2",
+                "taskTitle": "Task 2",
                 "due": "2024-06-30"
             },
             {
-                "task": "Task 3",
+                "taskTitle": "Task 3",
                 "due": "2024-07-15"
             }
         ]
