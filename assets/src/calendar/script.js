@@ -90,13 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add a task to a specific day in the calendar
-    function addTaskToCalendar(task, taskType) {
+    function addTaskToCalendar(task, taskType, color) {
         const { title, startDate, endDate, due } = task;
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         const dayElements = calendarElement.getElementsByClassName('day');
         const dueDate = new Date(due);
         dueDate.setDate(dueDate.getDate() + 1);
+        const dueStr = taskType == 'proj' ? "DUE: " : "";
         
         for (let i = 0; i < dayElements.length; i++) {
             const dayElement = dayElements[i];
@@ -110,15 +111,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const tasksForDay = dayElement.querySelectorAll('.task');
 
                 if (tasksForDay.length <= 1) {
-                const taskElement = document.createElement('div');
-                taskElement.className = 'task';
-                taskElement.textContent = title;
-                dayElement.appendChild(taskElement);
+                    const taskElement = document.createElement('div');
+                    taskElement.className = 'task';
+                    taskElement.textContent = dueStr + title;
+                    taskElement.style.backgroundColor = color;
+                    dayElement.appendChild(taskElement);
                 }
                 
                 // Limit visible tasks and add a "more-tasks" indicator
                 if (tasksForDay.length > 1) {
-                    console.log(dayNumber)
                     if (!dayElement.querySelector('.more-tasks')) {
                         const moreTasksElement = document.createElement('div');
                         moreTasksElement.className = 'task more-tasks';
@@ -128,6 +129,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+    }
+
+    function hashCode(str) { // java String#hashCode
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+           hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return 100 * hash;
+    } 
+    
+    function intToRGB(i){
+        var c = (i & 0x00FFFFFF)
+            .toString(16)
+            .toUpperCase();
+    
+        return "#" + "00000".substring(0, 6 - c.length) + c;
     }
 
     // Render tasks for the current month
@@ -145,16 +162,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
             if (newStart <= curDate && newEnd >= curDate) {
-                addTaskToCalendar(task, 'tasks');
+                addTaskToCalendar(task, 'tasks', '#ffeb3b');
             }
         });
 
         projTasksData.forEach(projData => {
+            color = intToRGB(hashCode(projData.title));
+            console.log(color)
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due)
                 dueDate.setDate(dueDate.getDate() + 1);
                 if (dueDate.getFullYear() == curDate.getFullYear() && dueDate.getMonth() == curDate.getMonth()) {
-                    addTaskToCalendar(task, 'proj')
+                    addTaskToCalendar(task, 'proj', color)
                 }
             })
         });
