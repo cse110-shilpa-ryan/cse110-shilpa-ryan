@@ -69,7 +69,7 @@ main {
     grid-template-columns: repeat(7, 1fr);
     gap: 5px;
     width: 90vw;
-    height: 65vh;
+    height: auto;
 }
 
 #nextMonth {
@@ -245,7 +245,7 @@ form button {
 
 .dropdown {
     position: absolute;
-    top: 50px;
+    top: 68px; /*Very speecific top allows the year drop down menu to not get mostly cut off by headerw*/
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
