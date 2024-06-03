@@ -228,12 +228,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close the task modal
     closeButton.addEventListener('click', () => {
         taskModal.style.display = 'none';
+        addTaskFormModal.style.display = 'none';
     });
 
     // Handle outside clicks to close the modals
     window.addEventListener('click', (event) => {
         if (event.target === taskModal) {
             taskModal.style.display = 'none';
+            addTaskFormModal.style.display = 'none';
         } else if (!monthYearDropdown.contains(event.target) && !currentMonthYear.contains(event.target)) {
             monthYearDropdown.style.display = 'none';
         }
