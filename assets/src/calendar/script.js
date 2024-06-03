@@ -19,13 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let selectedDay = null;
 
     // Retrieve tasks from local storage
-    function getTasks() {
-        return JSON.parse(localStorage.getItem('tasks')) || [];
+    function getTasks(taskType) {
+        return JSON.parse(localStorage.getItem(taskType)) || [];
     }
 
     // Save tasks to local storage
-    function saveTasks(tasks) {
-        localStorage.setItem('tasks', JSON.stringify(tasks));
+    function saveTasks(tasks, taskType) {
+        localStorage.setItem(taskType, JSON.stringify(tasks));
     }
 
     // Render the calendar for a given date
@@ -74,14 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const endDate = new Date(document.getElementById('endDateModal').value);
         const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
 
-        const tasks = getTasks();
+        const tasks = getTasks('tasks');
         tasks.push({
             id: Date.now(),  // Unique ID for each task
             title: taskTitle,
             startDate: startDate.toISOString(),
             endDate: endDate.toISOString()
         });
-        saveTasks(tasks);
+        saveTasks(tasks, 'tasks');
 
         renderCalendar(currentDate);  // Re-render calendar to include new tasks
         addTaskFormModal.reset();
@@ -90,11 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Add a task to a specific day in the calendar
-    function addTaskToCalendar(task) {
-        const { title, startDate, endDate } = task;
+    function addTaskToCalendar(task, taskType) {
+        const { title, startDate, endDate, due } = task;
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         const dayElements = calendarElement.getElementsByClassName('day');
+        const dueDate = new Date(due);
+        dueDate.setDate(dueDate.getDate() + 1);
+        
         for (let i = 0; i < dayElements.length; i++) {
             const dayElement = dayElements[i];
             const dayNumber = parseInt(dayElement.querySelector('.day-number')?.textContent, 10);
@@ -102,7 +105,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!dayNumber) continue;
 
             const dayDate = new Date(year, month, dayNumber);
-            if (dayDate >= new Date(startDate) && dayDate <= new Date(endDate)) {
+
+            if ((taskType == 'tasks' && dayDate >= new Date(startDate) && dayDate <= new Date(endDate)) || (taskType == 'proj' && dueDate.getDate() == dayDate.getDate())) {
                 const taskElement = document.createElement('div');
                 taskElement.className = 'task';
                 taskElement.textContent = title;
@@ -131,20 +135,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Render tasks for the current month
     function renderTasks() {
-        const tasks = getTasks();
+        const tasks = getTasks('tasks');
+        const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
+        const curDate = new Date(year, month);
 
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
+            //console.log(startDate, endDate)
 
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
-            const curDate = new Date(year, month);
             if (newStart <= curDate && newEnd >= curDate) {
-                addTaskToCalendar(task);
+                addTaskToCalendar(task, 'tasks');
             }
+        });
+
+        projTasksData.forEach(projData => {
+            projData.tasks.forEach(task => {
+                const dueDate = new Date(task.due)
+                dueDate.setDate(dueDate.getDate() + 1);
+                if (dueDate.getFullYear() == curDate.getFullYear() && dueDate.getMonth() == curDate.getMonth()) {
+                    addTaskToCalendar(task, 'proj')
+                }
+            })
         });
     }
 
@@ -152,14 +168,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function showTasksForDay(day) {
         selectedDay = day;
         taskList.innerHTML = '';
-        const tasks = getTasks();
+        const tasks = getTasks('tasks');
+        const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
+        const curDate = new Date(year, month, day);
     
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
-            const curDate = new Date(year, month, day);
     
             if (startDate <= curDate && endDate >= curDate) {
                 const taskItem = document.createElement('li');
@@ -174,6 +191,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 taskList.appendChild(taskItem);
             }
         });
+
+        projTasksData.forEach(projData => {
+            const projTitle = projData.title;
+            projData.tasks.forEach(task => {
+                const dueDate = new Date(task.due);
+                dueDate.setDate(dueDate.getDate() + 1);
+                
+                if (dueDate.getDate() == curDate.getDate()) {
+                    const taskItem = document.createElement('li');
+                    taskItem.textContent = `${task.title} (for ${projTitle})`;
+        
+                    taskList.appendChild(taskItem);
+                }
+            })
+        });
     
         modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
@@ -186,9 +218,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Delete a task from the task list and calendar
     function deleteTask(taskId) {
-        let tasks = getTasks();
+        let tasks = getTasks('tasks');
         tasks = tasks.filter(task => task.id !== taskId); // Only delete the specified task
-        saveTasks(tasks);
+        saveTasks(tasks, 'tasks');
         renderCalendar(currentDate);
         showTasksForDay(selectedDay);
     }
