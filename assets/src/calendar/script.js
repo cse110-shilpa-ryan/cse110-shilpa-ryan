@@ -107,26 +107,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const dayDate = new Date(year, month, dayNumber);
 
             if ((taskType == 'tasks' && dayDate >= new Date(startDate) && dayDate <= new Date(endDate)) || (taskType == 'proj' && dueDate.getDate() == dayDate.getDate())) {
+                const tasksForDay = dayElement.querySelectorAll('.task');
+
+                if (tasksForDay.length <= 1) {
                 const taskElement = document.createElement('div');
                 taskElement.className = 'task';
                 taskElement.textContent = title;
                 dayElement.appendChild(taskElement);
-
+                }
+                
                 // Limit visible tasks and add a "more-tasks" indicator
-                const tasksForDay = dayElement.querySelectorAll('.task');
-                if (tasksForDay.length > 2) {
-                    for (let j = 2; j < tasksForDay.length; j++) {
-                        tasksForDay[j].style.display = 'none';
-                    }
+                if (tasksForDay.length > 1) {
+                    console.log(dayNumber)
                     if (!dayElement.querySelector('.more-tasks')) {
                         const moreTasksElement = document.createElement('div');
                         moreTasksElement.className = 'task more-tasks';
                         moreTasksElement.textContent = 'More...';
                         dayElement.appendChild(moreTasksElement);
-                        moreTasksElement.addEventListener('click', (event) => {
-                            event.stopPropagation();  // Prevent triggering the day click event
-                            showTasksForDay(dayNumber);
-                        });
                     }
                 }
             }
@@ -144,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
-            //console.log(startDate, endDate)
 
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
@@ -198,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const dueDate = new Date(task.due);
                 dueDate.setDate(dueDate.getDate() + 1);
                 
-                if (dueDate.getDate() == curDate.getDate()) {
+                if (dueDate.getDate() == curDate.getDate() && dueDate.getMonth() == curDate.getMonth() && dueDate.getFullYear() == curDate.getFullYear()) {
                     const taskItem = document.createElement('li');
                     taskItem.textContent = `${task.title} (for ${projTitle})`;
         
