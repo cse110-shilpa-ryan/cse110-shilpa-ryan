@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: projects/projectCRUD/uProject.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: projects/projectCRUD/uProject.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { projects } from '../importProjects.js';
+import { saveProjectsToLocalStorage, displayProjects } from './rProject.js';
+
+/**
+ * Creates and displays an edit modal for a project.
+ * @param {Object|null} [project=null] - The project to edit, or null to create a new project.
+ * @param {number|null} [projectIndex=null] - The index of the project to edit, or null for a new project.
+ */
+export function createEditModal(project = null, projectIndex = null) {
+    const modalOverlay = document.createElement('div');
+    modalOverlay.className = 'modal-overlay';
+
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    const projectTitle = document.createElement('input');
+    projectTitle.type = 'text';
+    projectTitle.placeholder = 'Project Title';
+    projectTitle.value = project ? project.title : '';
+
+    const projectDescription = document.createElement('textarea');
+    projectDescription.placeholder = 'Project Description';
+    projectDescription.value = project ? project.description : '';
+
+    const projectImage = document.createElement('input');
+    projectImage.type = 'file';
+
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+
+    const saveButton = document.createElement('button');
+    saveButton.textContent = 'Save';
+    saveButton.addEventListener('click', () => {
+        if (!project) {
+            // Adding a new project
+            project = {
+                title: projectTitle.value,
+                description: projectDescription.value,
+                image: '',
+                tasks: []
+            };
+            projects.push(project);
+            saveProjectImage(projectImage, project).then(() => {
+                saveProjectsToLocalStorage();
+                displayProjects();
+                closeModal(modalOverlay);
+            });
+        } else {
+            // Editing an existing project
+            project.title = projectTitle.value;
+            project.description = projectDescription.value;
+            if (projectImage.files[0]) {
+                saveProjectImage(projectImage, project).then(() => {
+                    saveProjectsToLocalStorage();
+                    displayProjects();
+                    closeModal(modalOverlay);
+                });
+            } else {
+                saveProjectsToLocalStorage();
+                displayProjects();
+                closeModal(modalOverlay);
+            }
+        }
+    });
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.addEventListener('click', () => {
+        closeModal(modalOverlay);
+    });
+
+    modalContent.appendChild(projectTitle);
+    modalContent.appendChild(projectDescription);
+    modalContent.appendChild(projectImage);
+
+    buttonContainer.appendChild(saveButton);
+    buttonContainer.appendChild(cancelButton);
+    modalContent.appendChild(buttonContainer);
+
+    modalOverlay.appendChild(modalContent);
+    document.body.appendChild(modalOverlay);
+    document.querySelector('.project-container').classList.add('blur-background');
+}
+
+/**
+ * Saves the selected project image and updates the project object.
+ * @param {HTMLInputElement} inputElement - The input element containing the image file.
+ * @param {Object} project - The project object to update with the image data.
+ * @returns {Promise&lt;void>} A promise that resolves when the image is saved.
+ */
+export function saveProjectImage(inputElement, project) {
+    return new Promise((resolve) => {
+        if (inputElement.files[0]) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                project.image = reader.result;
+                resolve();
+            };
+            reader.readAsDataURL(inputElement.files[0]);
+        } else {
+            resolve();
+        }
+    });
+}
+
+/**
+ * Closes the modal dialog.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
+export function closeModal(modal) {
+    document.body.removeChild(modal);
+    document.querySelector('.project-container').classList.remove('blur-background');
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#toggleSize">toggleSize</a></li><li><a href="global.html#toggleTaskCompletion">toggleTaskCompletion</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jun 04 2024 03:50:54 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

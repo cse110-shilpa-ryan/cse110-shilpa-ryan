@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: projects/projectCRUD/cProject.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: projects/projectCRUD/cProject.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { projects } from '../importProjects.js';
+import { saveProjectsToLocalStorage } from './rProject.js';
+import { createEditModal } from './uProject.js';
+
+/**
+ * Creates a task card element.
+ * @param {Object} task - The task object.
+ * @param {number} projectIndex - The index of the project the task belongs to.
+ * @param {number|null} [taskIndex=null] - The index of the task within the project, or null if not applicable.
+ * @returns {HTMLElement} The task card element.
+ */
+export function createTaskCard(task, projectIndex, taskIndex = null) {
+    const taskCard = document.createElement('div');
+    taskCard.className = 'task-card';
+
+    // Task name input field
+    const taskName = document.createElement('input');
+    taskName.type = 'text';
+    taskName.value = task.title;
+    taskName.addEventListener('change', () => {
+        task.title = taskName.value;
+        saveProjectsToLocalStorage();
+    });
+
+    // Task due date input field
+    const taskDue = document.createElement('input');
+    taskDue.type = 'date';
+    taskDue.value = task.due;
+    taskDue.addEventListener('change', () => {
+        task.due = taskDue.value;
+        saveProjectsToLocalStorage();
+    });
+
+    // Task delete button
+    const taskDelete = document.createElement('div');
+    taskDelete.className = 'task-delete';
+    taskDelete.innerHTML = '&lt;i class="fa fa-trash">&lt;/i>';
+    taskDelete.addEventListener('click', () => {
+        if (taskIndex !== null) {
+            projects[projectIndex].tasks.splice(taskIndex, 1);
+        }
+        taskCard.remove();
+        saveProjectsToLocalStorage();
+    });
+
+    taskCard.appendChild(taskName);
+    taskCard.appendChild(taskDue);
+    taskCard.appendChild(taskDelete);
+    return taskCard;
+}
+
+/**
+ * Creates a project card element.
+ * @param {Object} project - The project object.
+ * @param {number} projectIndex - The index of the project.
+ * @returns {HTMLElement} The project card element.
+ */
+export function createProjectCard(project, projectIndex) {
+    const projectColumn = document.createElement('div');
+    projectColumn.className = 'project-column';
+
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card';
+
+    // Project image
+    const projectImage = document.createElement('div');
+    projectImage.className = 'project-image';
+    projectImage.style.backgroundImage = `url(${project.image})`;
+
+    const projectDetails = document.createElement('div');
+    projectDetails.className = 'project-details';
+
+    // Project title
+    const projectTitle = document.createElement('input');
+    projectTitle.type = 'text';
+    projectTitle.value = project.title;
+    projectTitle.disabled = true; // Disable editing directly
+
+    // Project description
+    const projectDescription = document.createElement('p');
+    projectDescription.textContent = project.description;
+
+    // Project delete button
+    const projectDelete = document.createElement('div');
+    projectDelete.className = 'project-delete';
+    projectDelete.innerHTML = '&lt;i class="fa fa-trash">&lt;/i>';
+    projectDelete.addEventListener('click', () => {
+        projects.splice(projectIndex, 1);
+        projectColumn.remove();
+        saveProjectsToLocalStorage();
+    });
+
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'button-container';
+
+    // Edit button
+    const editButton = document.createElement('button');
+    editButton.textContent = 'Edit';
+    editButton.className = 'card-button';
+    editButton.addEventListener('click', () => {
+        createEditModal(project, projectIndex);
+    });
+
+    // Add task button
+    const addTaskButton = document.createElement('button');
+    addTaskButton.textContent = 'Add Task';
+    addTaskButton.className = 'card-button';
+    addTaskButton.addEventListener('click', () => {
+        const today = new Date();
+        const nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Set to the next day using local time
+        const nextDayFormatted = nextDay.toISOString().split('T')[0];
+        const task = { title: 'New Task', due: nextDayFormatted };
+        projects[projectIndex].tasks.push(task);
+        const taskCard = createTaskCard(task, projectIndex, projects[projectIndex].tasks.length - 1);
+        projectColumn.appendChild(taskCard);
+        saveProjectsToLocalStorage();
+    });
+
+    projectDetails.appendChild(projectTitle);
+    projectDetails.appendChild(projectDescription);
+    projectCard.appendChild(projectImage);
+    projectCard.appendChild(projectDetails);
+    projectCard.appendChild(projectDelete);
+
+    buttonRow.appendChild(addTaskButton);
+    buttonRow.appendChild(editButton);
+    projectCard.appendChild(buttonRow);
+
+    projectColumn.appendChild(projectCard);
+
+    project.tasks.forEach((task, taskIndex) => {
+        const taskCard = createTaskCard(task, projectIndex, taskIndex);
+        projectColumn.appendChild(taskCard);
+    });
+
+    return projectColumn;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#toggleSize">toggleSize</a></li><li><a href="global.html#toggleTaskCompletion">toggleTaskCompletion</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Tue Jun 04 2024 03:50:54 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
