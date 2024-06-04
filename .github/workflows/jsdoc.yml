@@ -3,7 +3,8 @@ name: Test run of JS Doc Action
 on:  # When to run the workflow, either on push or on pull request
   push: 
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, closed]
+    
 
 permissions: # Permissions for the workflow
         contents: write
