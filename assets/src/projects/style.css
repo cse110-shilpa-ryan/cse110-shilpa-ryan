@@ -11,7 +11,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
+    background-color: white;
 }
 
 #projects-nav {
@@ -20,7 +20,8 @@ body {
 }
 
 #add-project-button {
-    position: fixed;
+    /* position: fixed; */
+    margin: 2% 3%;
     top: 1.5%;
     left: 1.5%;
     background-color: var(--button-color);
@@ -31,7 +32,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     border-radius: 0.5em;
-    z-index: 9001;
+    /* z-index: 9001; */
 }
 
 #add-project-button:hover {
@@ -39,7 +40,6 @@ body {
     transition: 0.5s;
     color: #000;
 }
-
 
 .project-container {
     display: flex;
@@ -63,8 +63,8 @@ body {
 .project-card {
     width: 100%;
     background-color: var(--box-color);
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border: 1.25px solid #000000;
+    border-radius: 20px;
     overflow: hidden;
     margin-bottom: 20px;
     position: relative;
@@ -123,9 +123,9 @@ body {
 
 .task-card {
     width: 95%;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: #ede7e3;
+    border: 1.25px solid #000000;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     position: relative;
