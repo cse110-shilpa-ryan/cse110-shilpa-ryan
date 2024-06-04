@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Markdown Previewer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="../../recurring-elements/nav.css">
-    <link rel="stylesheet" href="github-markdown.css">
-</head>
-
-<body>
-
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Markdown Previewer</title>
+      <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+          rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="../../recurring-elements/nav.css">
+      <link rel="stylesheet" href="github-markdown.css">
+  </head>
+  <body>
     <header>
         <div id="insert-nav" title="Markdown Previewer"></div>
     </header>
-
     <main>
+      <!-- One thing to do would be to modularize this for the journal page. -->
         <div id="container">
+          <!-- In the process of adding a line number/gutter to the page + download or export button -->
+            <div class="line-number-gutter"></div>
             <div id="editor">
-                <textarea id="text-content"></textarea>
+                <textarea id="text-content" placeholder="Enter markdown text here..."></textarea>
             </div>
             <div id="md-parser" class="markdown-body"></div>
         </div>
     </main>
-
-    <footer>
-        <p>11:eleven</p>
-    </footer>
-</body>
-<script src="script.js" type="module"></script>
-<script src="../../recurring-elements/nav.js"></script>
-
+    <div id="footer"></div>
+  </body>
+  <script src="script.js" type="module"></script>
+  <script src="../../recurring-elements/nav.js"></script>
+  <script src="../../recurring-elements/footer.js"></script>
 </html>

@@ -1,5 +1,3 @@
-
-
 function loadNavbar() {
     const navPlaceholder = document.getElementById('insert-nav');
     if (navPlaceholder) {

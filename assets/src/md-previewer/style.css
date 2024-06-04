@@ -20,25 +20,6 @@ main {
     overflow: hidden;
 }
 
-footer {
-    height: 52px;
-    background-color: #696969;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-footer p {
-    margin: 0;
-    color: #d3d3d3;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
-}
-
-footer p:hover {
-    color: black;
-}
-
 #container {
     display: flex;
     height: 100%;
@@ -80,4 +61,15 @@ footer p:hover {
     .markdown-body {
         padding: 15px;
     }
+}
+
+.line-number-gutter {
+    width: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.line {
+    font-size: 1.2em;
+    text-align: center;
 }
