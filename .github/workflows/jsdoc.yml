@@ -1,4 +1,4 @@
-name: Test run of JS Doc Action
+name: JS Documentation Action
 
 on:  # When to run the workflow, either on push or on pull request
   push: 
