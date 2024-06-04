@@ -89,3 +89,10 @@ nav {
     color: #000000;
     /* Black */
 }
+
+.home-icon{
+    float: left;
+    width: 5%;
+    margin-left: 2%;
+    width: 50px;
+}

@@ -74,11 +74,12 @@ main {
 
 #nextMonth {
     border-radius: 5px;
-    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
-    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
-    padding: 3px;
+    /* background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); */
+    background-color: #45051f;
+    padding: 0.5%;
     border: 1px solid #000;
-    color: black;
+    color: white;
     text-decoration: none;
     cursor: pointer;
     margin-right: 0.5%
@@ -87,22 +88,29 @@ main {
 }
 
 #nextMonth:hover {
-    background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%);
+    /* background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%); */
+    background-color: white;
+    color: #45051f;
+    font-weight: bold;
 }
 
 #prevMonth {
     border-radius: 5px;
-    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
-    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
-    padding: 3px;
+    /* background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%); */
+    background-color: #45051f;
+    padding: 0.5%;
     border: 1px solid #000;
-    color: black;
+    color: white;
     text-decoration: none;
     cursor: pointer;
 }
 
 #prevMonth:hover {
-    background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%);
+    /* background-image: linear-gradient(to top, rgb(180, 180, 180) 16%, rgb(225, 225, 225) 79%); */
+    background-color: white;
+    color: #45051f;
+    font-weight: bold;
 }
 
 .day {
