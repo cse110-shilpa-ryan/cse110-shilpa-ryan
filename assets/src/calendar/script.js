@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const projectList = document.getElementById('mainTaskList');
     const addTaskButton = document.getElementById('add-task-button');
     const addTaskFormModal = document.getElementById('addTaskFormModal');
+    const submitButton = addTaskFormModal.querySelector('button');
     const modalDate = document.getElementById('modal-date');
     const monthYearDropdown = document.getElementById('monthYearDropdown');
     const monthDropdown = document.getElementById('monthDropdown');
     const yearDropdown = document.getElementById('yearDropdown');
+    const taskTitleModal = document.getElementById('taskTitleModal');
+    const endDateModal = document.getElementById('endDateModal');
+    let editTaskId = null; // To keep track of the task being edited
 
     // Initialize current date and selected day
     let currentDate = new Date();
@@ -68,26 +72,40 @@ document.addEventListener('DOMContentLoaded', function() {
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
-    // Add a task to the calendar
+    // Add or edit a task
     addTaskFormModal.addEventListener('submit', function(event) {
         event.preventDefault();
-        const taskTitle = document.getElementById('taskTitleModal').value;
-        const endDate = new Date(document.getElementById('endDateModal').value);
+        const taskTitle = taskTitleModal.value;
+        const endDate = new Date(endDateModal.value);
         const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
 
         const tasks = getTasks('tasks');
-        tasks.push({
-            id: Date.now(),  // Unique ID for each task
-            title: taskTitle,
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString()
-        });
+
+        if (editTaskId !== null) {
+            // Edit existing task
+            const taskIndex = tasks.findIndex(task => task.id === editTaskId);
+            if (taskIndex !== -1) {
+                tasks[taskIndex].title = taskTitle;
+                tasks[taskIndex].startDate = startDate.toISOString();
+                tasks[taskIndex].endDate = endDate.toISOString();
+            }
+        } else {
+            // Add new task
+            tasks.push({
+                id: Date.now(),  // Unique ID for each task
+                title: taskTitle,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString()
+            });
+        }
+        
         saveTasks(tasks, 'tasks');
 
         renderCalendar(currentDate);  // Re-render calendar to include new tasks
         addTaskFormModal.reset();
         addTaskFormModal.style.display = 'none';
         showTasksForDay(selectedDay);
+        editTaskId = null; // Reset the edit task ID
     });
 
     // Add a task to a specific day in the calendar
@@ -198,12 +216,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (startDate <= curDate && endDate >= curDate) {
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
-                
+
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.className = 'delete-task';
                 deleteButton.addEventListener('click', () => deleteTask(task.id));
                 taskItem.appendChild(deleteButton);
+
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'edit-task';
+                editButton.addEventListener('click', () => editTask(task));
+                taskItem.appendChild(editButton);
     
                 taskList.appendChild(taskItem);
             }
@@ -254,7 +278,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle visibility of the add task form modal
     addTaskButton.addEventListener('click', () => {
         addTaskFormModal.style.display = addTaskFormModal.style.display === 'none' ? 'block' : 'none';
+        editTaskId = null; // Reset the edit task ID when opening the form for a new task
+        submitButton.innerHTML = 'Add Task';
     });
+
+    // Function to edit a task
+    function editTask(task) {
+        editTaskId = task.id;
+        taskTitleModal.value = task.title;
+        endDateModal.value = new Date(task.endDate).toISOString().substring(0, 10);
+        submitButton.innerHTML = 'Save Edit';
+        addTaskFormModal.style.display = 'block';
+    }
 
     // Delete a task from the task list and calendar
     function deleteTask(taskId) {
