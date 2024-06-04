@@ -158,12 +158,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return 100 * hash;
     } 
     
-    function intToRGB(i){
-        var c = (i & 0x00FFFFFF)
-            .toString(16)
-            .toUpperCase();
-    
-        return "#" + "00000".substring(0, 6 - c.length) + c;
+    function intToRGB(i) {
+        let r = (i >> 16) & 0xFF;
+        let g = (i >> 8) & 0xFF;
+        let b = i & 0xFF;
+
+        function offset(r, g, b) {
+            function check(c) {
+                return c < 100 ? 255 - c - 30 : c;
+            }
+            let test = Math.min(r, g, b);
+            if ((r + g + b - test) < 360) {
+                r = check(r);
+                g = check(g);
+                b = check(b);
+            }
+            return [r, g, b]
+        }
+        [r, g, b] = offset(r, g, b);
+        return `rgb(${r}, ${g}, ${b})`;
     }
 
     // Render tasks for the current month
@@ -188,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function() {
         projTasksData.forEach(projData => {
             const title = projData.title;
             color = intToRGB(hashCode(title));
+            console.log(color, title)
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due)
                 dueDate.setDate(dueDate.getDate() + 1);
