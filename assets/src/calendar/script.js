@@ -165,19 +165,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
         function offset(r, g, b) {
             function check(c) {
-                return c < 100 ? 255 - c - 30 : c;
+                return c < 80 ? c + Math.ceil((80-c)*(1.2)) : c > 200 ? c - Math.ceil((c-220)*(1.2)) : c ;
             }
-            let test = Math.min(r, g, b);
-            if ((r + g + b - test) < 360) {
-                r = check(r);
-                g = check(g);
-                b = check(b);
+            
+            
+            r = check(r);
+            g = check(g);
+            b = check(b);
+            if (r>=g && r>=b) {
+                r += 30
+            } else if (g>=r && g>=b) {
+                g += 30
+            } else if (b>=g && b>=r) {
+                b += 30
             }
+            if (r<=g && r<=b) {
+                r -= 30
+            } else if (g<=r && g<=b) {
+                g -= 30
+            } else if (b<=g && b<=r) {
+                b -= 30
+            }
+            
             return [r, g, b]
         }
         [r, g, b] = offset(r, g, b);
         return `rgb(${r}, ${g}, ${b})`;
     }
+
+    
+    
 
     // Render tasks for the current month
     function renderTasks() {
