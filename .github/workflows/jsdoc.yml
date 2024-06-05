@@ -1,9 +1,8 @@
 name: JS Documentation Action
 
-on:  # When to run the workflow, either on push or on pull request
+on:  # When to run the workflow, on push
   push: 
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
+
     
 
 permissions: # Permissions for the workflow
