@@ -14,7 +14,7 @@ export function addButton() {
         addButton.textContent = 'Add Project';
 
         // Append the button to the navigation bar
-        navButtonsContainer.appendChild(addButton);
+        navButtonsContainer.prepend(addButton);
     } else {
         console.error('Could not find the navigation buttons container');
     }
