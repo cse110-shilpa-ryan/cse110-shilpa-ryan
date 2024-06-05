@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: projects/importProjects.js</title>
+    <title>JSDoc: Source: projects/projectCRUD/addButton.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: projects/importProjects.js</h1>
+    <h1 class="page-title">Source: projects/projectCRUD/addButton.js</h1>
 
     
 
@@ -26,45 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { createEditModal } from './projectCRUD/uProject.js';
-import { saveProjectsToLocalStorage, loadProjectsFromLocalStorage, displayProjects } from './projectCRUD/rProject.js';
-import { addButton } from './projectCRUD/addButton.js';
-export const LOCAL_STORAGE_KEY = 'projectsData';
-export let projects = [];
-
-/**
- * Fetches projects from a JSON file.
- * @returns {Promise&lt;Array>} A promise that resolves to the projects array.
+            <pre class="prettyprint source linenums"><code>/**
+ * Adds a new button element to the navigation bar with the text "Add Project".
+ * @function addButton
  */
-async function fetchProjects() {
-    const response = await fetch('projects.json');
-    const projects = await response.json();
-    return projects;
-}
+export function addButton() {
 
-/**
- * Loads projects from local storage or fetches from JSON if not found.
- * Displays the projects in the project container.
- */
-async function loadProjects() {
-    projects = loadProjectsFromLocalStorage();
-    if (!projects) {
-        projects = await fetchProjects();
-        saveProjectsToLocalStorage();
+    let navButtonsContainer = document.getElementsByClassName('nav-buttons')[0];
+    if (navButtonsContainer) {
+        // Create the new button element
+        const addButton = document.createElement('div');
+
+        addButton.classList.add('nav-button');
+        addButton.id = 'add-project-button'; // A unique ID for the button
+        addButton.textContent = 'Add Project';
+
+        // Append the button to the navigation bar
+        navButtonsContainer.prepend(addButton);
+    } else {
+        console.error('Could not find the navigation buttons container');
     }
-    displayProjects();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
-    addButton();
-
-    setTimeout(500);
-
-    document.getElementById('add-project-button').addEventListener('click', () => {
-        createEditModal();
-    });
-});
 </code></pre>
         </article>
     </section>

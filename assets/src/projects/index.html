@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="style.css">
     <!-- Linking the common navigation stylesheet -->
     <link rel="stylesheet" href="../../recurring-elements/nav.css">
-    <!-- Importing the projects script as a module -->
-    <script type="module" src="importProjects.js"></script>
+
     <!-- Deferring the navigation script to load after the document -->
     <script defer src="../../recurring-elements/nav.js"></script>
+
     <!-- Deferring the footer script to load after the document -->
     <script defer src="../../recurring-elements/footer.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
@@ -28,13 +28,14 @@
     </header>
     <main>
         <!-- Button to add a new project -->
-        <button id="add-project-button">Add Project</button>
-
         <!-- Container for dynamically loaded projects -->
-        <div class="project-container"></div>            
+        <div class="project-container"></div>
     </main>
     <!-- Placeholder for the footer -->
     <!-- <div id="footer"></div> -->
 
 </body>
+<!-- Importing the projects script as a module -->
+<script type="module" src="importProjects.js"></script>
+
 </html>
