@@ -1,19 +1,43 @@
-name: JS Doc Action Example # name of the test
+name: JS Documentation Action
 
-on: [push] # the Github Action will activate "on" the event that you "push" to the repo
+on:  # When to run the workflow, either on push or on pull request
+  push: 
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    
 
-jobs: # the things being executed
-  tests: # the name of your status check, will become important when you do branch protection
-    runs-on: ubuntu-latest # which device on Github's server that you are running the Actions on
+permissions: # Permissions for the workflow
+        contents: write
+
+jobs:
+  generate-docs:  # More descriptive name for the job
+    runs-on: ubuntu-latest  # Specifies the runner environment
+
     steps:
-      - uses: actions/checkout@v4 # using version 4 of Actions
-      - name: Install Dependencies
-        run: npm install
-      - run: npm install jest
-      - run: npm install jsdoc --save-dev
-      - name: JS Docs Action
-        uses: andstor/jsdoc-action@v1
+      - uses: actions/checkout@v4  # Checks out the code for the workflow
+
+      - name: Set up Node.js  # setup for Node.js
+        uses: actions/setup-node@v4
         with:
-          source_dir: assets/src # source directory
-          recurse: true
-          output_dir: assets/out
+          node-version: 20  # Specifies the Node.js version
+
+      - name: Install Dependencies  # Installs project dependencies
+        run: npm install
+      - name: Install JSDoc  # Ensures JSDoc is installed
+        run: npm install jsdoc --save-dev
+        
+      - name: Generate JSDoc  # Runs JSDoc
+        run: npx jsdoc assets/src -r -d assets/docs
+
+      - name: Commit Documentation  # Commits the generated documentation back to the repository
+        run: |
+            git config user.name "github-actions"
+            git config user.email "git@github.com"
+            git add assets/docs/
+            git commit -m "Update JSDoc documentation" || echo "No changes to commit"
+            git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for pushing changes back to the repository
+
+
+          
