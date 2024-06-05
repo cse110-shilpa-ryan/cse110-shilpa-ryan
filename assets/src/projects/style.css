@@ -1,3 +1,6 @@
+/* Add Font Awesome for trash icon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
 /* Apply the imported font to all elements */
 * {
     font-family: 'Josefin Sans';
