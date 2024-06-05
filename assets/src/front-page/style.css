@@ -46,6 +46,14 @@ main {
     border-radius: 25px;
 }
 
+.project-image {
+    height: 100px;
+    width: 200px;
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center;
+}
+
 #home-nav {
     font-weight: bold;
     text-decoration: underline;
