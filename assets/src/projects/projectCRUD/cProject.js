@@ -17,6 +17,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     const taskName = document.createElement('input');
     taskName.type = 'text';
     taskName.value = task.title;
+    taskName.maxLength = 50; // Max length of 50 characters for task title
     taskName.addEventListener('change', () => {
         task.title = taskName.value;
         saveProjectsToLocalStorage();
