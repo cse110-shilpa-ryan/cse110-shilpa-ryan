@@ -19,6 +19,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }).sort((a,b) => b.id - a.id);
     }
 
+    /*function getJournalDays() {
+        const journals = getJournalEntires();
+        const today = new Date();
+        const nextSevenDays = new Date();
+        nextSevenDays.setDate(today.getDate() - 7);
+
+        let week = new Array();
+        for(let i = 0; i < 7; i++) {
+            if ( 0 !== journals.filter(journal => {
+                let journalDate = new Date(journal.id);
+                return journalDate === nextSevenDays;
+            }).length)
+                week.push(true);
+            else
+                week.push(false);
+        }
+    }*/
+
     // Render recent journals
     function renderRecentJournals() {
         const upcomingTasks = getRecentJournals();
