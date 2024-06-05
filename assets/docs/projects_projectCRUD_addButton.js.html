@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: projects/projectCRUD/rProject.js</title>
+    <title>JSDoc: Source: projects/projectCRUD/addButton.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: projects/projectCRUD/rProject.js</h1>
+    <h1 class="page-title">Source: projects/projectCRUD/addButton.js</h1>
 
     
 
@@ -26,36 +26,28 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { projects, LOCAL_STORAGE_KEY } from '../importProjects.js';
-import { createProjectCard } from './cProject.js';
-
-/**
- * Loads projects from local storage.
- * @returns {Array|null} The loaded projects array, or null if none are found.
+            <pre class="prettyprint source linenums"><code>/**
+ * Adds a new button element to the navigation bar with the text "Add Project".
+ * @function addButton
  */
-export function loadProjectsFromLocalStorage() {
-    const projects = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return projects ? JSON.parse(projects) : null;
+export function addButton() {
+
+    let navButtonsContainer = document.getElementsByClassName('nav-buttons')[0];
+    if (navButtonsContainer) {
+        // Create the new button element
+        const addButton = document.createElement('div');
+
+        addButton.classList.add('nav-button');
+        addButton.id = 'add-project-button'; // A unique ID for the button
+        addButton.textContent = 'Add Project';
+
+        // Append the button to the navigation bar
+        navButtonsContainer.appendChild(addButton);
+    } else {
+        console.error('Could not find the navigation buttons container');
+    }
 }
 
-/**
- * Saves the current projects to local storage.
- */
-export function saveProjectsToLocalStorage() {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(projects));
-}
-
-/**
- * Displays all projects in the project container.
- */
-export function displayProjects() {
-    const journalContainer = document.querySelector('.project-container');
-    journalContainer.innerHTML = '';
-    projects.forEach((project, index) => {
-        const projectColumn = createProjectCard(project, index);
-        journalContainer.appendChild(projectColumn);
-    });
-}
 </code></pre>
         </article>
     </section>
