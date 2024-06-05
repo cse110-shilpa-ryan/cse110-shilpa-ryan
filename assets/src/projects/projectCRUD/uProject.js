@@ -1,7 +1,11 @@
 import { projects } from '../importProjects.js';
 import { saveProjectsToLocalStorage, displayProjects } from './rProject.js';
 
-
+/**
+ * Creates and displays an edit modal for a project.
+ * @param {Object|null} [project=null] - The project to edit, or null to create a new project.
+ * @param {number|null} [projectIndex=null] - The index of the project to edit, or null for a new project.
+ */
 export function createEditModal(project = null, projectIndex = null) {
     const modalOverlay = document.createElement('div');
     modalOverlay.className = 'modal-overlay';
@@ -78,6 +82,12 @@ export function createEditModal(project = null, projectIndex = null) {
     document.querySelector('.project-container').classList.add('blur-background');
 }
 
+/**
+ * Saves the selected project image and updates the project object.
+ * @param {HTMLInputElement} inputElement - The input element containing the image file.
+ * @param {Object} project - The project object to update with the image data.
+ * @returns {Promise<void>} A promise that resolves when the image is saved.
+ */
 export function saveProjectImage(inputElement, project) {
     return new Promise((resolve) => {
         if (inputElement.files[0]) {
@@ -93,6 +103,10 @@ export function saveProjectImage(inputElement, project) {
     });
 }
 
+/**
+ * Closes the modal dialog.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
 export function closeModal(modal) {
     document.body.removeChild(modal);
     document.querySelector('.project-container').classList.remove('blur-background');
