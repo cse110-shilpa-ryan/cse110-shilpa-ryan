@@ -7,7 +7,6 @@ function loadFooter() {
 `;
   if (footerPlaceholder) {
     footerPlaceholder.innerHTML = footerHTML;
-    footerPlaceholder.class = "footer";
   } else {
     console.error('Could not find footer element');
   }
