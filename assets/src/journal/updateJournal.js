@@ -87,9 +87,6 @@ function loadEntries() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    let navLink = document.getElementById('journal-nav');
-    navLink.classList.add('active');
-
     loadEntries();
 
     document.getElementById('addEntry').addEventListener('click', () => {

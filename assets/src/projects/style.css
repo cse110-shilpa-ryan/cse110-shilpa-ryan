@@ -9,7 +9,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--background-color); /* Background color from a CSS variable */
+    background-color: white; /* Background color from a CSS variable */
 }
 
 #projects-nav {
@@ -30,12 +30,14 @@ body {
     cursor: pointer;
     border-radius: 0.5em;
     z-index: 9001; /* Ensure button stays on top */
+
 }
 
 #add-project-button:hover {
     background-color: var(--button-hover-color); /* Change background color on hover */
     transition: 0.5s;
-    color: #000; /* Change text color on hover */
+    color: var(--button-color); /* Change text color on hover */
+    font-weight: bold;
 }
 
 .project-container {
@@ -60,8 +62,8 @@ body {
 .project-card {
     width: 100%;
     background-color: var(--box-color); /* Card background color from a CSS variable */
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
     overflow: hidden;
     margin-bottom: 20px;
     position: relative; /* Ensure relative positioning for child elements */
@@ -115,9 +117,9 @@ body {
 
 .task-card {
     width: 95%;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: var(--box-color);
+    border: 1px solid black;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
     position: relative; /* Ensure relative positioning for child elements */
@@ -191,7 +193,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure overlay stays on top */
+    z-index: 1000; /*Ensure overlay stays on top */
 }
 
 .modal-content {
