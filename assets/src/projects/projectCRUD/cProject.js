@@ -73,6 +73,7 @@ export function createProjectCard(project, projectIndex) {
     // Project title
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
+    projectTitle.maxLength = 140;
     projectTitle.value = project.title;
     projectTitle.disabled = true; // Disable editing directly
 
