@@ -226,6 +226,17 @@ form button {
     cursor: pointer;
 }
 
+.edit-task {
+    background-color: rgb(3, 175, 3);
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    border-radius: 10px;
+}
+
 .delete-task {
     background-color: red;
     color: white;
