@@ -11,8 +11,9 @@ describe('Project Management Tests', () => {
     }, 15000);
 
     afterAll(async () => {
-        //setTimeout(10000);
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
     });
 
     test('Add new project and check if in local storage', async () => {
@@ -50,7 +51,7 @@ describe('Project Management Tests', () => {
                 ]
             },
             {
-                title: 'Puppeteer Test Project',
+                title: 'Puppeteer Test Proje',
                 description: 'test description',
                 image: '',
                 tasks: []
@@ -87,7 +88,7 @@ describe('Project Management Tests', () => {
                 }
             ]
         }, {
-            title: 'Puppeteer Test Project',
+            title: 'Puppeteer Test Proje',
             description: 'test description',
             image: '',
             tasks: []
