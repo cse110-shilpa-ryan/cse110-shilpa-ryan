@@ -15,22 +15,27 @@ export function createEditModal(project = null, projectIndex = null) {
 
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
+    projectTitle.id = 'project-title';
     projectTitle.placeholder = 'Project Title';
     projectTitle.maxLength = 20; // Set max length to 20 characters
     projectTitle.value = project ? project.title : '';
 
     const projectDescription = document.createElement('textarea');
+    projectDescription.id = 'project-description';
     projectDescription.placeholder = 'Project Description';
     projectDescription.value = project ? project.description : '';
 
     const projectImage = document.createElement('input');
     projectImage.type = 'file';
+    projectImage.accept = 'image/*';
+    projectImage.id = 'project-image';
 
     const buttonContainer = document.createElement('div');
     buttonContainer.className = 'button-container';
 
     const saveButton = document.createElement('button');
     saveButton.textContent = 'Save';
+    saveButton.id = 'save-project-button';
     saveButton.addEventListener('click', () => {
         if (!project) {
             // Adding a new project
@@ -66,6 +71,7 @@ export function createEditModal(project = null, projectIndex = null) {
 
     const cancelButton = document.createElement('button');
     cancelButton.textContent = 'Cancel';
+    cancelButton.id = 'cancel-project-button';
     cancelButton.addEventListener('click', () => {
         closeModal(modalOverlay);
     });
