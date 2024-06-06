@@ -44,6 +44,7 @@ export function createEditModal(project = null, projectIndex = null) {
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
     projectTitle.placeholder = 'Project Title';
+    projectTitle.maxLength = 20; // Set max length to 20 characters
     projectTitle.value = project ? project.title : '';
 
     const projectDescription = document.createElement('textarea');
