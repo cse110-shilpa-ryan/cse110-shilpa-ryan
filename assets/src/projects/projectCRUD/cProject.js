@@ -99,6 +99,7 @@ export function createProjectCard(project, projectIndex) {
     // Edit button
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
+    editButton.id = 'edit-project-button';
     editButton.className = 'card-button';
     editButton.addEventListener('click', () => {
         createEditModal(project, projectIndex);
@@ -107,6 +108,7 @@ export function createProjectCard(project, projectIndex) {
     // Add task button
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
+    addTaskButton.id = 'add-task-button';
     addTaskButton.className = 'card-button';
     addTaskButton.addEventListener('click', () => {
         const today = new Date();
