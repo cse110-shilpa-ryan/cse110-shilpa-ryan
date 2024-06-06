@@ -8,6 +8,7 @@ body {
 
 main {
     padding: 7rem 5%;
+    overflow-y: auto;
 }
 
 .dashboard {
