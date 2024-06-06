@@ -35,7 +35,6 @@ main {
     /* Change background color on hover */
     transition: 0.8s;
     color: var(--button-color);
-    
     /* Change text color on hover */
     font-weight: bold;
 }
@@ -47,7 +46,6 @@ main {
     padding: 20px;
     gap: 20px;
     max-height: 80vh; /* Limit the maximum height */
-    overflow-y: auto;
 }
 
 .project-column {
