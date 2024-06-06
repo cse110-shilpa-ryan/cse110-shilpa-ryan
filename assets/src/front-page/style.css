@@ -27,6 +27,7 @@ main {
     height: 2.5em;
 
 }
+
 .project-container { 
     grid-area: 2 / 1 / 4 / 3; 
     background-color: #f1f1f1;
@@ -59,18 +60,25 @@ main {
     gap: 5% 3%;
     height: 3em;
 }
+
 #daily-bar {
     border-radius: 15px;
     height: 3em;
     width: 1.5em;
-    background-color: red;
     text-align:center;
-    align-items: flex-end;
-    justify-content: flex-end;
+    vertical-align:center;
+    color:#cccccc;
 }
 
-.project-card {
+.absent {
+    background-color: rgb(41, 41, 41);
 }
+
+.present {
+    background-color: rgb(76, 169, 223);
+}
+
+
 .project-image {
     height: 2em;
     width: 2em;
@@ -78,6 +86,7 @@ main {
     background-size: cover;
     background-position: center;
 }
+
 
 #home-nav {
     font-weight: bold;

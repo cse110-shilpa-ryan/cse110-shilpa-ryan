@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return journals.filter(journal => {
             let journalDate = new Date(journal.id);
-            //console.log(journalDate.toDateString());
             return journalDate >= nextFiveDays;
         }).sort((a,b) => b.id - a.id);
     }
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const journals = getJournalEntries();
         const today = new Date();
         let nextSevenDays = new Date();
-        nextSevenDays.setDate(today.getDate() - 7);
+        nextSevenDays.setDate(today.getDate() - 6);
 
         let week = new Array();
         for(let i = 0; i < 7; i++) {
@@ -46,20 +45,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const weeklyProgress = getJournalDays();
         let progressContainer = document.getElementById('weekly-progress');
         let progressBar = document.getElementById('progress-bar');
+        let daysJournaled = 0;
 
         for(let i = 0; i < weeklyProgress.length; i++) {
             let dayBar = document.createElement('div');
             dayBar.id = 'daily-bar';
-            if(weeklyProgress[i][0])
+            if(weeklyProgress[i][0]) {
                 dayBar.className = "present";
+                daysJournaled ++;
+            }
+
             else
                 dayBar.className = "absent";
             dayBar.textContent = dayAbbreviation(weeklyProgress[i][1]);
             progressBar.appendChild(dayBar);
         }
 
-        let statusMessage = document.querySelector("#weekly-progress  h3");
-        statusMessage.innerHTML = 'haha';
+        let statusMessage = document.querySelector("#weekly-progress p");
+        statusMessage.innerHTML = progressMessage(daysJournaled);
     }
     function dayAbbreviation(index) {
         switch(index) {
@@ -72,6 +75,14 @@ document.addEventListener('DOMContentLoaded', function() {
             case 6: return "S";
         }
     }
+    function progressMessage(days) {
+        if(days === 7)
+            return `Awesome! You've journaled ${days} of the last 7 days!`;
+        else if(days >= 4)
+            return `Good Job! You've journaled ${days} of the last 7 days.`;
+        return `Make sure to journal! You've journaled ${days} of the last 7 days.`;
+
+    } 
 
     // Render recent journals
     function renderRecentJournals() {
