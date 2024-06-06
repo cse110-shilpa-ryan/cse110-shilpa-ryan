@@ -140,6 +140,7 @@ main {
 .task.more-tasks {
     background-color: #ccc;
     cursor: pointer;
+    z-index: 0;
 }
 
 .more-tasks {
