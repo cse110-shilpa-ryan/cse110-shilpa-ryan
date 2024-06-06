@@ -16,6 +16,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task name input field
     const taskName = document.createElement('input');
     taskName.type = 'text';
+    taskName.id = 'task-name';
     taskName.value = task.title;
     taskName.addEventListener('change', () => {
         task.title = taskName.value;
@@ -25,6 +26,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task due date input field
     const taskDue = document.createElement('input');
     taskDue.type = 'date';
+    taskDue.id = 'task-due';
     taskDue.value = task.due;
     taskDue.addEventListener('change', () => {
         task.due = taskDue.value;
@@ -34,6 +36,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task delete button
     const taskDelete = document.createElement('div');
     taskDelete.className = 'task-delete';
+    taskDelete.id = 'task-delete';
     taskDelete.innerHTML = '<i class="fa fa-trash"></i>';
     taskDelete.addEventListener('click', () => {
         if (taskIndex !== null) {
