@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 dayBar.className = "present";
                 daysJournaled ++;
             }
-
             else
                 dayBar.className = "absent";
             dayBar.textContent = dayAbbreviation(weeklyProgress[i][1]);
@@ -77,10 +76,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     function progressMessage(days) {
         if(days === 7)
-            return `Awesome! You've journaled ${days} of the last 7 days!`;
+            return `Awesome!<br>You've journaled ${days} of the last 7 days!`;
         else if(days >= 4)
-            return `Good Job! You've journaled ${days} of the last 7 days.`;
-        return `Make sure to journal! You've journaled ${days} of the last 7 days.`;
+            return `Good Job!<br>You've journaled ${days} of the last 7 days.`;
+        return `Make sure to journal!<br>You've journaled ${days} of the last 7 days.`;
 
     } 
 
@@ -102,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     renderWeeklyBar();
-    getJournalDays();
     renderRecentJournals();
 });
 

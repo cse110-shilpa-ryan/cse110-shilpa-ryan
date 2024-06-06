@@ -23,15 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
             projectContainer.innerHTML = '<li>No projects available</li>';
         } else {
             projects.forEach(project => {
-                const projectItem = document.createElement('li');
+                const projectItem = document.createElement('div');
+                projectItem.className="project-card";
                 projectItem.innerHTML = `
-                    <div class="project-card">
                         <div class="project-image" style="background-image: url(${project.image});"></div>
                         <div class="project-details">
                             <h3>${project.title}</h3>
                             <p>${project.description}</p>
                         </div>
-                    </div>
                 `;
                 projectContainer.appendChild(projectItem);
             });
