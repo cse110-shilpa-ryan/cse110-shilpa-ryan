@@ -37,8 +37,8 @@ describe('Project Management Tests', () => {
             return JSON.parse(localStorage.getItem('projectsData'));
         });
 
-        expect(projectsData).toEqual(expect.arrayContaining([
-            expect.objectContaining({
+        expect(projectsData).toEqual([
+            {
                 "title": "Example Project",
                 "description": "This is a description for the first project",
                 "image": "../../images/mock.png",
@@ -49,12 +49,13 @@ describe('Project Management Tests', () => {
                     }
                 ]
             },
-                {
-                    title: 'Puppeteer test Project',
-                    description: 'test description',
-                    image: 'https://avatars.githubusercontent.com/u/47124258?v=4'
-                })
-        ]));
+            {
+                title: 'Puppeteer Test Project',
+                description: 'test description',
+                image: '',
+                tasks: []
+            }
+        ]);
     }, 30000);
 
     test('Edit a project, check char limit, and check if in local storage', async () => {
@@ -75,7 +76,7 @@ describe('Project Management Tests', () => {
             return JSON.parse(localStorage.getItem('projectsData'));
         });
 
-        expect(projectsData).toEqual({
+        expect(projectsData).toEqual([{
             title: 'Project Updated',
             description: 'Updated description',
             image: '../../images/mock.png',
@@ -86,16 +87,11 @@ describe('Project Management Tests', () => {
                 }
             ]
         }, {
-            title: 'Puppeteer test Project',
+            title: 'Puppeteer Test Project',
             description: 'test description',
-            image: 'https://avatars.githubusercontent.com/u/47124258?v=4'
-        })
-            ;
+            image: '',
+            tasks: []
+        }]);
     }, 30000);
 
-   
-
 });
-
-
-

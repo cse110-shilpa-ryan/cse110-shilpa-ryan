@@ -32,7 +32,8 @@ export function createEditModal(project = null, projectIndex = null) {
     buttonContainer.className = 'button-container';
 
     const saveButton = document.createElement('button');
-    saveButton.id = 'save-button';
+    saveButton.id = 'save-project-button';
+    saveButton.className = 'save-project-button';
     saveButton.textContent = 'Save';
     saveButton.addEventListener('click', () => {
         if (!project) {

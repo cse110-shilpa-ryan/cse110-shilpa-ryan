@@ -12,9 +12,12 @@
     "lint": "standard",
     "docs": "jsdoc assets/src/*.js"
   },
-  "type": "module",
   "jest": {
+    "preset": "jest-puppeteer",
     "transform": {},
     "verbose": true
+  },
+  "dependencies": {
+    "puppeteer": "^0.0.1"
   }
 }
