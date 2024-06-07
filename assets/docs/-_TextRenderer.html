@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: projects/importProjects.js</title>
+    <title>JSDoc: Class: _TextRenderer</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,57 +17,138 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: projects/importProjects.js</h1>
+    <h1 class="page-title">Class: _TextRenderer</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { createEditModal } from './projectCRUD/uProject.js';
-import { saveProjectsToLocalStorage, loadProjectsFromLocalStorage, displayProjects } from './projectCRUD/rProject.js';
-import { addButton } from './projectCRUD/addButton.js';
-export const LOCAL_STORAGE_KEY = 'projectsData';
-export let projects = [];
+        <h2><span class="attribs"><span class="type-signature"></span></span>_TextRenderer<span class="signature">()</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">TextRenderer
+returns only the textual part of the token</div>
+        
+    
+</header>
 
-/**
- * Fetches projects from a JSON file.
- * @returns {Promise&lt;Array>} A promise that resolves to the projects array.
- */
-async function fetchProjects() {
-    const response = await fetch('projects.json');
-    const projects = await response.json();
-    return projects;
-}
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
- * Loads projects from local storage or fetches from JSON if not found.
- * Displays the projects in the project container.
- */
-async function loadProjects() {
-    projects = loadProjectsFromLocalStorage();
-    if (!projects) {
-        projects = await fetchProjects();
-        saveProjectsToLocalStorage();
-    }
-    displayProjects();
-}
+    
+    <h2>Constructor</h2>
+    
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
-    addButton();
+    
+    <h4 class="name" id="_TextRenderer"><span class="type-signature"></span>new _TextRenderer<span class="signature">()</span><span class="type-signature"></span></h4>
+    
 
-    setTimeout(500);
+    
 
-    document.getElementById('add-project-button').addEventListener('click', () => {
-        createEditModal();
-    });
-});
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="md-previewer_marked.esm.js.html">md-previewer/marked.esm.js</a>, <a href="md-previewer_marked.esm.js.html#line1753">line 1753</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
