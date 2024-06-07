@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Cache DOM elements
+    // Cache DOM elements.
     const calendarElement = document.getElementById('calendar');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
@@ -17,23 +17,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const yearDropdown = document.getElementById('yearDropdown');
     const taskTitleModal = document.getElementById('taskTitleModal');
     const endDateModal = document.getElementById('endDateModal');
-    let editTaskId = null; // To keep track of the task being edited
+    let editTaskId = null; // To keep track of the task being edited.
 
-    // Initialize current date and selected day
+    // Initialize current date and selected day.
     let currentDate = new Date();
     let selectedDay = null;
 
-    // Retrieve tasks from local storage
+    /**
+     * Retrives tasks from localStorage based on the key inputted from the 
+     * parameter.
+     * @param {String} taskType - Type of task. Differentiate between event 
+     * tasks ('tasks') or project tasks ('projectsData').
+     * @returns JSON parsed object by taskType key.
+     */
     function getTasks(taskType) {
         return JSON.parse(localStorage.getItem(taskType)) || [];
     }
 
-    // Save tasks to local storage
+    /**
+     * Save tasks to localStorage (only for 'event' tasks).
+     * @param {Array} tasks - The array of tasks that is to be saved.
+     * @param {String} taskType - Key used for the localStorage.
+     */
     function saveTasks(tasks, taskType) {
         localStorage.setItem(taskType, JSON.stringify(tasks));
     }
 
-    // Render the calendar for a given date
+    /**
+     * Renders the Calendar for the month using the month and year of the Date 
+     * Object.
+     * @param {Date} date - Date to render.
+     */
     function renderCalendar(date) {
         calendarElement.innerHTML = '';
         currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
@@ -43,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstDay = new Date(year, month, 1).getDay();
         const lastDate = new Date(year, month + 1, 0).getDate();
 
-        // Create blank days until the first day of the month
+        // Create blank days until the first day of the month.
         for (let i = 0; i < firstDay; i++) {
             const blankDay = document.createElement('div');
             blankDay.className = 'day';
             calendarElement.appendChild(blankDay);
         }
 
-        // Create days of the month
+        // Create days of the month.
         for (let day = 1; day <= lastDate; day++) {
             const dayElement = document.createElement('div');
             dayElement.className = 'day';
@@ -62,17 +76,22 @@ document.addEventListener('DOMContentLoaded', function() {
         renderTasks();
     }
 
-    // Change the month in the calendar
+    /**
+     * Move the month to be displayed on the Calendar forward or backwards by a 
+     * specified value.
+     * @param {*} direction - Direction to change Calendar month (negative for 
+     * backwards, positive for forwards).
+     */
     function changeMonth(direction) {
         currentDate.setMonth(currentDate.getMonth() + direction);
         renderCalendar(currentDate);
     }
 
-    // Event listeners for previous and next month buttons
+    // Event listeners for previous and next month buttons.
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
-    // Add or edit a task
+    // Add or edit a task after pressing submit in the form.
     addTaskFormModal.addEventListener('submit', function(event) {
         event.preventDefault();
         const taskTitle = taskTitleModal.value;
@@ -82,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tasks = getTasks('tasks');
 
         if (editTaskId !== null) {
-            // Edit existing task
+            // Edit existing task.
             const taskIndex = tasks.findIndex(task => task.id === editTaskId);
             if (taskIndex !== -1) {
                 tasks[taskIndex].title = taskTitle;
@@ -90,9 +109,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 tasks[taskIndex].endDate = endDate.toISOString();
             }
         } else {
-            // Add new task
+            // Add new task.
             tasks.push({
-                id: Date.now(),  // Unique ID for each task
+                id: Date.now(),  // Unique ID for each task.
                 title: taskTitle,
                 startDate: startDate.toISOString(),
                 endDate: endDate.toISOString()
@@ -101,14 +120,20 @@ document.addEventListener('DOMContentLoaded', function() {
         
         saveTasks(tasks, 'tasks');
 
-        renderCalendar(currentDate);  // Re-render calendar to include new tasks
+        renderCalendar(currentDate);  // Re-render calendar to include new tasks.
         addTaskFormModal.reset();
         addTaskFormModal.style.display = 'none';
         showTasksForDay(selectedDay);
-        editTaskId = null; // Reset the edit task ID
+        editTaskId = null; // Reset the edit task ID.
     });
 
-    // Add a task to a specific day in the calendar
+    /**
+     * Add a task to a specific day in the calendar.
+     * @param {Object} task 
+     * @param {String} taskType 
+     * @param {String} color 
+     * @param {String} projName 
+     */
     function addTaskToCalendar(task, taskType, color, projName="") {
         const { title, startDate, endDate, due } = task;
         const year = currentDate.getFullYear();
@@ -118,17 +143,21 @@ document.addEventListener('DOMContentLoaded', function() {
         dueDate.setDate(dueDate.getDate() + 1);
         const dueStr = taskType == 'proj' ? "DUE: " + projName + " - ": "";
         
+        // Iterate through each day "box".
         for (let i = 0; i < dayElements.length; i++) {
             const dayElement = dayElements[i];
             const dayNumber = parseInt(dayElement.querySelector('.day-number')?.textContent, 10);
 
-            if (!dayNumber) continue;
+            if (!dayNumber) continue; // Check if the box is a valid Calendar day.
 
             const dayDate = new Date(year, month, dayNumber);
 
+            // Add event task if the start and end date falls within the day.
+            // Add Project task if its due date falls within the day.
             if ((taskType == 'tasks' && dayDate >= new Date(startDate) && dayDate <= new Date(endDate)) || (taskType == 'proj' && dueDate.getDate() == dayDate.getDate())) {
                 const tasksForDay = dayElement.querySelectorAll('.task');
 
+                // Add task to the calendar.
                 if (tasksForDay.length <= 1) {
                     const taskElement = document.createElement('div');
                     taskElement.className = 'task';
@@ -137,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     dayElement.appendChild(taskElement);
                 }
                 
-                // Limit visible tasks and add a "more-tasks" indicator
+                // Limit visible tasks and add a "more-tasks" indicator.
                 if (tasksForDay.length > 1) {
                     if (!dayElement.querySelector('.more-tasks')) {
                         const moreTasksElement = document.createElement('div');
@@ -150,7 +179,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function hashCode(str) { // java String#hashCode
+    /**
+     * Adapted from Java's String#hashCode with slight modification to allow for
+     * more variety of colors for similar strings.
+     * @param {String} str - String to be hashed into an int.
+     * @returns {Int} The corresponding int hashed from the string.
+     */
+    function hashCode(str) {
         var hash = 0;
         for (var i = 0; i < str.length; i++) {
            hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -158,33 +193,47 @@ document.addEventListener('DOMContentLoaded', function() {
         return 100 * hash;
     } 
     
+    /**
+     * Converts the integer into its corresponding RGB code.
+     * @param {Int} i - Integer to be converted.
+     * @returns {String} - String representation of the RGB code.
+     */
     function intToRGB(i) {
+        // Separate the bits of the integer into the corresponding RGB components.
         let r = (i >> 16) & 0xFF;
         let g = (i >> 8) & 0xFF;
         let b = i & 0xFF;
 
+        /**
+         * Offsets the RGB components for colors that have visibility issues.
+         * @param {Int} r - R component of RGB.
+         * @param {Int} g - G component of RGB.
+         * @param {Int} b - B component of RGB.
+         * @returns {Array} - Array of the RGB components.
+         */
         function offset(r, g, b) {
-            function check(c) {
-                return c < 80 ? c + Math.ceil((80-c)*(1.2)) : c > 200 ? c - Math.ceil((c-220)*(1.2)) : c ;
-            }
-            
+            // Modify color for components with lower values and higher values.
+            let check = (c) => c < 80 ? c + Math.ceil((80 - c) * (1.2)) : 
+            c > 200 ? c - Math.ceil((c - 220) * (1.2)) : c;
             
             r = check(r);
             g = check(g);
             b = check(b);
-            if (r>=g && r>=b) {
-                r += 30
-            } else if (g>=r && g>=b) {
-                g += 30
-            } else if (b>=g && b>=r) {
-                b += 30
+
+            // Avoid grayscale colors.
+            if (r >= g && r >= b) {
+                r += 30;
+            } else if (g >= r && g >= b) {
+                g += 30;
+            } else if (b >= g && b >= r) {
+                b += 30;
             }
-            if (r<=g && r<=b) {
-                r -= 30
-            } else if (g<=r && g<=b) {
-                g -= 30
-            } else if (b<=g && b<=r) {
-                b -= 30
+            if (r <= g && r <= b) {
+                r -= 30;
+            } else if (g <= r && g <= b) {
+                g -= 30;
+            } else if (b <= g && b <= r) {
+                b -= 30;
             }
             
             return [r, g, b]
@@ -193,17 +242,19 @@ document.addEventListener('DOMContentLoaded', function() {
         return `rgb(${r}, ${g}, ${b})`;
     }
 
-    
-    
-
-    // Render tasks for the current month
+    /**
+     * Render tasks for the current month and year.
+     */
     function renderTasks() {
+        // Pull the event tasks and project tasks from localStorage.
         const tasks = getTasks('tasks');
         const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
         const curDate = new Date(year, month);
 
+        // Add any event task where the current month and year falls within 
+        // the start/end month and year.
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
@@ -211,14 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
             if (newStart <= curDate && newEnd >= curDate) {
-                addTaskToCalendar(task, 'tasks', '#ffeb3b');
+                addTaskToCalendar(task, 'tasks', '#ffeb3b'); 
+                // Event task color is consistent.
             }
         });
 
+        // Add any project tasks whose due month/year is the same as the
+        // current date's month/year.
         projTasksData.forEach(projData => {
             const title = projData.title;
             color = intToRGB(hashCode(title));
-            console.log(color, title)
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due)
                 dueDate.setDate(dueDate.getDate() + 1);
@@ -229,7 +282,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Display tasks for a specific day
+    /**
+     * Display tasks for a specific day in a modal.
+     * @param {Int} day - The number representing the day of the date.
+     */
     function showTasksForDay(day) {
         selectedDay = day;
         taskList.innerHTML = '';
@@ -240,20 +296,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const month = currentDate.getMonth();
         const curDate = new Date(year, month, day);
     
+        // Display each event task first.
         tasks.forEach(task => {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
     
             if (startDate <= curDate && endDate >= curDate) {
+                // Display tasks in the form of an unordered list.
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
 
+                // Add a delete button on the side.
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
                 deleteButton.className = 'delete-task';
                 deleteButton.addEventListener('click', () => deleteTask(task.id));
                 taskItem.appendChild(deleteButton);
 
+                // Add an edit button on the side.
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
                 editButton.className = 'edit-task';
@@ -264,56 +324,55 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Display Project tasks in a separate list.
         projTasksData.forEach(projData => {
-            // Create a new list element for the project
+            // Create a new list element for the project.
             const projectItem = document.createElement('li');
             let confirm = false;
-            // Create a heading for the project
+            // Create a heading for the project.
             const projectTitle = document.createElement('strong');
             projectTitle.textContent = projData.title;
             projectItem.appendChild(projectTitle);
             
-            // Create a nested list for the tasks
+            // Create a nested list for the tasks.
             const subList = document.createElement('ul');
             
-            // Iterate over tasks within the project
+            // Iterate over tasks within the project.
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due);
                 dueDate.setDate(dueDate.getDate() + 1);
                 
-                // Check if the task is due today
+                // Check if the task is due today.
                 if (dueDate.getDate() == curDate.getDate() && dueDate.getMonth() == curDate.getMonth() && dueDate.getFullYear() == curDate.getFullYear()) {
                     confirm = true;
-                    // Create a list item for each task
+                    // Create a list item for each task.
                     const taskItem = document.createElement('li');
                     taskItem.textContent = task.title;
                     
-                    // Append the task item to the task list
+                    // Append the task item to the task list.
                     subList.appendChild(taskItem);
                 }
             });
+            // Only display Project titles if the Project has at least one task that day.
             if (confirm) {
-                // Append the task list to the project item
                 projectItem.appendChild(subList);
-
-                // Append the project item to the main task list container
                 projectList.appendChild(projectItem);
             }
         });
         
-    
         modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
     }
 
-    // Toggle visibility of the add task form modal
+    // Toggle visibility of the add task form modal.
     addTaskButton.addEventListener('click', () => {
         addTaskFormModal.style.display = addTaskFormModal.style.display === 'none' ? 'block' : 'none';
-        editTaskId = null; // Reset the edit task ID when opening the form for a new task
+        editTaskId = null; // Reset the edit task ID when opening the form for a new task.
         submitButton.innerHTML = 'Add Task';
+        addTaskFormModal.reset();
     });
 
-    // Function to edit a task
+    // Function to edit a task.
     function editTask(task) {
         editTaskId = task.id;
         taskTitleModal.value = task.title;
@@ -322,32 +381,36 @@ document.addEventListener('DOMContentLoaded', function() {
         addTaskFormModal.style.display = 'block';
     }
 
-    // Delete a task from the task list and calendar
+    // Delete a task from the task list and calendar.
     function deleteTask(taskId) {
         let tasks = getTasks('tasks');
         tasks = tasks.filter(task => task.id !== taskId); // Only delete the specified task
         saveTasks(tasks, 'tasks');
         renderCalendar(currentDate);
         showTasksForDay(selectedDay);
+        addTaskFormModal.reset();
+        submitButton.innerHTML = 'Add Task';
     }
 
-    // Close the task modal
+    // Close the task modal.
     closeButton.addEventListener('click', () => {
         taskModal.style.display = 'none';
         addTaskFormModal.style.display = 'none';
+        addTaskFormModal.reset();
     });
 
-    // Handle outside clicks to close the modals
+    // Handle outside clicks to close the modals.
     window.addEventListener('click', (event) => {
         if (event.target === taskModal) {
             taskModal.style.display = 'none';
             addTaskFormModal.style.display = 'none';
+            addTaskFormModal.reset();
         } else if (!monthYearDropdown.contains(event.target) && !currentMonthYear.contains(event.target)) {
             monthYearDropdown.style.display = 'none';
         }
     });
 
-    // Populate the month and year dropdowns with options
+    // Populate the month and year dropdowns with options.
     function populateDropdowns() {
         monthDropdown.innerHTML = '';
         yearDropdown.innerHTML = '';
@@ -374,26 +437,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Show the month and year dropdowns when the current month/year is clicked
+    // Show the month and year dropdowns when the current month/year is clicked.
     currentMonthYear.addEventListener('click', () => {
         populateDropdowns();
         monthYearDropdown.style.display = 'block';
     });
 
-    // Change the month based on dropdown selection
+    // Change the month based on dropdown selection.
     monthDropdown.addEventListener('change', () => {
         currentDate.setMonth(monthDropdown.value);
         renderCalendar(currentDate);
         monthYearDropdown.style.display = 'none';
     });
 
-    // Change the year based on dropdown selection
+    // Change the year based on dropdown selection.
     yearDropdown.addEventListener('change', () => {
         currentDate.setFullYear(yearDropdown.value);
         renderCalendar(currentDate);
         monthYearDropdown.style.display = 'none';
     });
 
-    // Initial render of the calendar
     renderCalendar(currentDate);
 });
