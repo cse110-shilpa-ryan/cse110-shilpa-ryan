@@ -7,7 +7,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+
+      - name: Clear Node Modules and Cache
+        run: |
+          rm -rf node_modules
+          rm package-lock.json
+          npm cache clean --force
+      
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install jest
+      
       - name: Unit Test
         run: npm test ./__tests__/test.js
