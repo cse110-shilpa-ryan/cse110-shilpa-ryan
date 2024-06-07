@@ -24,7 +24,6 @@ main {
     background-color: #f1f1f1;
     padding: 2%;
     border-radius: 25px;
-
 }
 
 .project-container { 
@@ -43,17 +42,14 @@ main {
 
 .project-card {
     text-align: center;
-    position: relative;
 }
 
 .project-image {
     height: 4em;
-    /*width: 4em;*/
     background-color: #cccccc;
     background-size: cover;
     background-position: center;
 }
-
 
 .task-container { 
     grid-area: 4 / 1 / 6 / 3; 
