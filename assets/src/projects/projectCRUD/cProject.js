@@ -16,7 +16,9 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task name input field
     const taskName = document.createElement('input');
     taskName.type = 'text';
+    taskName.id = 'task-name';
     taskName.value = task.title;
+    taskName.maxLength = 25; // Max length of 50 characters for task title
     taskName.addEventListener('change', () => {
         task.title = taskName.value;
         saveProjectsToLocalStorage();
@@ -25,6 +27,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task due date input field
     const taskDue = document.createElement('input');
     taskDue.type = 'date';
+    taskDue.id = 'task-due';
     taskDue.value = task.due;
     taskDue.addEventListener('change', () => {
         task.due = taskDue.value;
@@ -34,6 +37,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     // Task delete button
     const taskDelete = document.createElement('div');
     taskDelete.className = 'task-delete';
+    taskDelete.id = 'task-delete';
     taskDelete.innerHTML = '<i class="fa fa-trash"></i>';
     taskDelete.addEventListener('click', () => {
         if (taskIndex !== null) {
@@ -65,6 +69,7 @@ export function createProjectCard(project, projectIndex) {
     // Project image
     const projectImage = document.createElement('div');
     projectImage.className = 'project-image';
+    projectImage.id = 'image-input';
     projectImage.style.backgroundImage = `url(${project.image})`;
 
     const projectDetails = document.createElement('div');
@@ -73,6 +78,7 @@ export function createProjectCard(project, projectIndex) {
     // Project title
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
+    projectTitle.maxLength = 20;
     projectTitle.value = project.title;
     projectTitle.disabled = true; // Disable editing directly
 
@@ -83,6 +89,7 @@ export function createProjectCard(project, projectIndex) {
     // Project delete button
     const projectDelete = document.createElement('div');
     projectDelete.className = 'project-delete';
+    projectDelete.id = 'project-delete';
     projectDelete.innerHTML = '<i class="fa fa-trash"></i>';
     projectDelete.addEventListener('click', () => {
         projects.splice(projectIndex, 1);
@@ -96,6 +103,7 @@ export function createProjectCard(project, projectIndex) {
     // Edit button
     const editButton = document.createElement('button');
     editButton.textContent = 'Edit';
+    editButton.id = 'edit-project-button';
     editButton.className = 'card-button';
     editButton.addEventListener('click', () => {
         createEditModal(project, projectIndex);
@@ -104,6 +112,7 @@ export function createProjectCard(project, projectIndex) {
     // Add task button
     const addTaskButton = document.createElement('button');
     addTaskButton.textContent = 'Add Task';
+    addTaskButton.id = 'add-task-button';
     addTaskButton.className = 'card-button';
     addTaskButton.addEventListener('click', () => {
         const today = new Date();

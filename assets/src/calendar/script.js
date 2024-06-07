@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCalendar(date) {
         calendarElement.innerHTML = '';
         currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-        
+
         const year = date.getFullYear();
         const month = date.getMonth();
         const firstDay = new Date(year, month, 1).getDay();
@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
+
         const curDate = new Date(year, month, day);
     
         // Display each event task first.
@@ -319,7 +320,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 editButton.className = 'edit-task';
                 editButton.addEventListener('click', () => editTask(task));
                 taskItem.appendChild(editButton);
-    
                 taskList.appendChild(taskItem);
             }
         });
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDropdowns() {
         monthDropdown.innerHTML = '';
         yearDropdown.innerHTML = '';
-        const months = Array.from({length: 12}, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        const months = Array.from({ length: 12 }, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
         months.forEach((month, index) => {
             const option = document.createElement('option');
             option.value = index;
