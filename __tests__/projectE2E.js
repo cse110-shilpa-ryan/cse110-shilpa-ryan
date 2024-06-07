@@ -7,8 +7,8 @@ describe('Project Management Tests', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch(); // Viewing the browser for testing
         page = await browser.newPage();
-        //await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
-        await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
+        await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
+        //await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
         await page.setViewport({ width: 1080, height: 1024 });
 
     }, 15000);
