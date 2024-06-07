@@ -115,7 +115,6 @@ describe('Project Management Tests', () => {
         // Find the first .project-column in the .project-container
         const projectContainer = await page.$('.project-container');
         const columns = await projectContainer.$$('.project-column');
-        const firstColumn = columns[0];
 
         await page.click('#add-task-button'); // Click on the Add Task button
 
@@ -151,7 +150,7 @@ describe('Project Management Tests', () => {
         }]);
     }, 3000);
 
-    test('edit content, and check local storage', async () => {
+    test('edit task content, and check local storage', async () => {
 
         /// Navigate through the DOM as specified
         await page.waitForSelector('.project-container'); // Ensure the container is loaded
@@ -171,7 +170,9 @@ describe('Project Management Tests', () => {
 
         await taskNameInput.click({ clickCount: 3 });
         await taskNameInput.type('Updated Last Task');
-        taskDueInput.click({ clickCount: 3 });
+        
+        taskDueInput.click();
+        await lastTaskCard.$eval('#task-due', (el) => el.value = '');
         await taskDueInput.type('07-11-2024');
 
         await page.click('body'); // Click outside the task to save it
