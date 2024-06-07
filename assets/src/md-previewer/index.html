@@ -15,14 +15,12 @@
         <div id="insert-nav" title="Markdown Previewer"></div>
     </header>
     <main>
-      <!-- One thing to do would be to modularize this for the journal page. -->
         <div id="container">
-          <!-- In the process of adding a line number/gutter to the page + download or export button -->
-            <div class="line-number-gutter"></div>
-            <div id="editor">
-                <textarea id="text-content" placeholder="Enter markdown text here..."></textarea>
-            </div>
-            <div id="md-parser" class="markdown-body"></div>
+          <div class="gutter">
+            <div class="lineNum">1</div>
+          </div>
+          <textarea id="text-content" placeholder="Enter markdown text here..."></textarea>
+          <div id="md-parser" class="markdown-body"></div>
         </div>
     </main>
     <div id="footer"></div>
