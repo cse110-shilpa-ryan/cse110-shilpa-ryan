@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     /**
     * Fetches entry content from localStorage.
@@ -52,7 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return week;
     }
-
+    
+    /**
+     * Renders the progress bar and progress message to the journal container.
+     * @param {*} journals - list of journal entries
+     */
     function renderWeeklyBar(journals) {
         const weeklyProgress = getJournalDays(journals, 7);
         let progressBar = document.getElementById('progress-bar');
@@ -72,8 +75,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         let statusMessage = document.querySelector("#weekly-progress p");
-        statusMessage.innerHTML = progressMessage(daysJournaled);
+        statusMessage.innerHTML = progressMessage(daysJournaled, );
     }
+    /**
+     * Returns a one-two character abbreviation of the day of the week
+     * @param {*} index - an index representation of day of the week, starting with 0 = Sunday
+     */
     function dayAbbreviation(index) {
         switch (index) {
             case 0: return "Su";
@@ -86,7 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
             default: return null;
         }
     }
-    function progressMessage(days) {
+    /**
+     * Returns a message to encourage users to journal more frequently. 
+     * @param {number} days - number of days journaled
+     * @param {number} maxDays - maximum number of days 
+     * @returns a message with positivity based on how many days you've journaled.
+     */
+    function progressMessage(days, maxDays) {
         if(days === 7)
             return `Awesome!<br>You've journaled ${days} of the last 7 days!`;
         else if(days >= 4)
