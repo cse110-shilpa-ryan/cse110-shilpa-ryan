@@ -35,7 +35,7 @@ jobs:
             git config user.email "git@github.com"
             git add assets/docs/
             git commit -m "Update JSDoc documentation" || echo "No changes to commit"
-            git push
+            git push origin HEAD:<name-of-remote-branch> || ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for pushing changes back to the repository
 
