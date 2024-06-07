@@ -173,7 +173,7 @@ describe('Project Management Tests', () => {
         
         taskDueInput.click();
         await lastTaskCard.$eval('#task-due', (el) => el.value = '');
-        await taskDueInput.type('07-11-2024');
+        await taskDueInput.type('07112024');
 
         await page.click('body'); // Click outside the task to save it
 
