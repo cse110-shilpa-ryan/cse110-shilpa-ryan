@@ -7,7 +7,7 @@ body {
 }
 
 main {
-    padding: 7rem 5%;
+    padding: 7rem 5% 14rem;
     overflow-y: auto;
 }
 
