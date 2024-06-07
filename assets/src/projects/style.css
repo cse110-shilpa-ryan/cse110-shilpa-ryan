@@ -1,11 +1,42 @@
-/* assets/src/journal/style.css */
-*{
+/* Add Font Awesome for trash icon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+/* Apply the imported font to all elements */
+* {
     font-family: 'Josefin Sans';
 }
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #ffffff;
+    background-color: white;
+    /* Background color from a CSS variable */
+}
+
+main {
+    padding: 7rem 5%;
+    overflow-y: auto;
+}
+
+#projects-nav {
+    font-weight: bold;
+    text-decoration: underline;
+    /* Highlight the projects navigation item */
+}
+
+#add-project-button {
+    background-color: var(--button-color);
+    color: white;
+}
+
+#add-project-button:hover {
+    transition: 0.3s;
+    background-color: var(--button-hover-color);
+    /* Change background color on hover */
+    transition: 0.8s;
+    color: var(--button-color);
+    /* Change text color on hover */
+    font-weight: bold;
 }
 
 .project-container {
@@ -14,32 +45,29 @@ body {
     justify-content: space-around;
     padding: 20px;
     gap: 20px;
-    /* Adds a gap between project columns */
-    overflow-y: auto;
-    /* Enables vertical scrolling */
-    max-height: 80vh;
-    /* Limits the height to 80% of the viewport */
+    max-height: 80vh; /* Limit the maximum height */
 }
 
 .project-column {
     flex: 1 1 calc(25% - 20px);
-    /* Allows 1 to 4 projects per row, with a gap */
+    /* Flexbox properties for responsiveness */
     display: flex;
     flex-direction: column;
     align-items: center;
     min-width: 250px;
-    /* Ensures the minimum width for a project column */
     max-width: 300px;
-    /* Ensures the maximum width for a project column */
 }
 
 .project-card {
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+    background-color: var(--box-color);
+    /* Card background color from a CSS variable */
+    border: 1px solid black;
+    border-radius: 15px;
     overflow: hidden;
     margin-bottom: 20px;
+    position: relative;
+    /* Ensure relative positioning for child elements */
 }
 
 .project-image {
@@ -47,32 +75,189 @@ body {
     background-color: #cccccc;
     background-size: cover;
     background-position: center;
+    /* Center the background image */
 }
 
 .project-details {
     padding: 10px;
 }
 
-.project-details h3 {
-    margin: 0;
-    color: #333;
+.project-details input[type="text"] {
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.project-details input[type="text"]:focus {
+    outline: none;
+    border-bottom: 1px solid #333;
+    /* Add bottom border on focus */
 }
 
 .project-details p {
     margin: 5px 0 0;
     color: #666;
+    /* Text color for project details */
+}
+
+.project-delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    /* Initially hidden */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+}
+
+.project-card:hover .project-delete {
+    display: block;
+    /* Show delete icon on hover */
+}
+
+.project-delete i {
+    color: var(--button-color);
+    /* Style the trash icon */
 }
 
 .task-card {
     width: 95%;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    background-color: var(--box-color);
+    border: 1px solid black;
+    border-radius: 10px;
     padding: 10px;
     margin-bottom: 10px;
+    position: relative;
+    /* Ensure relative positioning for child elements */
+}
+
+.task-card input[type="text"],
+.task-card input[type="date"] {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.task-card input[type="text"]:focus,
+.task-card input[type="date"]:focus {
+    outline: none;
+    border-bottom: 1px solid #333;
+    /* Add bottom border on focus */
 }
 
 .task-card p {
     margin: 0;
     color: #333;
+    /* Text color for task details */
+}
+
+.task-delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+    /* Initially hidden */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+}
+
+.task-card:hover .task-delete {
+    display: block;
+    /* Show delete icon on hover */
+}
+
+.task-delete i {
+    color: var(--button-color);
+    /* Style the trash icon */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    /* Distribute buttons evenly */
+}
+
+.card-button {
+    background-color: var(--box-color);
+    /* Button background color */
+    padding: 8px 18px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 0.8em;
+}
+
+.card-button:hover {
+    background-color: var(--button-color);
+    /* Change background color on hover */
+    transition: 0.3s;
+    color: #fff;
+    /* Change text color on hover */
+}
+
+/* Add styles for the edit modal and overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /*Ensure overlay stays on top */
+}
+
+.modal-content {
+    display: inline-block;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Add shadow for depth */
+    z-index: 1001;
+    /* Ensure content stays above overlay */
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="file"],
+.modal-content textarea {
+    width: 100%;
+    padding: 5px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.modal-content button {
+    background-color: var(--box-color);
+    /* Button background color */
+    padding: 8px 18px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 0.8em;
+}
+
+.modal-content button:hover {
+    background-color: var(--button-color);
+    /* Change background color on hover */
+    transition: 0.3s;
+    color: #fff;
+    /* Change text color on hover */
+}
+
+/* Blur the background when modal is active */
+.blur-background {
+    filter: blur(5px);
 }

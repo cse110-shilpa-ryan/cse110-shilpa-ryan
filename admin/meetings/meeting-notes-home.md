@@ -14,3 +14,5 @@
 - [Week 8 Meeting with TA](052224-TAmeeting.md)
 - [Sprint 2 Review](052624-sprint-2-review.md)
 - [Sprint 2 Retrospective](052624-retrospective.md)
+- [Sprint 3 Review](060224-sprint-3-review.md)
+- [Sprint 3 Retrospective](060224-retrospective.md)

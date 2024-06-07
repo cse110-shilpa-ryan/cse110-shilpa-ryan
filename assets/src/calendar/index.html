@@ -9,7 +9,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../../recurring-elements/nav.css">
-
+    <link rel="icon" type="image/png" href="../../images/icon.png">
 </head>
 
 <body>
@@ -40,11 +40,13 @@
                 <span class="close-button">&times;</span>
                 <h2>Tasks for <span id="modal-date"></span></h2>
                 <ul id="task-list"></ul>
-                <button id="add-task-button">Add Task</button>
+                <ul id="mainTaskList"></ul>
+
+                <button id="add-task-button">New Task</button>
                 <!-- Hidden Add Task Form -->
                 <form id="addTaskFormModal" style="display: none;">
                     <label for="taskTitleModal">Title:</label>
-                    <input type="text" id="taskTitleModal" required maxlength="50">
+                    <input type="text" id="taskTitleModal" required maxlength="20">
                     <label for="endDateModal">End Date:</label>
                     <input type="date" id="endDateModal" required>
                     <button type="submit">Add Task</button>
@@ -59,8 +61,7 @@
         <script src="script.js"></script>
     </main>
 
-    <div id="footer">
-    </div>
+    <footer class="footer"></footer>
 </body>
 <script src="../../recurring-elements/nav.js"></script>
 <script src="../../recurring-elements/footer.js"></script>

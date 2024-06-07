@@ -3,24 +3,39 @@
 
 <head>
     <title>Projects Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <!-- Linking the main stylesheet for this page -->
     <link rel="stylesheet" href="style.css">
+    <!-- Linking the common navigation stylesheet -->
     <link rel="stylesheet" href="../../recurring-elements/nav.css">
-    <script defer src="importTasks.js"></script>
+
+    <!-- Deferring the navigation script to load after the document -->
+    <script defer src="../../recurring-elements/nav.js"></script>
+
+    <!-- Deferring the footer script to load after the document -->
+    <script defer src="../../recurring-elements/footer.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../images/icon.png">
 </head>
 
 <body>
     <header>
+        <!-- Placeholder for navigation menu -->
         <div id="insert-nav" title="Projects"></div>
     </header>
-
     <main>
-        <div class="project-container"></div>
-    </main>
-
-    <div id="footer"></div>
+        <!-- Button to add a new project -->
+        <!-- Container for dynamically loaded projects -->
+        <div class="project-container"></div>            
+    </main> <br><br><br>
+  
+    <!-- Placeholder for the footer -->
+    <footer class="footer"></footer>
 </body>
-<script src="../../recurring-elements/nav.js"></script>
-<script src="../../recurring-elements/footer.js"></script>
+<!-- Importing the projects script as a module -->
+<script type="module" src="importProjects.js"></script>
 
 </html>
