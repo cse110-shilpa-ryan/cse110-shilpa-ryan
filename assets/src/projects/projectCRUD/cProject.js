@@ -69,6 +69,7 @@ export function createProjectCard(project, projectIndex) {
     // Project image
     const projectImage = document.createElement('div');
     projectImage.className = 'project-image';
+    projectImage.id = 'image-input';
     projectImage.style.backgroundImage = `url(${project.image})`;
 
     const projectDetails = document.createElement('div');
@@ -88,6 +89,7 @@ export function createProjectCard(project, projectIndex) {
     // Project delete button
     const projectDelete = document.createElement('div');
     projectDelete.className = 'project-delete';
+    projectDelete.id = 'project-delete';
     projectDelete.innerHTML = '<i class="fa fa-trash"></i>';
     projectDelete.addEventListener('click', () => {
         projects.splice(projectIndex, 1);

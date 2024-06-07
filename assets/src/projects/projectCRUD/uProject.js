@@ -23,9 +23,11 @@ export function createEditModal(project = null, projectIndex = null) {
     const projectDescription = document.createElement('textarea');
     projectDescription.id = 'project-description';
     projectDescription.placeholder = 'Project Description';
+    projectDescription.id = 'project-description';
     projectDescription.value = project ? project.description : '';
 
     const projectImage = document.createElement('input');
+    projectImage.id = 'project-image';
     projectImage.type = 'file';
     projectImage.accept = 'image/*';
     projectImage.id = 'project-image';
@@ -34,6 +36,8 @@ export function createEditModal(project = null, projectIndex = null) {
     buttonContainer.className = 'button-container';
 
     const saveButton = document.createElement('button');
+    saveButton.id = 'save-project-button';
+    saveButton.className = 'save-project-button';
     saveButton.textContent = 'Save';
     saveButton.id = 'save-project-button';
     saveButton.addEventListener('click', () => {
@@ -70,6 +74,7 @@ export function createEditModal(project = null, projectIndex = null) {
     });
 
     const cancelButton = document.createElement('button');
+    cancelButton.id = 'cancel-button';
     cancelButton.textContent = 'Cancel';
     cancelButton.id = 'cancel-project-button';
     cancelButton.addEventListener('click', () => {

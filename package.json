@@ -12,13 +12,9 @@
     "lint": "standard",
     "docs": "jsdoc assets/src/*.js"
   },
-  "type": "module",
   "jest": {
     "preset": "jest-puppeteer",
-    "verbose": true,
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    }
+    "verbose": true
   },
   "dependencies": {
     "just": "^0.1.8"
