@@ -1,7 +1,10 @@
 name: JS Documentation Action
 
-on:  # When to run the workflow, on push
-  push: 
+on:
+  push:  # Runs on push to any branch
+  pull_request:  # Runs on pull requests
+    branches:
+      - main  # Only for pull requests to main
 
 permissions: # Permissions for the workflow
         contents: write
