@@ -26,11 +26,30 @@ main {
     padding: 2%;
     border-radius: 25px;
 }
+
 .project-container { 
     grid-area: 2 / 1 / 4 / 3; 
     background-color: #ede7e3;
     padding: 2%;
     border-radius: 25px;
+}
+
+#recent-projects {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5% 3%;
+}
+
+.project-card {
+    text-align: center;
+}
+
+.project-image {
+    height: 4em;
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center;
 }
 
 .task-container { 
@@ -45,6 +64,40 @@ main {
     background-color: #ede7e3;
     padding: 4%;
     border-radius: 25px;
+}
+
+#home-journals > li {
+    line-height: 150%;
+}
+
+#progress-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*align-items: center;*/
+    gap: 5% 3%;
+    height: 3em;
+}
+
+#weekly-progress > p {
+    text-align: center;
+}
+
+#daily-bar {
+    border-radius: 15px;
+    height: 3em;
+    width: 1.5em;
+    text-align:center;
+    vertical-align:center;
+    color:#cccccc;
+}
+
+.absent {
+    background-color: rgb(41, 41, 41);
+}
+
+.present {
+    background-color: rgb(76, 169, 223);
 }
 
 #home-nav {
