@@ -7,7 +7,7 @@ describe('Project Management Tests', () => {
     beforeAll(async () => {
         browser = await puppeteer.launch(); // Viewing the browser for testing
         page = await browser.newPage();
-        await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html'); 
+        await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
         //await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
         await page.setViewport({ width: 1080, height: 2048 });
 
@@ -151,7 +151,7 @@ describe('Project Management Tests', () => {
         }]);
     }, 3000);
 
-    test('add task, edit content, and check local storage', async () => {
+    test('edit content, and check local storage', async () => {
 
         /// Navigate through the DOM as specified
         await page.waitForSelector('.project-container'); // Ensure the container is loaded
@@ -194,6 +194,75 @@ describe('Project Management Tests', () => {
                 }
             ]
         }, {
+            title: 'Puppeteer Test Proje',
+            description: 'test description',
+            image: '',
+            tasks: []
+        }]);
+    }, 3000);
+
+    test('delete task, and check local storage', async () => {
+
+        /// Navigate through the DOM as specified
+        await page.waitForSelector('.project-container'); // Ensure the container is loaded
+        // Find the first .project-column in the .project-container
+        const projectContainer = await page.$('.project-container');
+        const columns = await projectContainer.$$('.project-column');
+        const firstColumn = columns[0];
+
+        // Click on the first .task-card within the project-column
+        const taskCards = await firstColumn.$$('.task-card');
+        const lastTaskCard = taskCards[1];
+
+        await lastTaskCard.hover();
+
+        const taskDeleteButton = await lastTaskCard.$('#task-delete');
+        await taskDeleteButton.click();
+
+        await page.click('body'); // Click outside the task to save it
+
+        // Check local storage for updated task list
+        const projectsData = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('projectsData'));
+        });
+        expect(projectsData).toEqual([{
+            title: 'Project Updated',
+            description: 'Updated description',
+            image: '../../images/mock.png',
+            tasks: [
+                {
+                    title: 'First Task, Example',
+                    due: '2024-06-10'
+                }
+            ]
+        }, {
+            title: 'Puppeteer Test Proje',
+            description: 'test description',
+            image: '',
+            tasks: []
+        }]);
+    }, 3000);
+
+    test('delete project, and check local storage', async () => {
+        // Click the Delete Project button for the first project
+        await page.waitForSelector('.project-container'); // Ensure the container is loaded
+        // Find the first .project-column in the .project-container
+        const projectContainer = await page.$('.project-container');
+        const columns = await projectContainer.$$('.project-column');
+        // get first project card
+        const firstColumn = columns[0];
+        const projectCard = await firstColumn.$('.project-card');
+        await projectCard.hover();
+
+        // Click the Delete Project button
+        const projectDeleteButton = await projectCard.$('.project-delete');
+        await projectDeleteButton.click();
+
+        // Check local storage for updated project list
+        const projectsData = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('projectsData'));
+        });
+        expect(projectsData).toEqual([{
             title: 'Puppeteer Test Proje',
             description: 'test description',
             image: '',
