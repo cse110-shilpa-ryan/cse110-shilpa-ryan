@@ -5,9 +5,12 @@ describe('Project Management Tests', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch({ headless: false, slowMo: 10 }); // Viewing the browser for testing
+        browser = await puppeteer.launch({ headless: false, slowMo: 15 }); // Viewing the browser for testing
         page = await browser.newPage();
-        await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
+        //await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
+        await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
+        await page.setViewport({ width: 1080, height: 1024 });
+
     }, 15000);
 
     afterAll(async () => {
@@ -15,6 +18,18 @@ describe('Project Management Tests', () => {
             await browser.close();
         }
     });
+
+    /**
+     tests to write :
+        add project
+        edit project
+        add task
+        edit task
+        delete task
+        delete project
+        reload page & check
+        return project to original   
+     */
 
     test('Add new project and check if in local storage', async () => {
         await page.click('#add-project-button'); // Click the Add Project button
@@ -25,9 +40,8 @@ describe('Project Management Tests', () => {
 
         await page.evaluate(() => {
             const input = document.getElementById('project-image');
-            input.setAttribute('type', 'text');
-            input.value = 'https://avatars.githubusercontent.com/u/47124258?v=4';
-            input.setAttribute('type', 'file');
+
+            input.setAttribute('file', 'https://avatars.githubusercontent.com/u/47124258?v=4');
         });
 
         // Save the project
@@ -57,7 +71,7 @@ describe('Project Management Tests', () => {
                 tasks: []
             }
         ]);
-    }, 30000);
+    }, 3000);
 
     test('Edit a project, check char limit, and check if in local storage', async () => {
         // Click the Edit Project button for the first project
@@ -67,7 +81,6 @@ describe('Project Management Tests', () => {
         await page.type('#project-title', 'Project Updated');
         await page.$eval('#project-description', (el) => el.value = '');
         await page.type('#project-description', 'Updated description');
-
 
         // Save the project
         await page.click('#save-project-button'); // Make sure the button id is correct
@@ -93,6 +106,57 @@ describe('Project Management Tests', () => {
             image: '',
             tasks: []
         }]);
-    }, 30000);
+    }, 3000);
+
+    test('Add a new task to a project and verify in local storage', async () => {
+
+        /// Navigate through the DOM as specified
+        await page.waitForSelector('.project-container'); // Ensure the container is loaded
+        // Find the first .project-column in the .project-container
+        const projectContainer = await page.$('.project-container');
+        const columns = await projectContainer.$$('.project-column');
+        const firstColumn = columns[0];
+
+        await page.click('#add-task-button'); // Click on the Add Task button
+
+        // Click on the first .task-card within the project-column
+        const taskCards = await firstColumn.$$('.task-card');
+        const lastTaskCard = taskCards[1];
+        const taskNameInput = await lastTaskCard.$('#task-name');
+        const taskDueInput = await lastTaskCard.$('#task-due');
+
+        await taskNameInput.click({ clickCount: 3 });
+        await taskNameInput.type('Updated Last Task');
+
+        taskDueInput.click({ clickCount: 3 });
+        await taskDueInput.type('07-11-2024');
+
+        await page.click('body'); // Click outside the task to save it
+
+        // Check local storage for updated task list
+        const projectsData = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('projectsData'));
+        });
+        expect(projectsData).toEqual([{
+            title: 'Project Updated',
+            description: 'Updated description',
+            image: '../../images/mock.png',
+            tasks: [
+                {
+                    title: 'First Task, Example',
+                    due: '2024-06-10'
+                }, {
+                    title: 'Updated Last Task',
+                    due: '2024-07-11'
+                }
+            ]
+        }, {
+            title: 'Puppeteer Test Proje',
+            description: 'test description',
+            image: '',
+            tasks: []
+        }]);
+    }, 3000);
+
 
 });

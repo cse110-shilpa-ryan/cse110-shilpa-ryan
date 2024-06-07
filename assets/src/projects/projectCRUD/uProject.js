@@ -16,6 +16,7 @@ export function createEditModal(project = null, projectIndex = null) {
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
     projectTitle.id = 'project-title';
+    projectTitle.maxLength = 20;
     projectTitle.placeholder = 'Project Title';
     projectTitle.value = project ? project.title : '';
 
