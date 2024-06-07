@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Cache DOM elements
     const calendarElement = document.getElementById('calendar');
     const prevMonthBtn = document.getElementById('prevMonth');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCalendar(date) {
         calendarElement.innerHTML = '';
         currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
-        
+
         const year = date.getFullYear();
         const month = date.getMonth();
         const firstDay = new Date(year, month, 1).getDay();
@@ -72,8 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
-    // Add or edit a task
-    addTaskFormModal.addEventListener('submit', function(event) {
+    // Add a task to the calendar
+    addTaskFormModal.addEventListener('submit', function (event) {
+
         event.preventDefault();
         const taskTitle = taskTitleModal.value;
         const endDate = new Date(endDateModal.value);
@@ -238,6 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const projTasksData = getTasks('projectsData');
         const year = currentDate.getFullYear();
         const month = currentDate.getMonth();
+
         const curDate = new Date(year, month, day);
     
         tasks.forEach(task => {
@@ -253,13 +255,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 deleteButton.className = 'delete-task';
                 deleteButton.addEventListener('click', () => deleteTask(task.id));
                 taskItem.appendChild(deleteButton);
-
                 const editButton = document.createElement('button');
                 editButton.textContent = 'Edit';
                 editButton.className = 'edit-task';
                 editButton.addEventListener('click', () => editTask(task));
                 taskItem.appendChild(editButton);
-    
                 taskList.appendChild(taskItem);
             }
         });
@@ -301,7 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-    
         modalDate.textContent = new Date(year, month, day).toDateString();
         taskModal.style.display = 'block';
     }
@@ -351,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDropdowns() {
         monthDropdown.innerHTML = '';
         yearDropdown.innerHTML = '';
-        const months = Array.from({length: 12}, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        const months = Array.from({ length: 12 }, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
         months.forEach((month, index) => {
             const option = document.createElement('option');
             option.value = index;
