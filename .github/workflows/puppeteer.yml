@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Clear Node Modules and Cache
+        run: |
+          rm -rf node_modules
+          npm cache clean --force
+      
       - name: Install Dependencies
-        run: npm install
-
-      - name: Jest Setup
-        run: npm install jest
-      - run: npm install jest jest-diff --save-dev
-      - run: npm install kleur --save-dev
-
-      - name: Canvas Lab 6 Setup
-        run: npm install --save-dev jest babel-jest @babel/core @babel/preset-env puppeteer jest-puppeteer
+        run: |
+          npm install
+          npm install --save-dev babel-jest @babel/core @babel/preset-env puppeteer jest-puppeteer
 
       - name: Jest with Puppeteer
         run: npm run test
