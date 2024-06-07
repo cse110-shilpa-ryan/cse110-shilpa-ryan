@@ -5,7 +5,7 @@ describe('Project Management Tests', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch({ headless: false, slowMo: 15 }); // Viewing the browser for testing
+        browser = await puppeteer.launch(); // Viewing the browser for testing
         page = await browser.newPage();
         //await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
         await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
@@ -73,7 +73,7 @@ describe('Project Management Tests', () => {
         ]);
     }, 3000);
 
-    test('Edit a project, check char limit, and check if in local storage', async () => {
+    test('edit project, check char limit, and check local storage', async () => {
         // Click the Edit Project button for the first project
         await page.click('#edit-project-button');
         // Update the project details
@@ -108,7 +108,7 @@ describe('Project Management Tests', () => {
         }]);
     }, 3000);
 
-    test('Add a new task to a project and verify in local storage', async () => {
+    test('add task and check local storage', async () => {
 
         /// Navigate through the DOM as specified
         await page.waitForSelector('.project-container'); // Ensure the container is loaded
@@ -120,14 +120,57 @@ describe('Project Management Tests', () => {
         await page.click('#add-task-button'); // Click on the Add Task button
 
         // Click on the first .task-card within the project-column
+        const today = new Date();
+        const nextDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // Set to the next day using local time
+        const tommorow = nextDay.toISOString().split('T')[0];
+
+        await page.click('body'); // Click outside the task to save it
+
+        // Check local storage for updated task list
+        const projectsData = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('projectsData'));
+        });
+        expect(projectsData).toEqual([{
+            title: 'Project Updated',
+            description: 'Updated description',
+            image: '../../images/mock.png',
+            tasks: [
+                {
+                    title: 'First Task, Example',
+                    due: '2024-06-10'
+                }, {
+                    title: 'New Task',
+                    due: `${tommorow}`
+                }
+            ]
+        }, {
+            title: 'Puppeteer Test Proje',
+            description: 'test description',
+            image: '',
+            tasks: []
+        }]);
+    }, 3000);
+
+    test('add task, edit content, and check local storage', async () => {
+
+        /// Navigate through the DOM as specified
+        await page.waitForSelector('.project-container'); // Ensure the container is loaded
+        // Find the first .project-column in the .project-container
+        const projectContainer = await page.$('.project-container');
+        const columns = await projectContainer.$$('.project-column');
+        const firstColumn = columns[0];
+
+        //await page.click('#add-task-button'); // Click on the Add Task button
+
+        // Click on the first .task-card within the project-column
         const taskCards = await firstColumn.$$('.task-card');
         const lastTaskCard = taskCards[1];
+
         const taskNameInput = await lastTaskCard.$('#task-name');
         const taskDueInput = await lastTaskCard.$('#task-due');
 
         await taskNameInput.click({ clickCount: 3 });
         await taskNameInput.type('Updated Last Task');
-
         taskDueInput.click({ clickCount: 3 });
         await taskDueInput.type('07-11-2024');
 
@@ -157,6 +200,5 @@ describe('Project Management Tests', () => {
             tasks: []
         }]);
     }, 3000);
-
 
 });

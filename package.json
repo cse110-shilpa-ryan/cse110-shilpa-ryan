@@ -16,8 +16,5 @@
     "preset": "jest-puppeteer",
     "transform": {},
     "verbose": true
-  },
-  "dependencies": {
-    "puppeteer": "^0.0.1"
   }
 }
