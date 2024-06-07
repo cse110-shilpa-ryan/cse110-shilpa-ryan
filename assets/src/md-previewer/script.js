@@ -3,11 +3,16 @@ import { marked } from './marked.esm.js';
 const contents = document.getElementById('text-content');
 const parsedContent = document.getElementById('md-parser');
 
+/**
+ * @param {boolean} breaks - Makes a newline everytime enter is pressed
+ * @param {boolean} gfm - Mimics Github's markdown as close as possible
+ */
 marked.use({
     breaks: true,
     gfm: true,
 });
 
+// Loads text if it was saved in local storage
 document.addEventListener('DOMContentLoaded', () => {
     const text = localStorage.getItem('content');
     if (text) {
@@ -17,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateGutter();
 })
 
+/** Parses the text into HTML the regex is to remove
+ * all occurences of characters that marked can't parse
+ * such as zero width characters
+*/
 contents.addEventListener('input', () => {
     const text = contents.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '');
     parsedContent.innerHTML = marked.parse(text);
