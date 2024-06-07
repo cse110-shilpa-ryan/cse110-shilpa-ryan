@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: calendar/script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: calendar/script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>document.addEventListener('DOMContentLoaded', function() {
+    // Cache DOM elements.
+    const calendarElement = document.getElementById('calendar');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const currentMonthYear = document.getElementById('currentMonthYear');
+    const taskModal = document.getElementById('task-modal');
+    const closeButton = document.querySelector('.close-button');
+    const taskList = document.getElementById('task-list');
+    const projectList = document.getElementById('mainTaskList');
+    const addTaskButton = document.getElementById('add-task-button');
+    const addTaskFormModal = document.getElementById('addTaskFormModal');
+    const submitButton = addTaskFormModal.querySelector('button');
+    const modalDate = document.getElementById('modal-date');
+    const monthYearDropdown = document.getElementById('monthYearDropdown');
+    const monthDropdown = document.getElementById('monthDropdown');
+    const yearDropdown = document.getElementById('yearDropdown');
+    const taskTitleModal = document.getElementById('taskTitleModal');
+    const endDateModal = document.getElementById('endDateModal');
+    let editTaskId = null; // To keep track of the task being edited.
+
+    // Initialize current date and selected day.
+    let currentDate = new Date();
+    let selectedDay = null;
+
+    /**
+     * Retrives tasks from localStorage based on the key inputted from the 
+     * parameter.
+     * @param {String} taskType - Type of task. Differentiate between event 
+     * tasks ('tasks') or project tasks ('projectsData').
+     * @returns JSON parsed object by taskType key.
+     */
+    function getTasks(taskType) {
+        return JSON.parse(localStorage.getItem(taskType)) || [];
+    }
+
+    /**
+     * Save tasks to localStorage (only for 'event' tasks).
+     * @param {Array} tasks - The array of tasks that is to be saved.
+     * @param {String} taskType - Key used for the localStorage.
+     */
+    function saveTasks(tasks, taskType) {
+        localStorage.setItem(taskType, JSON.stringify(tasks));
+    }
+
+    /**
+     * Renders the Calendar for the month using the month and year of the Date 
+     * Object.
+     * @param {Date} date - Date to render.
+     */
+    function renderCalendar(date) {
+        calendarElement.innerHTML = '';
+        currentMonthYear.textContent = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+
+        // Create blank days until the first day of the month.
+        for (let i = 0; i &lt; firstDay; i++) {
+            const blankDay = document.createElement('div');
+            blankDay.className = 'day';
+            calendarElement.appendChild(blankDay);
+        }
+
+        // Create days of the month.
+        for (let day = 1; day &lt;= lastDate; day++) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'day';
+            dayElement.innerHTML = `&lt;div class="day-number">${day}&lt;/div>`;
+            calendarElement.appendChild(dayElement);
+            dayElement.addEventListener('click', () => showTasksForDay(day));
+        }
+
+        renderTasks();
+    }
+
+    /**
+     * Move the month to be displayed on the Calendar forward or backwards by a 
+     * specified value.
+     * @param {*} direction - Direction to change Calendar month (negative for 
+     * backwards, positive for forwards).
+     */
+    function changeMonth(direction) {
+        currentDate.setMonth(currentDate.getMonth() + direction);
+        renderCalendar(currentDate);
+    }
+
+    // Event listeners for previous and next month buttons.
+    prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+    nextMonthBtn.addEventListener('click', () => changeMonth(1));
+
+    // Add or edit a task after pressing submit in the form.
+    addTaskFormModal.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const taskTitle = taskTitleModal.value;
+        const endDate = new Date(endDateModal.value);
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
+
+        const tasks = getTasks('tasks');
+
+        if (editTaskId !== null) {
+            // Edit existing task.
+            const taskIndex = tasks.findIndex(task => task.id === editTaskId);
+            if (taskIndex !== -1) {
+                tasks[taskIndex].title = taskTitle;
+                tasks[taskIndex].startDate = startDate.toISOString();
+                tasks[taskIndex].endDate = endDate.toISOString();
+            }
+        } else {
+            // Add new task.
+            tasks.push({
+                id: Date.now(),  // Unique ID for each task.
+                title: taskTitle,
+                startDate: startDate.toISOString(),
+                endDate: endDate.toISOString()
+            });
+        }
+        
+        saveTasks(tasks, 'tasks');
+
+        renderCalendar(currentDate);  // Re-render calendar to include new tasks.
+        addTaskFormModal.reset();
+        addTaskFormModal.style.display = 'none';
+        showTasksForDay(selectedDay);
+        editTaskId = null; // Reset the edit task ID.
+    });
+
+    /**
+     * Add a task to a specific day in the calendar.
+     * @param {Object} task 
+     * @param {String} taskType 
+     * @param {String} color 
+     * @param {String} projName 
+     */
+    function addTaskToCalendar(task, taskType, color, projName="") {
+        const { title, startDate, endDate, due } = task;
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const dayElements = calendarElement.getElementsByClassName('day');
+        const dueDate = new Date(due);
+        dueDate.setDate(dueDate.getDate() + 1);
+        const dueStr = taskType == 'proj' ? "DUE: " + projName + " - ": "";
+        
+        // Iterate through each day "box".
+        for (let i = 0; i &lt; dayElements.length; i++) {
+            const dayElement = dayElements[i];
+            const dayNumber = parseInt(dayElement.querySelector('.day-number')?.textContent, 10);
+
+            if (!dayNumber) continue; // Check if the box is a valid Calendar day.
+
+            const dayDate = new Date(year, month, dayNumber);
+
+            // Add event task if the start and end date falls within the day.
+            // Add Project task if its due date falls within the day.
+            if ((taskType == 'tasks' &amp;&amp; dayDate >= new Date(startDate) &amp;&amp; dayDate &lt;= new Date(endDate)) || (taskType == 'proj' &amp;&amp; dueDate.getDate() == dayDate.getDate())) {
+                const tasksForDay = dayElement.querySelectorAll('.task');
+
+                // Add task to the calendar.
+                if (tasksForDay.length &lt;= 1) {
+                    const taskElement = document.createElement('div');
+                    taskElement.className = 'task';
+                    taskElement.textContent = dueStr + title;
+                    taskElement.style.backgroundColor = color;
+                    dayElement.appendChild(taskElement);
+                }
+                
+                // Limit visible tasks and add a "more-tasks" indicator.
+                if (tasksForDay.length > 1) {
+                    if (!dayElement.querySelector('.more-tasks')) {
+                        const moreTasksElement = document.createElement('div');
+                        moreTasksElement.className = 'task more-tasks';
+                        moreTasksElement.textContent = 'More...';
+                        dayElement.appendChild(moreTasksElement);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Adapted from Java's String#hashCode with slight modification to allow for
+     * more variety of colors for similar strings.
+     * @param {String} str - String to be hashed into an int.
+     * @returns {Int} The corresponding int hashed from the string.
+     */
+    function hashCode(str) {
+        var hash = 0;
+        for (var i = 0; i &lt; str.length; i++) {
+           hash = str.charCodeAt(i) + ((hash &lt;&lt; 5) - hash);
+        }
+        return 100 * hash;
+    } 
+    
+    /**
+     * Converts the integer into its corresponding RGB code.
+     * @param {Int} i - Integer to be converted.
+     * @returns {String} - String representation of the RGB code.
+     */
+    function intToRGB(i) {
+        // Separate the bits of the integer into the corresponding RGB components.
+        let r = (i >> 16) &amp; 0xFF;
+        let g = (i >> 8) &amp; 0xFF;
+        let b = i &amp; 0xFF;
+
+        /**
+         * Offsets the RGB components for colors that have visibility issues.
+         * @param {Int} r - R component of RGB.
+         * @param {Int} g - G component of RGB.
+         * @param {Int} b - B component of RGB.
+         * @returns {Array} - Array of the RGB components.
+         */
+        function offset(r, g, b) {
+            // Modify color for components with lower values and higher values.
+            let check = (c) => c &lt; 80 ? c + Math.ceil((80 - c) * (1.2)) : 
+            c > 200 ? c - Math.ceil((c - 220) * (1.2)) : c;
+            
+            r = check(r);
+            g = check(g);
+            b = check(b);
+
+            // Avoid grayscale colors.
+            if (r >= g &amp;&amp; r >= b) {
+                r += 30;
+            } else if (g >= r &amp;&amp; g >= b) {
+                g += 30;
+            } else if (b >= g &amp;&amp; b >= r) {
+                b += 30;
+            }
+            if (r &lt;= g &amp;&amp; r &lt;= b) {
+                r -= 30;
+            } else if (g &lt;= r &amp;&amp; g &lt;= b) {
+                g -= 30;
+            } else if (b &lt;= g &amp;&amp; b &lt;= r) {
+                b -= 30;
+            }
+            
+            return [r, g, b]
+        }
+        [r, g, b] = offset(r, g, b);
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    /**
+     * Render tasks for the current month and year.
+     */
+    function renderTasks() {
+        // Pull the event tasks and project tasks from localStorage.
+        const tasks = getTasks('tasks');
+        const projTasksData = getTasks('projectsData');
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const curDate = new Date(year, month);
+
+        // Add any event task where the current month and year falls within 
+        // the start/end month and year.
+        tasks.forEach(task => {
+            const startDate = new Date(task.startDate);
+            const endDate = new Date(task.endDate);
+
+            const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
+            const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
+            if (newStart &lt;= curDate &amp;&amp; newEnd >= curDate) {
+                addTaskToCalendar(task, 'tasks', '#ffeb3b'); 
+                // Event task color is consistent.
+            }
+        });
+
+        // Add any project tasks whose due month/year is the same as the
+        // current date's month/year.
+        projTasksData.forEach(projData => {
+            const title = projData.title;
+            color = intToRGB(hashCode(title));
+            projData.tasks.forEach(task => {
+                const dueDate = new Date(task.due)
+                dueDate.setDate(dueDate.getDate() + 1);
+                if (dueDate.getFullYear() == curDate.getFullYear() &amp;&amp; dueDate.getMonth() == curDate.getMonth()) {
+                    addTaskToCalendar(task, 'proj', color, title)
+                }
+            })
+        });
+    }
+
+    /**
+     * Display tasks for a specific day in a modal.
+     * @param {Int} day - The number representing the day of the date.
+     */
+    function showTasksForDay(day) {
+        selectedDay = day;
+        taskList.innerHTML = '';
+        projectList.innerHTML = '';
+        const tasks = getTasks('tasks');
+        const projTasksData = getTasks('projectsData');
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        const curDate = new Date(year, month, day);
+    
+        // Display each event task first.
+        tasks.forEach(task => {
+            const startDate = new Date(task.startDate);
+            const endDate = new Date(task.endDate);
+    
+            if (startDate &lt;= curDate &amp;&amp; endDate >= curDate) {
+                // Display tasks in the form of an unordered list.
+                const taskItem = document.createElement('li');
+                taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
+
+                // Add a delete button on the side.
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'delete-task';
+                deleteButton.addEventListener('click', () => deleteTask(task.id));
+                taskItem.appendChild(deleteButton);
+
+                // Add an edit button on the side.
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'edit-task';
+                editButton.addEventListener('click', () => editTask(task));
+                taskItem.appendChild(editButton);
+                taskList.appendChild(taskItem);
+            }
+        });
+
+        // Display Project tasks in a separate list.
+        projTasksData.forEach(projData => {
+            // Create a new list element for the project.
+            const projectItem = document.createElement('li');
+            let confirm = false;
+            // Create a heading for the project.
+            const projectTitle = document.createElement('strong');
+            projectTitle.textContent = projData.title;
+            projectItem.appendChild(projectTitle);
+            
+            // Create a nested list for the tasks.
+            const subList = document.createElement('ul');
+            
+            // Iterate over tasks within the project.
+            projData.tasks.forEach(task => {
+                const dueDate = new Date(task.due);
+                dueDate.setDate(dueDate.getDate() + 1);
+                
+                // Check if the task is due today.
+                if (dueDate.getDate() == curDate.getDate() &amp;&amp; dueDate.getMonth() == curDate.getMonth() &amp;&amp; dueDate.getFullYear() == curDate.getFullYear()) {
+                    confirm = true;
+                    // Create a list item for each task.
+                    const taskItem = document.createElement('li');
+                    taskItem.textContent = task.title;
+                    
+                    // Append the task item to the task list.
+                    subList.appendChild(taskItem);
+                }
+            });
+            // Only display Project titles if the Project has at least one task that day.
+            if (confirm) {
+                projectItem.appendChild(subList);
+                projectList.appendChild(projectItem);
+            }
+        });
+        
+        modalDate.textContent = new Date(year, month, day).toDateString();
+        taskModal.style.display = 'block';
+    }
+
+    // Toggle visibility of the add task form modal.
+    addTaskButton.addEventListener('click', () => {
+        addTaskFormModal.style.display = addTaskFormModal.style.display === 'none' ? 'block' : 'none';
+        editTaskId = null; // Reset the edit task ID when opening the form for a new task.
+        submitButton.innerHTML = 'Add Task';
+        addTaskFormModal.reset();
+    });
+
+    // Function to edit a task.
+    function editTask(task) {
+        editTaskId = task.id;
+        taskTitleModal.value = task.title;
+        endDateModal.value = new Date(task.endDate).toISOString().substring(0, 10);
+        submitButton.innerHTML = 'Save Edit';
+        addTaskFormModal.style.display = 'block';
+    }
+
+    // Delete a task from the task list and calendar.
+    function deleteTask(taskId) {
+        let tasks = getTasks('tasks');
+        tasks = tasks.filter(task => task.id !== taskId); // Only delete the specified task
+        saveTasks(tasks, 'tasks');
+        renderCalendar(currentDate);
+        showTasksForDay(selectedDay);
+        addTaskFormModal.reset();
+        submitButton.innerHTML = 'Add Task';
+    }
+
+    // Close the task modal.
+    closeButton.addEventListener('click', () => {
+        taskModal.style.display = 'none';
+        addTaskFormModal.style.display = 'none';
+        addTaskFormModal.reset();
+    });
+
+    // Handle outside clicks to close the modals.
+    window.addEventListener('click', (event) => {
+        if (event.target === taskModal) {
+            taskModal.style.display = 'none';
+            addTaskFormModal.style.display = 'none';
+            addTaskFormModal.reset();
+        } else if (!monthYearDropdown.contains(event.target) &amp;&amp; !currentMonthYear.contains(event.target)) {
+            monthYearDropdown.style.display = 'none';
+        }
+    });
+
+    // Populate the month and year dropdowns with options.
+    function populateDropdowns() {
+        monthDropdown.innerHTML = '';
+        yearDropdown.innerHTML = '';
+        const months = Array.from({ length: 12 }, (v, i) => new Date(0, i).toLocaleString('default', { month: 'long' }));
+        months.forEach((month, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = month;
+            if (index === currentDate.getMonth()) {
+                option.selected = true;
+            }
+            monthDropdown.appendChild(option);
+        });
+
+        const currentYear = new Date().getFullYear();
+        for (let year = currentYear - 10; year &lt;= currentYear + 10; year++) {
+            const option = document.createElement('option');
+            option.value = year;
+            option.textContent = year;
+            if (year === currentDate.getFullYear()) {
+                option.selected = true;
+            }
+            yearDropdown.appendChild(option);
+        }
+    }
+
+    // Show the month and year dropdowns when the current month/year is clicked.
+    currentMonthYear.addEventListener('click', () => {
+        populateDropdowns();
+        monthYearDropdown.style.display = 'block';
+    });
+
+    // Change the month based on dropdown selection.
+    monthDropdown.addEventListener('change', () => {
+        currentDate.setMonth(monthDropdown.value);
+        renderCalendar(currentDate);
+        monthYearDropdown.style.display = 'none';
+    });
+
+    // Change the year based on dropdown selection.
+    yearDropdown.addEventListener('change', () => {
+        currentDate.setFullYear(yearDropdown.value);
+        renderCalendar(currentDate);
+        monthYearDropdown.style.display = 'none';
+    });
+
+    renderCalendar(currentDate);
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_Lexer.html">_Lexer</a></li><li><a href="-_Parser.html">_Parser</a></li><li><a href="-_Renderer.html">_Renderer</a></li><li><a href="-_TextRenderer.html">_TextRenderer</a></li><li><a href="-_Tokenizer.html">_Tokenizer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_getDefaults">_getDefaults</a></li><li><a href="global.html#addButton">addButton</a></li><li><a href="global.html#block">block</a></li><li><a href="global.html#blockNormal">blockNormal</a></li><li><a href="global.html#blockPedantic">blockPedantic</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#deleteEntry">deleteEntry</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#escape">escape</a></li><li><a href="global.html#escapeTest">escapeTest</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#getEntries">getEntries</a></li><li><a href="global.html#gfmTable">gfmTable</a></li><li><a href="global.html#inlineBreaks">inlineBreaks</a></li><li><a href="global.html#inlineGfm">inlineGfm</a></li><li><a href="global.html#inlineNormal">inlineNormal</a></li><li><a href="global.html#inlinePedantic">inlinePedantic</a></li><li><a href="global.html#loadEntries">loadEntries</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#newline">newline</a></li><li><a href="global.html#rtrim">rtrim</a></li><li><a href="global.html#saveEntries">saveEntries</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#updateTitle">updateTitle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Jun 07 2024 21:25:13 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
