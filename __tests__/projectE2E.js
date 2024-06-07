@@ -170,8 +170,8 @@ describe('Project Management Tests', () => {
 
         await taskNameInput.click({ clickCount: 3 });
         await taskNameInput.type('Updated Last Task');
-        
-        taskDueInput.click();
+
+        await taskDueInput.click();
         await lastTaskCard.$eval('#task-due', (el) => el.value = '');
         await taskDueInput.type('07112024');
 
