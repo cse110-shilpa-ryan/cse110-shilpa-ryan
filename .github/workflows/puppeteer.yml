@@ -12,7 +12,11 @@ jobs:
 
       - name: Jest Setup
         run: npm install jest
-      - name: Puppeteer Setup
-        run: npm install puppeteer
+
+      - name: Canvas Lab 6 Setup
+        run: npm install --save-dev jest babel-jest @babel/core @babel/preset-env puppeteer jest-puppeteer
+
       - name: Jest with Puppeteer
         run: npm run test
+
+      
