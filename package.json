@@ -14,7 +14,10 @@
   },
   "jest": {
     "preset": "jest-puppeteer",
-    "transform": {},
-    "verbose": true
+    "verbose": true,
+    "transform": {}
+  },
+  "dependencies": {
+    "just": "^0.1.8"
   }
 }

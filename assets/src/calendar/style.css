@@ -13,6 +13,8 @@ main {
     flex-direction: column;
     margin: 0;
     background-color: #f4f4f4;
+    padding: 5rem 0;
+    overflow-y: auto;
 }
 
 #calendar-nav {
@@ -138,6 +140,7 @@ main {
 .task.more-tasks {
     background-color: #ccc;
     cursor: pointer;
+    z-index: 0;
 }
 
 .more-tasks {
@@ -224,6 +227,17 @@ form button {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.edit-task {
+    background-color: rgb(3, 175, 3);
+    color: white;
+    border: none;
+    padding: 2px 5px;
+    cursor: pointer;
+    float: right;
+    font-size: 12px;
+    border-radius: 10px;
 }
 
 .delete-task {

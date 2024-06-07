@@ -18,6 +18,7 @@ export function createTaskCard(task, projectIndex, taskIndex = null) {
     taskName.type = 'text';
     taskName.id = 'task-name';
     taskName.value = task.title;
+    taskName.maxLength = 25; // Max length of 50 characters for task title
     taskName.addEventListener('change', () => {
         task.title = taskName.value;
         saveProjectsToLocalStorage();
@@ -77,6 +78,7 @@ export function createProjectCard(project, projectIndex) {
     // Project title
     const projectTitle = document.createElement('input');
     projectTitle.type = 'text';
+    projectTitle.maxLength = 20;
     projectTitle.value = project.title;
     projectTitle.disabled = true; // Disable editing directly
 
