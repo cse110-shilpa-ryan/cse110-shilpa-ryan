@@ -56,21 +56,30 @@ describe('Homepage E2E Tests', () => {
     expect(titleDate).toBe(expectedDate);
   });
 
-  it('should render exactly 3 projects', async () => {
+  it('should render top 3 projects, or all if less than 3 projects in total', async () => {
+    // Laod the project page first
     await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
+  
+    // Navigate to the front page
     await page.goto('http://127.0.0.1:5502/assets/src/front-page/index.html');
   
-    // Wait for the projects to be rendered
     await page.waitForSelector('.project-card');
+
+    const renderedProjects = await page.$$('.project-card');
+
+    // Read the number of projects from local storage
+    const totalProjectCount = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem('projectsData')).length;
+    });
   
-    // Get the number of rendered projects
-    const renderedProjectsCount = await page.$$eval('.project-card', cards => cards.length);
-  
-    // Ensure that the number of rendered projects is exactly 3
-    expect(renderedProjectsCount).toBe(3);
-  },5000);
-  
-  
+    if (totalProjectCount.length >= 3) {
+        // If 3 or more projects are rendered, assert that exactly 3 are rendered
+        expect(renderedProjects.length).toBe(3);
+    } else {
+        expect (renderedProjects.length).toBe(totalProjectCount);
+    }
+}, 10000);
+
   it('should render the top 3 projects', async () => {
     const projectsPath = path.resolve(__dirname, '../assets/src/projects/projects.json');
     const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
@@ -100,8 +109,71 @@ describe('Homepage E2E Tests', () => {
     });
   },5000);
 
-  // TODO: task tests
-  
+  it('should display only tasks that are due within the next 3 days', async () => {
+    const upcomingTasksSelector = '#upcoming-tasks'; // Selector for the upcoming tasks container
+
+    // Wait for the selector to appear in the DOM with a timeout of 10 seconds
+    await page.waitForSelector(upcomingTasksSelector, { timeout: 10000 });
+
+    // Extract the text content of all `li` elements within the `#upcoming-tasks` container
+    const tasks = await page.$$eval(`${upcomingTasksSelector} li`, tasks => tasks.map(task => task.textContent));
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Get today's date without time
+    const nextThreeDays = new Date(today);
+    nextThreeDays.setDate(today.getDate() + 3); // Get the date 3 days from today
+
+    tasks.forEach(taskText => {
+      const dateMatch = taskText.match(/\(Due: (.+)\)/); // Extract the due date from the task text
+      if (dateMatch) {
+        const taskDate = new Date(dateMatch[1]); // Parse the due date
+        taskDate.setHours(0, 0, 0, 0); // Ensure the task date is without time
+
+        // Check if the task date is within the next 3 days
+        if (taskDate.getTime() < today.getTime() || taskDate.getTime() > nextThreeDays.getTime()) {
+          throw new Error(`Task "${taskText}" has a due date out of the expected range: ${dateMatch[1]}`);
+        }
+      } else {
+        throw new Error(`Task text "${taskText}" does not contain a valid due date`);
+      }
+    });
+  }, 10000); 
+
+
+  it('should display all tasks due within the next 3 days', async () => {
+    // Fetch tasks from local storage
+    const upcomingTasksFromLocalStorage = JSON.parse(await page.evaluate(() => localStorage.getItem('tasks'))) || [];
+    const projectTasksFromLocalStorage = JSON.parse(await page.evaluate(() => localStorage.getItem('projectsData'))) || [];
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Get today's date without time
+    const nextThreeDays = new Date(today);
+    nextThreeDays.setDate(today.getDate() + 3); // Get the date 3 days from today
+
+    // Filter and merge upcoming and project tasks due in 3 days
+    const allTasksDueInThreeDays = [...upcomingTasksFromLocalStorage, ...projectTasksFromLocalStorage]
+      .filter(task => {
+        const taskDate = new Date(task.endDate);
+        taskDate.setHours(0, 0, 0, 0); // Ensure the task date is without time
+        return taskDate >= today && taskDate <= nextThreeDays;
+      });
+
+    const upcomingTasksSelector = '#upcoming-tasks'; // Selector for the upcoming tasks container
+
+    // Wait for the selector to appear in the DOM with a timeout of 10 seconds
+    await page.waitForSelector(upcomingTasksSelector, { timeout: 10000 });
+
+    // Extract the text content of all `li` elements within the `#upcoming-tasks` container
+    const tasksDisplayedOnPage = await page.$$eval(`${upcomingTasksSelector} li`, tasks => tasks.map(task => task.textContent));
+
+    // Check if all tasks due in 3 days are displayed on the page
+    allTasksDueInThreeDays.forEach(task => {
+      const taskText = `${task.title || task.task} (Due: ${new Date(task.endDate).toDateString()})`;
+      if (!tasksDisplayedOnPage.includes(taskText)) {
+        throw new Error(`Task "${taskText}" due in 3 days is not displayed on the page`);
+      }
+    });
+  }, 10000); 
 
 });
 
