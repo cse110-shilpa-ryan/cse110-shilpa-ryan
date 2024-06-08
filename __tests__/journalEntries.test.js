@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
-import { createEntry, updateTitle } from '../assets/src/journal/updateJournal';
-import { getEntries } from '../assets/src/journal/updateJournal';
+import { createEntry, updateTitle, deleteEntry, getEntries } from '../assets/src/journal/updateJournal';
 
 jest.mock('../assets/src/journal/updateJournal');
 
@@ -19,6 +18,22 @@ describe('createEntry', () => {
 });
 
 // Read
+describe('getEntries', () => {
+  let entries;
+
+  beforeEach(() => {
+    entries = [
+      { id: 1, title: 'Title 1', content: 'Content 1' },
+      { id: 2, title: 'Title 2', content: 'Content 2' },
+    ];
+    getEntries.mockReturnValue(entries);
+  });
+
+  test('should fetch all journal entries', () => {
+    const fetchedEntries = getEntries();
+    expect(fetchedEntries).toEqual(entries);
+  });
+});
 
 // Update
 describe('updateTitle', () => {
@@ -39,3 +54,19 @@ describe('updateTitle', () => {
 });
 
 // Delete
+describe('deleteEntry', () => {
+  let id, deleted;
+
+  beforeEach(() => {
+    id = 1;
+    getEntries.mockReturnValue([{ id: 1, title: 'Title 1', content: 'Content 1' }]);
+    deleted = deleteEntry(id);
+  });
+
+  test('should delete the journal entry with the specified id', () => {
+    const entries = getEntries();
+    const deletedEntry = entries.find(entry => entry.id === id);
+    expect(deletedEntry).toBeUndefined();
+    expect(deleted.id).toBe(id);
+  });
+});
