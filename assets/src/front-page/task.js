@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         return tasks.filter(task => {
-            console.log("yaya");
             const endDate = new Date(Date.parse(task.due));
             return endDate >= today && endDate <= nextThreeDays;
         });
