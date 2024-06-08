@@ -175,6 +175,22 @@ describe('Homepage E2E Tests', () => {
     });
   }, 10000); 
 
+  it('should assign each journal progress bar with a status class', async () => {
+    const progressBarSelector = '#progress-bar';
+    await page.waitForSelector(progressBarSelector, { timeout: 10000 });  
+    const dailyBars = await page.$$eval(`${progressBarSelector} div`, bars => bars.map(b => b.className));
+    
+    dailyBars.forEach(barClass => {
+      if (barClass === '') {
+        throw new Error(`Progress bar classes not set`);
+      }
+      else if (barClass !== 'absent' && barClass !== 'present') {
+        throw new Error(`Invalid class for progress bar - ${barClass}`);
+      }
+    });
+
+  }, 10000); 
+
   it('should only display journals within the last week', async () => {
     const journalSelector = '#home-journals';
     // Wait for the selector to appear in the DOM with a timeout of 10 seconds
