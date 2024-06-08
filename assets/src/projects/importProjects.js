@@ -1,6 +1,6 @@
 import { createEditModal } from './projectCRUD/uProject.js';
 import { saveProjectsToLocalStorage, loadProjectsFromLocalStorage, displayProjects } from './projectCRUD/rProject.js';
-
+import { addButton } from './projectCRUD/addButton.js';
 export const LOCAL_STORAGE_KEY = 'projectsData';
 export let projects = [];
 
@@ -29,6 +29,9 @@ async function loadProjects() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadProjects();
+    addButton();
+
+    setTimeout(500);
 
     document.getElementById('add-project-button').addEventListener('click', () => {
         createEditModal();

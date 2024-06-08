@@ -1,115 +1,12 @@
 [
     {
-        "title": "Project 1",
-        "description": "Filler description text of project 1",
-        "image": "../../images/image1.png",
+        "title": "Example Project",
+        "description": "This is a description for the first project",
+        "image": "../../images/mock.png",
         "tasks": [
             {
-                "title": "Task 1-1",
-                "due": "2024-06-01"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-15"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-01"
-            }
-        ]
-    },
-    {
-        "title": "Project 2",
-        "description": "Filler description text of project 2",
-        "image": "../../images/image2.png",
-        "tasks": [
-            {
-                "title": "Task 1",
-                "due": "2024-06-05"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-20"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-05"
-            }
-        ]
-    },
-    {
-        "title": "Project 3",
-        "description": "Filler description text of project 3",
-        "image": "../../images/image3.png",
-        "tasks": [
-            {
-                "title": "Task 1",
+                "title": "First Task, Example",
                 "due": "2024-06-10"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-25"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-10"
-            }
-        ]
-    },
-    {
-        "title": "Project 4",
-        "description": "Filler description text of project 4",
-        "image": "../../images/image4.png",
-        "tasks": [
-            {
-                "title": "Task 1",
-                "due": "2024-06-15"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-30"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-15"
-            }
-        ]
-    },
-    {
-        "title": "Project 5",
-        "description": "Filler description text of project 5",
-        "image": "../../images/image5.png",
-        "tasks": [
-            {
-                "title": "Task 1",
-                "due": "2024-06-15"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-30"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-15"
-            }
-        ]
-    },
-    {
-        "title": "Project 6",
-        "description": "Filler description text of project 6",
-        "image": "../../images/image6.png",
-        "tasks": [
-            {
-                "title": "Task 1",
-                "due": "2024-06-15"
-            },
-            {
-                "title": "Task 2",
-                "due": "2024-06-30"
-            },
-            {
-                "title": "Task 3",
-                "due": "2024-07-15"
             }
         ]
     }

@@ -1,11 +1,9 @@
 function loadFooter() {
-  const footerPlaceholder = document.getElementById('footer');
+  const footerPlaceholder = document.querySelector('footer');
   const footerHTML = `
-  <footer class="footer">
     <div class="footer-container">
       <p>11:eleven</p>
     </div>
-  </footer> 
 `;
   if (footerPlaceholder) {
     footerPlaceholder.innerHTML = footerHTML;

@@ -1,3 +1,6 @@
+/**
+ * When the page loads, load in the most recent journal entries and a journaling progress bar
+ */
 document.addEventListener('DOMContentLoaded', function() {
     /**
     * Fetches entry content from localStorage.
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     /**
-     * Renders the progress bar and progress message to the journal container.
+     * Renders the progress bar and progress message to the home page.
      * @param {*} journals - list of journal entries
      */
     function renderWeeklyBar(journals) {
@@ -108,7 +111,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     } 
 
-    // Render recent journals
+    /**
+     * Renders the list of recent journal entries to the home page
+     * @param {*} journals - list of journal entries
+     */
     function renderRecentJournals(journals) {
         const upcomingTasks = getRecentJournals(journals, 7);
         const journalContainer = document.getElementById('home-journals');
@@ -125,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
+
     let journals = getJournalEntries();
     renderWeeklyBar(journals);
     renderRecentJournals(journals);

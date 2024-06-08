@@ -7,6 +7,7 @@ function loadNavbar() {
         <nav>
             <div class="nav-container">
                 <div class="nav-title">
+                <a href="../front-page/index.html"><img src="../../images/icon.png" alt="home icon" class="home-icon"></a>
                 </div>
                     <div class="nav-buttons">
                         <a href="../front-page/index.html" class="nav-button" id="home-nav">Home</a>
