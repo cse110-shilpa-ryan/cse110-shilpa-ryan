@@ -15,6 +15,7 @@
   "type": "module",
   "jest": {
     "preset": "jest-puppeteer",
+    "transform": {},
     "verbose": true,
     "transform": {
       "^.+\\.js$": "babel-jest"
