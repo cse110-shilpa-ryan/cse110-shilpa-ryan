@@ -175,5 +175,33 @@ describe('Homepage E2E Tests', () => {
     });
   }, 10000); 
 
+  it('should only display journals within the last week', async () => {
+    const journalSelector = '#home-journals';
+    // Wait for the selector to appear in the DOM with a timeout of 10 seconds
+    await page.waitForSelector(journalSelector, { timeout: 10000 });
+
+    const journals = await page.$$eval(`${journalSelector} li`, journals => journals.map(j => j.textContent));
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Get today's date without time
+    const lastWeek = new Date(today);
+    lastWeek.setDate(today.getDate() - 6); // Get the dates from last week
+
+    journals.forEach(journalText => {
+      let paranthesesRegEx =  /\(([^)]+)\)/;
+      const dateMatch = journalText.match(paranthesesRegEx); // Extract the date from the journal
+      if (dateMatch) {
+        const journalDate = new Date(dateMatch[1]); // Parse the date
+        taskDate.setHours(0, 0, 0, 0);
+
+        if (journalDate.getTime() > today.getTime() || journalDate.getTime() < lastWeek.getTime()) {
+          throw new Error(`Journal "${journalText}" has a date out of the expected range: ${dateMatch[1]}`);
+        }
+      } else {
+        if(!(journalText === 'No recent journals'))
+          throw new Error(`Task text "${journalText}" does not contain a valid due date`);
+      }
+    });
+  }, 10000); 
 });
 
