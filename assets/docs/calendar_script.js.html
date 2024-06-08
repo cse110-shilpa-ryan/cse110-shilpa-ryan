@@ -1,4 +1,32 @@
-document.addEventListener('DOMContentLoaded', function() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: calendar/script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: calendar/script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>document.addEventListener('DOMContentLoaded', function() {
     // Cache DOM elements.
     const calendarElement = document.getElementById('calendar');
     const prevMonthBtn = document.getElementById('prevMonth');
@@ -58,17 +86,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const lastDate = new Date(year, month + 1, 0).getDate();
 
         // Create blank days until the first day of the month.
-        for (let i = 0; i < firstDay; i++) {
+        for (let i = 0; i &lt; firstDay; i++) {
             const blankDay = document.createElement('div');
             blankDay.className = 'day';
             calendarElement.appendChild(blankDay);
         }
 
         // Create days of the month.
-        for (let day = 1; day <= lastDate; day++) {
+        for (let day = 1; day &lt;= lastDate; day++) {
             const dayElement = document.createElement('div');
             dayElement.className = 'day';
-            dayElement.innerHTML = `<div class="day-number">${day}</div>`;
+            dayElement.innerHTML = `&lt;div class="day-number">${day}&lt;/div>`;
             calendarElement.appendChild(dayElement);
             dayElement.addEventListener('click', () => showTasksForDay(day));
         }
@@ -144,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const dueStr = taskType == 'proj' ? "DUE: " + projName + " - ": "";
         
         // Iterate through each day "box".
-        for (let i = 0; i < dayElements.length; i++) {
+        for (let i = 0; i &lt; dayElements.length; i++) {
             const dayElement = dayElements[i];
             const dayNumber = parseInt(dayElement.querySelector('.day-number')?.textContent, 10);
 
@@ -154,11 +182,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Add event task if the start and end date falls within the day.
             // Add Project task if its due date falls within the day.
-            if ((taskType == 'tasks' && dayDate >= new Date(startDate) && dayDate <= new Date(endDate)) || (taskType == 'proj' && dueDate.getDate() == dayDate.getDate())) {
+            if ((taskType == 'tasks' &amp;&amp; dayDate >= new Date(startDate) &amp;&amp; dayDate &lt;= new Date(endDate)) || (taskType == 'proj' &amp;&amp; dueDate.getDate() == dayDate.getDate())) {
                 const tasksForDay = dayElement.querySelectorAll('.task');
 
                 // Add task to the calendar.
-                if (tasksForDay.length <= 1) {
+                if (tasksForDay.length &lt;= 1) {
                     const taskElement = document.createElement('div');
                     taskElement.className = 'task';
                     taskElement.textContent = dueStr + title;
@@ -187,8 +215,8 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function hashCode(str) {
         var hash = 0;
-        for (var i = 0; i < str.length; i++) {
-           hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        for (var i = 0; i &lt; str.length; i++) {
+           hash = str.charCodeAt(i) + ((hash &lt;&lt; 5) - hash);
         }
         return 100 * hash;
     } 
@@ -200,9 +228,9 @@ document.addEventListener('DOMContentLoaded', function() {
      */
     function intToRGB(i) {
         // Separate the bits of the integer into the corresponding RGB components.
-        let r = (i >> 16) & 0xFF;
-        let g = (i >> 8) & 0xFF;
-        let b = i & 0xFF;
+        let r = (i >> 16) &amp; 0xFF;
+        let g = (i >> 8) &amp; 0xFF;
+        let b = i &amp; 0xFF;
 
         /**
          * Offsets the RGB components for colors that have visibility issues.
@@ -213,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
          */
         function offset(r, g, b) {
             // Modify color for components with lower values and higher values.
-            let check = (c) => c < 80 ? c + Math.ceil((80 - c) * (1.2)) : 
+            let check = (c) => c &lt; 80 ? c + Math.ceil((80 - c) * (1.2)) : 
             c > 200 ? c - Math.ceil((c - 220) * (1.2)) : c;
             
             r = check(r);
@@ -221,18 +249,18 @@ document.addEventListener('DOMContentLoaded', function() {
             b = check(b);
 
             // Avoid grayscale colors.
-            if (r >= g && r >= b) {
+            if (r >= g &amp;&amp; r >= b) {
                 r += 30;
-            } else if (g >= r && g >= b) {
+            } else if (g >= r &amp;&amp; g >= b) {
                 g += 30;
-            } else if (b >= g && b >= r) {
+            } else if (b >= g &amp;&amp; b >= r) {
                 b += 30;
             }
-            if (r <= g && r <= b) {
+            if (r &lt;= g &amp;&amp; r &lt;= b) {
                 r -= 30;
-            } else if (g <= r && g <= b) {
+            } else if (g &lt;= r &amp;&amp; g &lt;= b) {
                 g -= 30;
-            } else if (b <= g && b <= r) {
+            } else if (b &lt;= g &amp;&amp; b &lt;= r) {
                 b -= 30;
             }
             
@@ -261,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const newStart = new Date(startDate.getFullYear(), startDate.getMonth());
             const newEnd = new Date(endDate.getFullYear(), endDate.getMonth());
-            if (newStart <= curDate && newEnd >= curDate) {
+            if (newStart &lt;= curDate &amp;&amp; newEnd >= curDate) {
                 addTaskToCalendar(task, 'tasks', '#ffeb3b'); 
                 // Event task color is consistent.
             }
@@ -275,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
             projData.tasks.forEach(task => {
                 const dueDate = new Date(task.due)
                 dueDate.setDate(dueDate.getDate() + 1);
-                if (dueDate.getFullYear() == curDate.getFullYear() && dueDate.getMonth() == curDate.getMonth()) {
+                if (dueDate.getFullYear() == curDate.getFullYear() &amp;&amp; dueDate.getMonth() == curDate.getMonth()) {
                     addTaskToCalendar(task, 'proj', color, title)
                 }
             })
@@ -302,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const startDate = new Date(task.startDate);
             const endDate = new Date(task.endDate);
     
-            if (startDate <= curDate && endDate >= curDate) {
+            if (startDate &lt;= curDate &amp;&amp; endDate >= curDate) {
                 // Display tasks in the form of an unordered list.
                 const taskItem = document.createElement('li');
                 taskItem.textContent = `${task.title} (from ${startDate.toDateString()} to ${endDate.toDateString()})`;
@@ -343,7 +371,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 dueDate.setDate(dueDate.getDate() + 1);
                 
                 // Check if the task is due today.
-                if (dueDate.getDate() == curDate.getDate() && dueDate.getMonth() == curDate.getMonth() && dueDate.getFullYear() == curDate.getFullYear()) {
+                if (dueDate.getDate() == curDate.getDate() &amp;&amp; dueDate.getMonth() == curDate.getMonth() &amp;&amp; dueDate.getFullYear() == curDate.getFullYear()) {
                     confirm = true;
                     // Create a list item for each task.
                     const taskItem = document.createElement('li');
@@ -405,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
             taskModal.style.display = 'none';
             addTaskFormModal.style.display = 'none';
             addTaskFormModal.reset();
-        } else if (!monthYearDropdown.contains(event.target) && !currentMonthYear.contains(event.target)) {
+        } else if (!monthYearDropdown.contains(event.target) &amp;&amp; !currentMonthYear.contains(event.target)) {
             monthYearDropdown.style.display = 'none';
         }
     });
@@ -426,7 +454,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         const currentYear = new Date().getFullYear();
-        for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+        for (let year = currentYear - 10; year &lt;= currentYear + 10; year++) {
             const option = document.createElement('option');
             option.value = year;
             option.textContent = year;
@@ -459,3 +487,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderCalendar(currentDate);
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_Lexer.html">_Lexer</a></li><li><a href="-_Parser.html">_Parser</a></li><li><a href="-_Renderer.html">_Renderer</a></li><li><a href="-_TextRenderer.html">_TextRenderer</a></li><li><a href="-_Tokenizer.html">_Tokenizer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_getDefaults">_getDefaults</a></li><li><a href="global.html#addButton">addButton</a></li><li><a href="global.html#block">block</a></li><li><a href="global.html#blockNormal">blockNormal</a></li><li><a href="global.html#blockPedantic">blockPedantic</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#deleteEntry">deleteEntry</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#escape">escape</a></li><li><a href="global.html#escapeTest">escapeTest</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#getEntries">getEntries</a></li><li><a href="global.html#gfmTable">gfmTable</a></li><li><a href="global.html#inlineBreaks">inlineBreaks</a></li><li><a href="global.html#inlineGfm">inlineGfm</a></li><li><a href="global.html#inlineNormal">inlineNormal</a></li><li><a href="global.html#inlinePedantic">inlinePedantic</a></li><li><a href="global.html#loadEntries">loadEntries</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#newline">newline</a></li><li><a href="global.html#rtrim">rtrim</a></li><li><a href="global.html#saveEntries">saveEntries</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#updateTitle">updateTitle</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Fri Jun 07 2024 21:25:13 GMT+0000 (Coordinated Universal Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
