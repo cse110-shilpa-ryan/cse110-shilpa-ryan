@@ -1,5 +1,3 @@
-
-
 function loadNavbar() {
     const navPlaceholder = document.getElementById('insert-nav');
     if (navPlaceholder) {
@@ -14,6 +12,7 @@ function loadNavbar() {
                         <a href="../calendar/index.html" class="nav-button" id="calendar-nav">Calendar</a>
                         <a href="../projects/index.html" class="nav-button" id="projects-nav">Projects</a>
                         <a href="../journal/index.html" class="nav-button" id="journal-nav">Journal</a>
+                        <a href="../md-previewer/index.html" class="nav-button" id="markdown-nav">Markdown Previewer</a>
                 </div>
             </div>
         </nav>

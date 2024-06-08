@@ -1,11 +1,19 @@
-
+/**
+ * Display the tasks that are due in the next 3 days
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // Helper function to get tasks from local storage
+    /**
+     * Helper function to get tasks from local storage
+     * @returns tasks
+     */
     function getTasks() {
         return JSON.parse(localStorage.getItem('tasks')) || [];
     }
 
-    // Helper function to filter tasks due in the next 3 days
+    /**
+     * Helper function to filter tasks due in the next 3 days
+     * @returns tasks due in the next 3 days
+     */
     function getUpcomingTasks() {
         const tasks = getTasks();
         const today = new Date();
@@ -18,7 +26,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Render upcoming tasks to the task container
+    /**
+     * Render upcoming tasks to the task container
+     */
     function renderUpcomingTasks() {
         const upcomingTasks = getUpcomingTasks();
         const taskContainer = document.getElementById('upcoming-tasks');

@@ -1,0 +1,55 @@
+* {
+    font-family: 'Josefin Sans';
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+#container {
+    display: flex;
+    height: 100%;
+}
+
+#editor {
+    width: 50%;
+}
+
+#text-content {
+    overflow: auto;
+    font-size: 1.2em;
+    width: 50%;
+}
+
+#md-parser {
+    overflow: auto;
+    padding: 0.5%;
+    flex: 1;
+}
+
+.gutter {
+    overflow-y: hidden;
+    display: flex;
+    flex-flow: column;
+    vertical-align: center;
+    text-align: center;
+    padding: 0.4em;
+    background-color: lightgrey;
+}
+
+.lineNum {
+    font-size: 1.2em;
+}

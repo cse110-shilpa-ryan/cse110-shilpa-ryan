@@ -7,12 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Dependencies
-        run: npm install
 
-      - name: Jest Setup
-        run: npm install jest
-      - name: Puppeteer Setup
-        run: npm install puppeteer
+      - name: Clear Node Modules and Cache
+        run: |
+          rm -rf node_modules
+          rm package-lock.json
+          npm cache clean --force
+      
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install --save-dev babel-jest @babel/core @babel/preset-env puppeteer jest-puppeteer
+
       - name: Jest with Puppeteer
         run: npm run test
+
+      
