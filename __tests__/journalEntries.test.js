@@ -4,6 +4,7 @@ import { getEntries } from '../assets/src/journal/updateJournal';
 
 jest.mock('../assets/src/journal/updateJournal');
 
+// Create
 describe('createEntry', () => {
   let entry, newEntry;
 
@@ -13,10 +14,13 @@ describe('createEntry', () => {
   });
 
   test('should create a new journal entry with the correct content', () => {
-    expect(newEntry.title).toBe(entry);
+    expect(newEntry.content).toBe(entry);
   });
 });
 
+// Read
+
+// Update
 describe('updateTitle', () => {
   let id, newTitle;
 
@@ -33,3 +37,5 @@ describe('updateTitle', () => {
     expect(updatedEntry.title).toBe(newTitle);
   });
 });
+
+// Delete
