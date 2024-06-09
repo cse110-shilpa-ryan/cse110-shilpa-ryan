@@ -91,6 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
     nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
+    // Ensure validity of endDateModal is reset.
+    endDateModal.addEventListener('click', () => {
+        endDateModal.setCustomValidity('');
+    });
+
     // Add or edit a task after pressing submit in the form.
     addTaskFormModal.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -98,6 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const endDate = new Date(endDateModal.value);
         const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), selectedDay);
 
+        // Prevent tasks with invalid endDates from being saved.
+        if (startDate >= endDate) {
+            endDateModal.setCustomValidity('End Date cannot be before or the same as Start Date.')
+            return;
+        }
+        
         const tasks = getTasks('tasks');
 
         if (editTaskId !== null) {
