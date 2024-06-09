@@ -16,3 +16,4 @@
 - [Sprint 2 Retrospective](052624-retrospective.md)
 - [Sprint 3 Review](060224-sprint-3-review.md)
 - [Sprint 3 Retrospective](060224-retrospective.md)
+- [Final Meeting](060924-final-meeting.md)
