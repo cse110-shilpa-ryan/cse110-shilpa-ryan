@@ -191,6 +191,19 @@ describe('Homepage E2E Tests', () => {
 
   }, 10000); 
 
+  it('should have seven days in the progress bar, and each day should be different', async () => {
+    const progressBarSelector = '#progress-bar';
+    await page.waitForSelector(progressBarSelector, { timeout: 10000 });  
+    const dailyBars = await page.$$eval(`${progressBarSelector} div`, bars => bars.map(b => b.textContent));
+    if (dailyBars.length !== 7) {
+      throw new Error(`Invalid number of days in progress bar - was ${dailyBars.length}, should be 7`);
+    }
+    let checkDuplicates = new Set(dailyBars);
+    if (checkDuplicates.size !== dailyBars.length) {
+      throw new Error(`Duplicate day of the week values in progress bar, only ${checkDuplicates.length} unique values found`);
+    }
+  }, 10000);
+
   it('should only display journals within the last week', async () => {
     const journalSelector = '#home-journals';
     // Wait for the selector to appear in the DOM with a timeout of 10 seconds
