@@ -79,9 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             upcomingTasks.forEach(task => {
                 const taskItem = document.createElement('li');
-                const taskDueDate = new Date(task.endDate).toISOString().split('T')[0];
-                //taskItem.textContent = `${task.title} (Due: ${new Date(task.endDate).toDateString()})`;
-                taskItem.textContent = `${task.title} (Due: ${taskDueDate})`;
+                taskItem.textContent = `${task.title} (Due: ${task.endDate})`;
                 taskContainer.appendChild(taskItem);
             });
 
