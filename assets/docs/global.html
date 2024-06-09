@@ -1887,6 +1887,143 @@ saves it to localStorage.
     
 
     
+    <h4 class="name" id="dayAbbreviation"><span class="type-signature"></span>dayAbbreviation<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns a one-two character abbreviation of the day of the week
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">an index representation of day of the week, starting with 0 = Sunday</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="front-page_journal.js.html">front-page/journal.js</a>, <a href="front-page_journal.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="deleteEntry"><span class="type-signature"></span>deleteEntry<span class="signature">(id)</span><span class="type-signature"></span></h4>
     
 
@@ -2314,6 +2451,444 @@ saves it to localStorage.
         
 <div class="param-desc">
     all journal entries in localStorage
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getJournalDays"><span class="type-signature"></span>getJournalDays<span class="signature">(journals, days)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Get an array of days. The days include whether or not you journaled, as well as the day of the week.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>journals</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">list of journal entries</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>days</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">number of days to return</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="front-page_journal.js.html">front-page/journal.js</a>, <a href="front-page_journal.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    array of 2 element arrays. Format of each element is [hasJournaled, indexDayOfWeek]
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getJournalEntries"><span class="type-signature"></span>getJournalEntries<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Fetches entry content from localStorage.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="front-page_journal.js.html">front-page/journal.js</a>, <a href="front-page_journal.js.html#line5">line 5</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    all journal entries in localStorage
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getRecentJournals"><span class="type-signature"></span>getRecentJournals<span class="signature">(journals, days)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Filters journal entries by the most recent number of days
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>journals</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">list of journal entries</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>days</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">number of days to filter by</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="front-page_journal.js.html">front-page/journal.js</a>, <a href="front-page_journal.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    journal entries created within the last number of days.
 </div>
 
 
@@ -3529,7 +4104,7 @@ and saves it to localStorage.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_Lexer.html">_Lexer</a></li><li><a href="-_Parser.html">_Parser</a></li><li><a href="-_Renderer.html">_Renderer</a></li><li><a href="-_TextRenderer.html">_TextRenderer</a></li><li><a href="-_Tokenizer.html">_Tokenizer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_getDefaults">_getDefaults</a></li><li><a href="global.html#addButton">addButton</a></li><li><a href="global.html#block">block</a></li><li><a href="global.html#blockNormal">blockNormal</a></li><li><a href="global.html#blockPedantic">blockPedantic</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#deleteEntry">deleteEntry</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#escape">escape</a></li><li><a href="global.html#escapeTest">escapeTest</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#getEntries">getEntries</a></li><li><a href="global.html#gfmTable">gfmTable</a></li><li><a href="global.html#inlineBreaks">inlineBreaks</a></li><li><a href="global.html#inlineGfm">inlineGfm</a></li><li><a href="global.html#inlineNormal">inlineNormal</a></li><li><a href="global.html#inlinePedantic">inlinePedantic</a></li><li><a href="global.html#loadEntries">loadEntries</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#newline">newline</a></li><li><a href="global.html#rtrim">rtrim</a></li><li><a href="global.html#saveEntries">saveEntries</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#updateTitle">updateTitle</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="-_Lexer.html">_Lexer</a></li><li><a href="-_Parser.html">_Parser</a></li><li><a href="-_Renderer.html">_Renderer</a></li><li><a href="-_TextRenderer.html">_TextRenderer</a></li><li><a href="-_Tokenizer.html">_Tokenizer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_getDefaults">_getDefaults</a></li><li><a href="global.html#addButton">addButton</a></li><li><a href="global.html#block">block</a></li><li><a href="global.html#blockNormal">blockNormal</a></li><li><a href="global.html#blockPedantic">blockPedantic</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#createEditModal">createEditModal</a></li><li><a href="global.html#createEntry">createEntry</a></li><li><a href="global.html#createProjectCard">createProjectCard</a></li><li><a href="global.html#createTaskCard">createTaskCard</a></li><li><a href="global.html#dayAbbreviation">dayAbbreviation</a></li><li><a href="global.html#deleteEntry">deleteEntry</a></li><li><a href="global.html#displayProjects">displayProjects</a></li><li><a href="global.html#escape">escape</a></li><li><a href="global.html#escapeTest">escapeTest</a></li><li><a href="global.html#fetchProjects">fetchProjects</a></li><li><a href="global.html#getEntries">getEntries</a></li><li><a href="global.html#getJournalDays">getJournalDays</a></li><li><a href="global.html#getJournalEntries">getJournalEntries</a></li><li><a href="global.html#getRecentJournals">getRecentJournals</a></li><li><a href="global.html#gfmTable">gfmTable</a></li><li><a href="global.html#inlineBreaks">inlineBreaks</a></li><li><a href="global.html#inlineGfm">inlineGfm</a></li><li><a href="global.html#inlineNormal">inlineNormal</a></li><li><a href="global.html#inlinePedantic">inlinePedantic</a></li><li><a href="global.html#loadEntries">loadEntries</a></li><li><a href="global.html#loadProjects">loadProjects</a></li><li><a href="global.html#loadProjectsFromLocalStorage">loadProjectsFromLocalStorage</a></li><li><a href="global.html#newline">newline</a></li><li><a href="global.html#rtrim">rtrim</a></li><li><a href="global.html#saveEntries">saveEntries</a></li><li><a href="global.html#saveProjectImage">saveProjectImage</a></li><li><a href="global.html#saveProjectsToLocalStorage">saveProjectsToLocalStorage</a></li><li><a href="global.html#updateContent">updateContent</a></li><li><a href="global.html#updateTitle">updateTitle</a></li></ul>
 </nav>
 
 <br class="clear">

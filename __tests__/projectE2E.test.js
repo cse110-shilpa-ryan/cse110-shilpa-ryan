@@ -271,4 +271,21 @@ describe('Project Management Tests', () => {
         }]);
     }, 3000);
 
+    test('reload page and check local storage', async () => {
+        await page.reload();
+
+        // Check local storage for updated project list
+        const projectsData = await page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('projectsData'));
+        });
+        expect(projectsData).toEqual([{
+            title: 'Puppeteer Test Proje',
+            description: 'test description',
+            image: '',
+            tasks: []
+        }]);
+    }, 3000);
+
+    
+
 });
