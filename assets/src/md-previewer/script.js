@@ -46,10 +46,10 @@ function updateGutter() {
 	
 	gutter.innerHTML = '';
 	for(var i = 0; i < numOfLines; i++) {
-		var span = document.createElement('span');
-        span.classList.add('lineNum');
-		span.innerHTML = i+1;
-		gutter.appendChild(span);	
+		var div = document.createElement('div');
+        div.classList.add('lineNum');
+		div.innerHTML = i+1;
+		gutter.appendChild(div);	
 	}
 }
 // Event listener to update line number gutter
