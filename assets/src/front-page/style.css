@@ -86,6 +86,7 @@ main {
 #daily-bar {
     border-radius: 15px;
     height: 3em;
+    padding: 2% 1%;
     width: 1.5em;
     text-align:center;
     vertical-align:center;
@@ -97,7 +98,7 @@ main {
 }
 
 .present {
-    background-color: rgb(76, 169, 223);
+    background-color: rgb(70, 139, 64);
 }
 
 #home-nav {
