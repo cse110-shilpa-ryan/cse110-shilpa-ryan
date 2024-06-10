@@ -137,9 +137,9 @@ describe('Calendar end to end', () => {
         let data = await page.evaluate(() => {
             return JSON.parse(localStorage.getItem('projectsData'));
         });
-        let text = await page.evaluate(() => {
+        let task = await page.evaluate(() => {
             return document.getElementsByClassName('task')[2].innerHTML;
         }); 
-        expect(text).toBe('test1Edited');
+        expect(task).toBe('DUE: Example Project - First Task, Example');
     });
 }, 15000);
