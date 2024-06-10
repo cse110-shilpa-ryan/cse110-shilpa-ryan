@@ -7,17 +7,17 @@ describe('Homepage E2E Tests', () => {
   let page;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({ headless: false });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
   });
 
   afterAll(async () => {
     // await new Promise(resolve => setTimeout(resolve, 5000)); // Delay for 5 seconds before closing the browser
     await browser.close();
-  });
+  }, 25000);
 
   it('should load the homepage and check main elements', async () => {
-    await page.goto('http://127.0.0.1:5502/assets/src/front-page/index.html'); 
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html'); 
 
     // Wait for the main elements to load
     await page.waitForSelector('header');
@@ -43,7 +43,7 @@ describe('Homepage E2E Tests', () => {
   });
 
   it('should update the title date dynamically', async () => {
-    await page.goto('http://127.0.0.1:5502/assets/src/front-page/index.html');
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
     
     // Wait for the title-date to be populated
     await page.waitForSelector('.title-date');
@@ -58,10 +58,10 @@ describe('Homepage E2E Tests', () => {
 
   it('should render top 3 projects, or all if less than 3 projects in total', async () => {
     // Laod the project page first
-    await page.goto('http://127.0.0.1:5502/assets/src/projects/index.html');
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
   
     // Navigate to the front page
-    await page.goto('http://127.0.0.1:5502/assets/src/front-page/index.html');
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
   
     await page.waitForSelector('.project-card');
 
@@ -85,7 +85,7 @@ describe('Homepage E2E Tests', () => {
     const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
     const topProjects = projects.slice(0, 3);
 
-    await page.goto('http://127.0.0.1:5502/assets/src/front-page/index.html');
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
 
     // Wait for the projects to be rendered
     await page.waitForSelector('.project-card');

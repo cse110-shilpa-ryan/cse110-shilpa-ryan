@@ -26,13 +26,13 @@ describe("testRecentJournalsAndJournalDays", () => {
         numDays1 = 3;
         numDays2 = 7;
         let id1 = new Date();
-        let id2 = new Date(); 
+        let id2 = new Date();
         id1.setDate(id1.getDate() - 1);
         id2.setDate(id2.getDate() - 5);
         testJournals = [
             { id: id1.valueOf, title: 'Journal 1', content: 'Content 1' },
             { id: id2.valueOf, title: 'Journal 1', content: 'Content 2' },
-          ];
+        ];
     });
 
     test('should filter one test journal and return one  testjournal', () => {
@@ -50,7 +50,7 @@ describe("testRecentJournalsAndJournalDays", () => {
         let trueCounter = 0;
         let falseCounter = 0;
         result.forEach(day => {
-            if(day[0])
+            if (day[0])
                 trueCounter++;
             else
                 falseCounter++;
