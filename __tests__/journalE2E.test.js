@@ -9,7 +9,7 @@ describe('Journal App E2E Tests', () => {
         page = await browser.newPage();
         await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/journal/index.html'); // Replace with the actual URL of your app
         await page.setViewport({ width: 1080, height: 2048 });
-    }, 25000);
+    }, 15000);
 
     afterAll(async () => {
         if (browser) {
