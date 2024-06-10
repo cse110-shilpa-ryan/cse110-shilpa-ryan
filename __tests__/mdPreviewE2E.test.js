@@ -10,13 +10,14 @@ describe('Basic testing of Markdown previewer', () => {
         browser = await puppeteer.launch(); // Set to false if you want to see the browser actions
         page = await browser.newPage();
         await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/md-previewer/index.html');
+        await page.setViewport({ width: 1080, height: 2048 });
     }, 20000);
 
-    // afterAll(async () => {
-    //     if (browser) {
-    //         await browser.close();
-    //     }
-    // });
+    afterAll(async () => {
+        if (browser) {
+            await browser.close();
+        }
+    });
 
     test('Add text in text area and confirm', async () => {
         await page.click('textarea');
