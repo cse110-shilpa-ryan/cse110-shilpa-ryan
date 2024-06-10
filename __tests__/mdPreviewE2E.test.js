@@ -1,3 +1,5 @@
+const puppeteer = require('puppeteer');
+
 const exampleHTML = '<h1>Heading 1</h1>\n<h2>Heading 2</h2>\n<p><code>System.out.println("Hello World!");</code></p>\n<ul>\n<li>Bullet point 1<br><a href="https://www.google.com">Link to google</a></li>\n</ul>\n';
 const exampleText = '# Heading 1\n## Heading 2\n`System.out.println("Hello World!");`\n- Bullet point 1\n[Link to google](https://www.google.com)';
 const lineNumbers = 5;
@@ -5,6 +7,8 @@ const lineNumbers = 5;
 describe('Basic testing of Markdown previewer', () => {
 
     beforeAll(async () => {
+        browser = await puppeteer.launch({ headless: false }); // Set to false if you want to see the browser actions
+        page = await browser.newPage();
         await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/md-previewer/index.html');
     }, 20000);
 
