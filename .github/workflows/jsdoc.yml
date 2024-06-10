@@ -1,6 +1,6 @@
 name: JS Documentation Action
 
-on:  # When to run the workflow, on push 
+on:  # When to run the workflow, on push
   push: 
 
 permissions: # Permissions for the workflow
