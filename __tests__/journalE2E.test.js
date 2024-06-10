@@ -5,11 +5,11 @@ describe('Journal App E2E Tests', () => {
     let page;
 
     beforeAll(async () => {
-        browser = await puppeteer.launch({ headless: false }); // Set to false if you want to see the browser actions
+        browser = await puppeteer.launch(); // Set to false if you want to see the browser actions
         page = await browser.newPage();
         await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/journal/index.html'); // Replace with the actual URL of your app
         await page.setViewport({ width: 1080, height: 2048 });
-    }, 15000);
+    }, 25000);
 
     afterAll(async () => {
         if (browser) {
