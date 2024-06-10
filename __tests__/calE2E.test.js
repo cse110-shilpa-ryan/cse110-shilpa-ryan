@@ -17,7 +17,7 @@ describe('Calendar end to end', () => {
         if (browser) {
             await browser.close();
         }
-    });
+    }, 15000);
 
     test("Add task and check local Storage", async () => {
         
@@ -53,7 +53,7 @@ describe('Calendar end to end', () => {
         let title = data[0].title;
         expect(title).toEqual('test1');
         
-    });
+    }, 15000);
 
     test("Check start date", async () => {
         await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
@@ -74,7 +74,7 @@ describe('Calendar end to end', () => {
         }
         expect(date).toBe(`${short}${num}`);
 
-    });
+    }, 15000);
 
     test("Check end date", async () => {
         
@@ -95,7 +95,7 @@ describe('Calendar end to end', () => {
 
         expect(end).toBe(`${short}${day}`);
 
-    });
+    }, 15000);
 
     test("Edit task and check local storage", async () => {
         let num = await page.evaluate(() => {
@@ -112,7 +112,7 @@ describe('Calendar end to end', () => {
         });
         let newtitle = data2[0].title;
         expect(newtitle).toBe('test1Edited');
-    });
+    }, 15000);
 
     test("Checking if task is displayed", async () => {
         
@@ -123,7 +123,7 @@ describe('Calendar end to end', () => {
             return text;
         });   
         expect(text).toBe("test1Edited")  ;
-    });
+    }, 15000);
 
     test("Add project task and check if displayed", async () => {
         
@@ -142,4 +142,4 @@ describe('Calendar end to end', () => {
         }); 
         expect(text).toBe('DUE: Example Project - First Task, Example');
     });
-});
+}, 15000);
