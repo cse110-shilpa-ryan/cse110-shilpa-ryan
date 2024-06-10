@@ -1,6 +1,6 @@
 name: End to End Tests with Puppeteer
 
-on: [push] # the Github Action will activate "on" the event that you "push" to the repo
+on: [push] # the action will activate "on" the event that you "push" to the repo
 
 jobs:
   tests: # the name of the status check
