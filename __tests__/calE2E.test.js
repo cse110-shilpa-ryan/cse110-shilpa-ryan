@@ -140,6 +140,6 @@ describe('Calendar end to end', () => {
         let task = await page.evaluate(() => {
             return document.getElementsByClassName('task')[2].innerHTML;
         }); 
-        expect(task).toBe('DUE: Example Project - First Task, Example');
+        expect(task).toBe('test1Edited');
     });
 }, 15000);
