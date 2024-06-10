@@ -12,14 +12,14 @@ describe('Basic testing of Markdown previewer', () => {
         browser = await puppeteer.launch(); // Set to false if you want to see the browser actions
         page = await browser.newPage();
         await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/md-previewer/index.html');
-        await page.setViewport({ width: 1080, height: 2048 });
+        await page.setViewport({ width: 720, height: 1280 });
     }, 20000);
 
     afterAll(async () => {
         if (browser) {
             await browser.close();
         }
-    });
+    }, 20000);
 
     test('Add text in text area and confirm', async () => {
         await page.click('textarea');
@@ -46,8 +46,8 @@ describe('Basic testing of Markdown previewer', () => {
     }, 20000);
 
     test('Confirm number of line numbers', async () => {
-        const resultLineNumbers = await page.$eval('#md-parser', parser => {
-            return parser.children.length;
+        const resultLineNumbers = await page.$eval('.gutter', gutter => {
+            return gutter.childElementCount;
         });
         expect(resultLineNumbers).toBe(lineNumbers);
     }, 20000);
