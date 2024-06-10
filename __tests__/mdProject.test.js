@@ -50,6 +50,4 @@ describe('Basic testing of Markdown previewer', () => {
         });
         expect(resultText).toBe('');
     }, 20000);
-
-
 });
