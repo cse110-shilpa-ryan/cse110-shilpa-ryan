@@ -5,6 +5,8 @@ const exampleText = '# Heading 1\n## Heading 2\n`System.out.println("Hello World
 const lineNumbers = 5;
 
 describe('Basic testing of Markdown previewer', () => {
+    let browser;
+    let page;
 
     beforeAll(async () => {
         browser = await puppeteer.launch(); // Set to false if you want to see the browser actions
