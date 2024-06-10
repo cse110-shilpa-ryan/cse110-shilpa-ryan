@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-describe('Projects E2E Tests', () => {
+describe('Project Management Tests', () => {
     let browser;
     let page;
 
@@ -17,7 +17,7 @@ describe('Projects E2E Tests', () => {
         if (browser) {
             await browser.close();
         }
-    }, 25000);
+    });
 
     /**
      tests to write :

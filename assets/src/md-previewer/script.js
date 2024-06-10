@@ -45,11 +45,11 @@ function updateGutter() {
 	numOfLines = lineBreaks.length ? lineBreaks.length + 1 : 1;
 	
 	gutter.innerHTML = '';
-	for(var i = 0; i < numOfLines; i++) {
-		var span = document.createElement('span');
-        span.classList.add('lineNum');
-		span.innerHTML = i+1;
-		gutter.appendChild(span);	
+	for(let i = 0; i < numOfLines; i++) {
+		let div = document.createElement('div');
+        div.classList.add('lineNum');
+		div.innerHTML = i+1;
+		gutter.appendChild(div);	
 	}
 }
 // Event listener to update line number gutter
@@ -57,5 +57,7 @@ input.addEventListener('input', updateGutter);
 
 // Event number to sync line number with textarea location
 input.addEventListener('scroll', () => {
-    gutter.scrollTop = input.scrollTop;
+    const scrollPercent = input.scrollTop / (input.scrollHeight - input.clientHeight);
+    const top = scrollPercent * (gutter.scrollHeight - gutter.clientHeight)
+    gutter.scrollTo(0, top)
 });

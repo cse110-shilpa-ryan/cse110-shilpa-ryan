@@ -15,7 +15,8 @@ body {
 
 main {
     padding: 0;
-    padding-top: 82px; /* Cowboy fix to account for z-indexed nav-bar */
+    padding-top: 82px;
+    /* Cowboy fix to account for z-indexed nav-bar */
     padding-bottom: 44.933px;
     flex: 1;
     overflow: hidden;
@@ -36,6 +37,11 @@ main {
     overflow: auto;
     font-size: 1.2em;
     width: 50%;
+    padding: 6.4px;
+    border: 1 solid black;
+    outline: none;
+    resize: none;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #md-parser {
@@ -49,13 +55,17 @@ main {
     display: flex;
     flex-flow: column;
     vertical-align: center;
-    text-align: center;
     padding: 0.4em;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
     background-color: lightgrey;
 }
 
 .lineNum {
     font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif;
+    flex: 0 1 auto;
+    text-align: center;
 }
 
 #markdown-nav {

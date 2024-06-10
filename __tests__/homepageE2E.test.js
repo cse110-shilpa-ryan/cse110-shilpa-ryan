@@ -14,10 +14,10 @@ describe('Homepage E2E Tests', () => {
   afterAll(async () => {
     // await new Promise(resolve => setTimeout(resolve, 5000)); // Delay for 5 seconds before closing the browser
     await browser.close();
-  }, 25000);
+  });
 
-  it('should load the homepage and check main elements', async () => {
-    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
+  test('should load the homepage and check main elements', async () => {
+    await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html'); 
 
     // Wait for the main elements to load
     await page.waitForSelector('header');
@@ -40,11 +40,11 @@ describe('Homepage E2E Tests', () => {
     expect(projectContainer).toBeTruthy();
     expect(taskContainer).toBeTruthy();
     expect(journalContainer).toBeTruthy();
-  });
+  }, 15000);
 
-  it('should update the title date dynamically', async () => {
+  test('should update the title date dynamically', async () => {
     await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
-
+    
     // Wait for the title-date to be populated
     await page.waitForSelector('.title-date');
 
@@ -52,17 +52,17 @@ describe('Homepage E2E Tests', () => {
 
     const now = new Date();
     const expectedDate = `Home - ${now.toDateString()}`;
-
+    
     expect(titleDate).toBe(expectedDate);
   }, 15000);
 
-  it('should render top 3 projects, or all if less than 3 projects in total', async () => {
+  test('should render top 3 projects, or all if less than 3 projects in total', async () => {
     // Laod the project page first
     await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/projects/index.html');
-
+  
     // Navigate to the front page
     await page.goto('https://cse110-sp24-group11.github.io/cse110-sp24-group11/assets/src/front-page/index.html');
-
+  
     await page.waitForSelector('.project-card');
 
     const renderedProjects = await page.$$('.project-card');
@@ -71,16 +71,16 @@ describe('Homepage E2E Tests', () => {
     const totalProjectCount = await page.evaluate(() => {
       return JSON.parse(localStorage.getItem('projectsData')).length;
     });
-
+  
     if (totalProjectCount.length >= 3) {
-      // If 3 or more projects are rendered, assert that exactly 3 are rendered
-      expect(renderedProjects.length).toBe(3);
+        // If 3 or more projects are rendered, assert that exactly 3 are rendered
+        expect(renderedProjects.length).toBe(3);
     } else {
-      expect(renderedProjects.length).toBe(totalProjectCount);
+        expect (renderedProjects.length).toBe(totalProjectCount);
     }
-  }, 15000);
+}, 15000);
 
-  it('should render the top 3 projects', async () => {
+  test('should render the top 3 projects', async () => {
     const projectsPath = path.resolve(__dirname, '../assets/src/projects/projects.json');
     const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
     const topProjects = projects.slice(0, 3);
@@ -109,11 +109,11 @@ describe('Homepage E2E Tests', () => {
     });
   }, 15000);
 
-  it('should display only tasks that are due within the next 3 days', async () => {
+  test('should display only tasks that are due within the next 3 days', async () => {
     const upcomingTasksSelector = '#upcoming-tasks'; // Selector for the upcoming tasks container
 
     // Wait for the selector to appear in the DOM with a timeout of 10 seconds
-    await page.waitForSelector(upcomingTasksSelector, { timeout: 10000 });
+    await page.waitForSelector(upcomingTasksSelector, { timeout: 1000 });
 
     // Extract the text content of all `li` elements within the `#upcoming-tasks` container
     const tasks = await page.$$eval(`${upcomingTasksSelector} li`, tasks => tasks.map(task => task.textContent));
@@ -137,10 +137,10 @@ describe('Homepage E2E Tests', () => {
         throw new Error(`Task text "${taskText}" does not contain a valid due date`);
       }
     });
-  }, 15000);
+  }, 15000); 
 
 
-  it('should display all tasks due within the next 3 days', async () => {
+  test('should display all tasks due within the next 3 days', async () => {
     // Fetch tasks from local storage
     const upcomingTasksFromLocalStorage = JSON.parse(await page.evaluate(() => localStorage.getItem('tasks'))) || [];
     const projectTasksFromLocalStorage = JSON.parse(await page.evaluate(() => localStorage.getItem('projectsData'))) || [];
@@ -161,7 +161,7 @@ describe('Homepage E2E Tests', () => {
     const upcomingTasksSelector = '#upcoming-tasks'; // Selector for the upcoming tasks container
 
     // Wait for the selector to appear in the DOM with a timeout of 10 seconds
-    await page.waitForSelector(upcomingTasksSelector, { timeout: 10000 });
+    await page.waitForSelector(upcomingTasksSelector, { timeout: 1000 });
 
     // Extract the text content of all `li` elements within the `#upcoming-tasks` container
     const tasksDisplayedOnPage = await page.$$eval(`${upcomingTasksSelector} li`, tasks => tasks.map(task => task.textContent));
@@ -173,13 +173,13 @@ describe('Homepage E2E Tests', () => {
         throw new Error(`Task "${taskText}" due in 3 days is not displayed on the page`);
       }
     });
-  }, 15000);
+  }, 15000); 
 
-  it('should assign each journal progress bar with a status class', async () => {
+  test('should assign each journal progress bar with a status class', async () => {
     const progressBarSelector = '#progress-bar';
-    await page.waitForSelector(progressBarSelector, { timeout: 10000 });
+    await page.waitForSelector(progressBarSelector, { timeout: 15000 });  
     const dailyBars = await page.$$eval(`${progressBarSelector} div`, bars => bars.map(b => b.className));
-
+    
     dailyBars.forEach(barClass => {
       if (barClass === '') {
         throw new Error(`Progress bar classes not set`);
@@ -189,11 +189,11 @@ describe('Homepage E2E Tests', () => {
       }
     });
 
-  }, 15000);
+  }, 15000); 
 
-  it('should have seven days in the progress bar, and each day should be different', async () => {
+  test('should have seven days in the progress bar, and each day should be different', async () => {
     const progressBarSelector = '#progress-bar';
-    await page.waitForSelector(progressBarSelector, { timeout: 10000 });
+    await page.waitForSelector(progressBarSelector, { timeout: 15000 });  
     const dailyBars = await page.$$eval(`${progressBarSelector} div`, bars => bars.map(b => b.textContent));
     if (dailyBars.length !== 7) {
       throw new Error(`Invalid number of days in progress bar - was ${dailyBars.length}, should be 7`);
@@ -204,10 +204,10 @@ describe('Homepage E2E Tests', () => {
     }
   }, 15000);
 
-  it('should only display journals within the last week', async () => {
+  test('should only display journals within the last week', async () => {
     const journalSelector = '#home-journals';
     // Wait for the selector to appear in the DOM with a timeout of 10 seconds
-    await page.waitForSelector(journalSelector, { timeout: 10000 });
+    await page.waitForSelector(journalSelector, { timeout: 15000 });
 
     const journals = await page.$$eval(`${journalSelector} li`, journals => journals.map(j => j.textContent));
 
@@ -217,7 +217,7 @@ describe('Homepage E2E Tests', () => {
     lastWeek.setDate(today.getDate() - 6); // Get the dates from last week
 
     journals.forEach(journalText => {
-      let paranthesesRegEx = /\(([^)]+)\)/;
+      let paranthesesRegEx =  /\(([^)]+)\)/;
       const dateMatch = journalText.match(paranthesesRegEx); // Extract the date from the journal
       if (dateMatch) {
         const journalDate = new Date(dateMatch[1]); // Parse the date
@@ -227,10 +227,10 @@ describe('Homepage E2E Tests', () => {
           throw new Error(`Journal "${journalText}" has a date out of the expected range: ${dateMatch[1]}`);
         }
       } else {
-        if (!(journalText === 'No recent journals'))
+        if(!(journalText === 'No recent journals'))
           throw new Error(`Task text "${journalText}" does not contain a valid due date`);
       }
     });
-  }, 15000);
+  }, 15000); 
 });
 
