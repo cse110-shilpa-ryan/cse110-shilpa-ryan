@@ -60,7 +60,7 @@ describe('Basic testing of Markdown previewer', () => {
         await page.keyboard.press('Backspace');
         const resultText = await page.$eval('textarea', textArea => {
             return textArea.value;
-        });
+        }, 2000);
         expect(resultText).toBe('');
     }, 20000);
 });
